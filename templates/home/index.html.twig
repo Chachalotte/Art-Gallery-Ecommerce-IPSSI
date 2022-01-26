@@ -25,13 +25,17 @@
         <a href="#">+ tout voir</a>
     <div>    
     <div>
-        <img src="https://via.placeholder.com/380x300"/>
-        <div>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-        </div>
+        {% for artist in artists %}
+            <img src="https://via.placeholder.com/380x300"/>
+            <div>
+                <img src="https://via.placeholder.com/200x120"/>
+                <img src="https://via.placeholder.com/200x120"/>
+                <img src="https://via.placeholder.com/200x120"/>
+                <img src="https://via.placeholder.com/200x120"/>
+            </div>
+        {% else %}
+            <p>Il n'y a pas encore d'artistes à présenter.</p>
+        {% endfor %}
     </div>
 </article>
 <article>
@@ -40,13 +44,17 @@
         <a href="#">+ tout voir</a>
     <div>
     <div>
-        <img src="https://via.placeholder.com/380x300"/>
-        <div>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-        </div>
+        {% for artist in artists %} 
+            <img src="https://via.placeholder.com/380x300"/>
+            <div>
+                <img src="https://via.placeholder.com/200x120"/>
+                <img src="https://via.placeholder.com/200x120"/>
+                <img src="https://via.placeholder.com/200x120"/>
+                <img src="https://via.placeholder.com/200x120"/>
+            </div>
+        {% else %}
+            <p>Il n'y a pas encore d'oeuvres à présenter.</p>
+        {% endfor %}
     </div>
 </article>
 <div>
