@@ -5,53 +5,72 @@
 {% block content %}
 <div>Promotions du moment</div>
 <article>
-    <div>
+    <div class="article__header">
         <h2>Les classiques</h2>
         <a href="#">+ tout voir</a>
     <div>
-    <div>
-        <img src="https://via.placeholder.com/380x300"/>
-        <div>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-            <img src="https://via.placeholder.com/200x120"/>
-        </div>
+    <div class="article__image">
+        {% for product in products | reverse | slice(0, 1) %} 
+            <div class="article__image--big">
+                <h3>{{ product.name }}</h3>
+                <img src="{{ product.img }}"/>
+                <p>{{ product.price }}€</p>
+            </div>
+            {% for product in products | reverse | slice(1, 4) %} 
+                <div class="article__image--small">
+                    <h3>{{ product.name }}</h3>
+                    <img src="{{ product.img }}"/>
+                    <p>{{ product.price }}€</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Il n'y a pas encore d'oeuvres à présenter.</p>
+        {% endfor %}
     </div>
 </article>
 <article>
-    <div>
+    <div class="article__header">
         <h2>Les artistes</h2>
         <a href="#">+ tout voir</a>
     <div>    
-    <div>
-        {% for artist in artists %}
-            <img src="https://via.placeholder.com/380x300"/>
-            <div>
-                <img src="https://via.placeholder.com/200x120"/>
-                <img src="https://via.placeholder.com/200x120"/>
-                <img src="https://via.placeholder.com/200x120"/>
-                <img src="https://via.placeholder.com/200x120"/>
+    <div class="article__image">
+        {% for artist in artists | reverse | slice(0, 1) %} 
+            <div class="article__image--big">
+                <h3>{{ artist.name }}</h3>
+                <img src="https://via.placeholder.com/200x185">
+                {# <img src="{{ artist.img }}"/> #}
             </div>
+            {% for artist in artists | reverse | slice(1, 4) %} 
+                <div class="article__image--small">
+                    <h3>{{ artist.name }}</h3>
+                    <img src="https://via.placeholder.com/100x85">
+                    {# <img src="{{ artist.img }}"/> #}
+                </div>
+            {% endfor %}
         {% else %}
             <p>Il n'y a pas encore d'artistes à présenter.</p>
         {% endfor %}
     </div>
 </article>
 <article>
-    <div>
+    <div class="article__header">
         <h2>Le oeuvres uniques</h2>
         <a href="#">+ tout voir</a>
     <div>
-    <div>
-        {% for artist in artists %} 
-            <img src="https://via.placeholder.com/380x300"/>
-            <div>
-                <img src="https://via.placeholder.com/200x120"/>
-                <img src="https://via.placeholder.com/200x120"/>
-                <img src="https://via.placeholder.com/200x120"/>
-                <img src="https://via.placeholder.com/200x120"/>
+    <div class="article__image">
+        {% for product in products | reverse | slice(0, 1) %} 
+            <div class="article__image--big">
+                <h3>{{ product.name }}</h3>
+                <img src="{{ product.img }}"/>
+                <p>{{ product.price }}€</p>
             </div>
+            {% for product in products | reverse | slice(1, 4) %} 
+                <div class="article__image--small">
+                    <h3>{{ product.name }}</h3>
+                    <img src="{{ product.img }}"/>
+                    <p>{{ product.price }}€</p>
+                </div>
+            {% endfor %}
         {% else %}
             <p>Il n'y a pas encore d'oeuvres à présenter.</p>
         {% endfor %}
