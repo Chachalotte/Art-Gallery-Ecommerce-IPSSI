@@ -14,6 +14,20 @@
         {% endblock %}
     </head>
     <body>
+        <nav>
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+            {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+            {% else  %}
+            <li><a href="{{ path('login') }}">Connexion</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('admin') }}">Administration</a></li>
+            <li><a href="{{ path('dossier') }}">Dossier</a></li>
+            {% endif %}
+        </nav>
+        
         {% block body %}{% endblock %}
     </body>
 </html>
