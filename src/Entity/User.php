@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -44,6 +46,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 20)]
     private $age;
+
+    #[ORM\ManyToOne(targetEntity: Ordered::class, inversedBy: 'User')]
+    private $ordered;
+
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Comments::class)]
+    private $comments;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $avatar;
+
+    #[ORM\Column(type: 'text')]
+    private $description;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +190,72 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAge(string $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getOrdered(): ?Ordered
+    {
+        return $this->ordered;
+    }
+
+    public function setOrdered(?Ordered $ordered): self
+    {
+        $this->ordered = $ordered;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
