@@ -70,3 +70,7 @@ section .partner__items {
     display: flex;
     justify-content: space-around;
 }
+
+section .partner__items div img {
+    width: 15vw;
+}

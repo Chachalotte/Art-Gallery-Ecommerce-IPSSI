@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -24,7 +25,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('SymfonyProjectIpssiOneWeek');
+            ->setTitle('Art Galery Ecommerce');
     }
 
     public function configureMenuItems(): iterable
@@ -39,6 +40,7 @@ class DashboardController extends AbstractDashboardController
 
             MenuItem::section('Liste des demandes d\'adoption'),
             MenuItem::linkToCrud('Produits', 'fa fa-user', Product::class),
+            MenuItem::linkToCrud('Categories', 'fa fa-user', Category::class),
 
             MenuItem::linkToLogout('Logout', 'fa fa-exit'),
         ];

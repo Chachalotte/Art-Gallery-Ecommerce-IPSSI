@@ -14,12 +14,12 @@
     <div class="article__image">
         {% for product in products | reverse | slice(0, 1) %} 
             <div class="article__image--big">
-                <h3>{{ product.name }}</h3>
+                <h3>{{ product.name | capitalize}}</h3>
                 <img src="{{ product.img }}"/>
             </div>
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
-                    <h3>{{ product.name }}</h3>
+                    <h3>{{ product.name | capitalize }}</h3>
                     <img src="{{ product.img }}"/>
                 </div>
             {% endfor %}
@@ -36,13 +36,13 @@
     <div class="article__image">
         {% for artist in artists | reverse | slice(0, 1) %} 
             <div class="article__image--big">
-                <h3>{{ artist.name }} {{artist.firstname}}</h3>
+                <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
                 <img src="https://via.placeholder.com/200x185">
                 {# <img src="{{ artist.img }}"/> #}
             </div>
             {% for artist in artists | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
-                    <h3>{{ artist.name }}</h3>
+                    <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
                     <img src="https://via.placeholder.com/100x85">
                     {# <img src="{{ artist.img }}"/> #}
                 </div>
@@ -60,13 +60,13 @@
     <div class="article__image">
         {% for product in products | reverse | slice(0, 1) %} 
             <div class="article__image--big">
-                <h3>{{ product.name }}</h3>
+                <h3>{{ product.name | capitalize}}</h3>
                 <img src="{{ product.img }}"/>
                 <p>{{ product.price }}€</p>
             </div>
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
-                    <h3>{{ product.name }}</h3>
+                    <h3>{{ product.name | capitalize }}</h3>
                     <img src="{{ product.img }}"/>
                     <p>{{ product.price }}€</p>
                 </div>
@@ -107,20 +107,21 @@
     <h2>Ils parlent de nous</h2>
     <div class="partner__items">
         <div>
-            <img src="https://via.placeholder.com/120x75" />
-            <p>Partenaire</p>
+            <img src="https://sallelesdaude.fr/application/files/7015/1783/7202/magazine_art_et_decoration_partenaire_salon_art_deco_paris_fevrier_2017_0.png" />
+            {# <p>Partenaire</p> #}
         </div>
         <div>
-            <img src="https://via.placeholder.com/120x75" />
-            <p>Partenaire</p>
+            <img src="http://www.d4n.be/wp-content/uploads/BeauxArts_Logo.gif" />
+            {# <img src="https://via.placeholder.com/120x75" /> #}
+            {# <p>Partenaire</p> #}
         </div>
         <div>
-            <img src="https://via.placeholder.com/120x75" />
-            <p>Partenaire</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Art%2B_Magazine_Logo.png" />
+            {# <p>Partenaire</p> #}
         </div>
         <div>
-            <img src="https://via.placeholder.com/120x75" />
-            <p>Partenaire</p>
+            <img src="https://i.pinimg.com/474x/7c/3f/a6/7c3fa6333bc0b9fec0df3ca511928d1a.jpg" />
+            {# <p>Partenaire</p> #}
         </div>
     </div>
 </section>
