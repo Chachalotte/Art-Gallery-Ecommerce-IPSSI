@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+
+{% for product in products %}
+        {% if loop.first %}
+        <section>
+        {% endif %}
+        {{ product.name }}
+        {{ product.description }}
+        {{ product.img }}
+
+        {% if loop.index % 3 == 0 %}
+		{# Après 3 boucles on reforme une section et on sépare les blocs #}
+		</section>
+		{% endif %}     
+        {% if loop.last %}
+		{# close last row #}
+		{% endif %}
+    {% endfor %}
+{% endblock %}
