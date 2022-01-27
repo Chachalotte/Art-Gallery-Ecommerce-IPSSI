@@ -5,3 +5,16 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+#-----------------------------------------ROUTES STATIQUES------------------------------------------
+privacy:
+  path: /privacy
+  controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+      template: "static/privacy.html.twig"
+
+terms:
+  path: /terms
+  controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+      template: "static/terms.html.twig"

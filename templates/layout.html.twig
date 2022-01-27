@@ -4,10 +4,10 @@
 
 <header>
     <nav>
-        <img src="https://via.placeholder.com/100x85" alt="logo de la galerie">
+        <a href="{{path('home')}}"><img src="https://via.placeholder.com/100x85" alt="logo de la galerie"/></a>
         <div>
             <ul class="nav" >
-                <li><a class="nav__link" href="#">Artistes</a></li>
+                <li><a class="nav__link" href="{{path('artistList')}}">Artistes</a></li>
                 <li><a class="nav__link" href="#">Catégories</a></li>
                 <li><a class="nav__link" href="#">Evenements</a></li>
                 <li><a class="nav__link" href="#"></a></li>
@@ -17,46 +17,46 @@
     </nav>
 </header>
 
-{% block content %}{% endblock %}
+<main>{% block content %}{% endblock %}</main>
 
 <footer>
-    <div>
-        <div>
+    <div class='major'>
+        <div class='major__cat'>
             <h4>Nos offres</h4>
             <ul class="nav" >
-                <li><a class="nav__link" href="#">Les classiques</a></li>
-                <li><a class="nav__link" href="#">Les artistes</a></li>
+                <li><a class="nav__link" href="#">Les vitrines</a></li>
+                <li><a class="nav__link" href="{{path('artistList')}}">Les artistes</a></li>
                 <li><a class="nav__link" href="#">Les oeuvres à vendre</a></li>
                 <li><a class="nav__link" href="#">Inscription / Connexion</a></li>
                 <li><a class="nav__link" href="#">Conditions de ventes</a></li>
                 <li><a class="nav__link" href="#">Retours et remboursements</a></li>
             </ul>
-        <div>
-        <div>
+        </div>
+        <div class='major__cat'>
             <h4>Artistes</h4>
             <ul class="nav" >
                 <li><a class="nav__link" href="#">Inscription / Connexion</a></li>
                 <li><a class="nav__link" href="#">Exposer et vendre</a></li>
             </ul>
-        <div>
-        <div>
+        </div>
+        <div class='major__cat'>
             <h4>Evenements</h4>
             <ul class="nav" >
                 <li><a class="nav__link" href="#">Exposition du moment</a></li>
                 <li><a class="nav__link" href="#">Vernissages à venir</a></li>
                 <li><a class="nav__link" href="#">Nouveaux arrivants</a></li>
             </ul>
-        <div>
-        <div>
+        </div>
+        <div class='major__cat'>
             <h4>Guides et contact</h4>
             <ul class="nav" >
                 <li><a class="nav__link" href="#">Contact</a></li>
                 <li><a class="nav__link" href="#">Relation presse</a></li>
-                <li><a class="nav__link" href="#">Mentions légales</a></li>
+                <li><a class="nav__link" href="{{ path('privacy')}}">Mentions légales</a></li>
                 <li><a class="nav__link" href="#">Politique de confidentialité</a></li>
-                <li><a class="nav__link" href="#">CGU</a></li>
+                <li><a class="nav__link" href="{{ path('terms')}}">CGU</a></li>
             </ul>
-        <div>
+        </div>
     </div>  
     &copy2022 ArtGalery
 </footer>
