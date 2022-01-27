@@ -1,20 +1,123 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/galleryArtSymfony/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/galleryArtSymfony/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+{% block content %}
+<div>Promotions du moment</div>
+<article>
+    <div class="article__header">
+        <h2>Les classiques</h2>
+        <a href="#">+ tout voir</a>
+    <div>
+    <div class="article__image">
+        {% for product in products | reverse | slice(0, 1) %} 
+            <div class="article__image--big">
+                <h3>{{ product.name }}</h3>
+                <img src="{{ product.img }}"/>
+                <p>{{ product.price }}€</p>
+            </div>
+            {% for product in products | reverse | slice(1, 4) %} 
+                <div class="article__image--small">
+                    <h3>{{ product.name }}</h3>
+                    <img src="{{ product.img }}"/>
+                    <p>{{ product.price }}€</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Il n'y a pas encore d'oeuvres à présenter.</p>
+        {% endfor %}
+    </div>
+</article>
+<article>
+    <div class="article__header">
+        <h2>Les artistes</h2>
+        <a href="#">+ tout voir</a>
+    <div>    
+    <div class="article__image">
+        {% for artist in artists | reverse | slice(0, 1) %} 
+            <div class="article__image--big">
+                <h3>{{ artist.name }}</h3>
+                <img src="https://via.placeholder.com/200x185">
+                {# <img src="{{ artist.img }}"/> #}
+            </div>
+            {% for artist in artists | reverse | slice(1, 4) %} 
+                <div class="article__image--small">
+                    <h3>{{ artist.name }}</h3>
+                    <img src="https://via.placeholder.com/100x85">
+                    {# <img src="{{ artist.img }}"/> #}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Il n'y a pas encore d'artistes à présenter.</p>
+        {% endfor %}
+    </div>
+</article>
+<article>
+    <div class="article__header">
+        <h2>Le oeuvres uniques</h2>
+        <a href="#">+ tout voir</a>
+    <div>
+    <div class="article__image">
+        {% for product in products | reverse | slice(0, 1) %} 
+            <div class="article__image--big">
+                <h3>{{ product.name }}</h3>
+                <img src="{{ product.img }}"/>
+                <p>{{ product.price }}€</p>
+            </div>
+            {% for product in products | reverse | slice(1, 4) %} 
+                <div class="article__image--small">
+                    <h3>{{ product.name }}</h3>
+                    <img src="{{ product.img }}"/>
+                    <p>{{ product.price }}€</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Il n'y a pas encore d'oeuvres à présenter.</p>
+        {% endfor %}
+    </div>
+</article>
+<div>
+    <div>
+        <h2>Inscription à notre newsletter</h2>
+        <p>Lorem ipsum dolor sit amet et delectus accommodare his consul copiosae legendos at vix ad putent delectus delicata usu. Vidit dissentiet eos cu eum an brute copiosae hendrerit. Eos erant</p>
+    <div>
+    <div>
+        <input placeholder="Email">
+    </div>
 </div>
+<hr>
+<section>
+    <h2>Commandes facilitées</h2>
+    <div>
+        <img src="https://via.placeholder.com/180x100" />
+        <p>Petite explication</p>
+    </div>
+    <div>
+        <img src="https://via.placeholder.com/180x100" />
+        <p>Petite explication</p>
+    </div>
+    <div>
+        <img src="https://via.placeholder.com/180x100" />
+        <p>Petite explication</p>
+    </div>
+</section>
+<section>
+    <h2>Ils parlent de nous</h2>
+    <div>
+        <img src="https://via.placeholder.com/120x75" />
+        <p>Partenaire</p>
+    </div>
+    <div>
+        <img src="https://via.placeholder.com/120x75" />
+        <p>Partenaire</p>
+    </div>
+    <div>
+        <img src="https://via.placeholder.com/120x75" />
+        <p>Partenaire</p>
+    </div>
+    <div>
+        <img src="https://via.placeholder.com/120x75" />
+        <p>Partenaire</p>
+    </div>
+</section>
 {% endblock %}

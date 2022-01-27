@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} {% endblock %}
+
+{% block body %}
+<div>
+    </br></br>
+    <ul>
+        <h2>Liste des artistes</h2>
+    </ul>
+
+    {% for artists in artist %}
+    <ul>
+    <div>
+       <h3><a href="{{ path('artistList') }}/{{artists.id}}"> {{artists.firstname}} {{artists.name}}  </br><img src="https://via.placeholder.com/100x100"/> </h3></a> 
+    </div>
+    </ul>
+    
+
+    {% endfor %}
+    
+</div>
+
+{% endblock %}
