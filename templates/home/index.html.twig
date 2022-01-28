@@ -37,14 +37,14 @@
         {% for artist in artists | reverse | slice(0, 1) %} 
             <div class="article__image--big">
                 <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
-                <img src="https://via.placeholder.com/200x185">
-                {# <img src="{{ artist.img }}"/> #}
+                {# <img src="https://via.placeholder.com/200x185"> #}
+                <img src="{{ artist.avatar }}"/>
             </div>
             {% for artist in artists | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
-                    <img src="https://via.placeholder.com/100x85">
-                    {# <img src="{{ artist.img }}"/> #}
+                    {# <img src="https://via.placeholder.com/100x85"> #}
+                    <img src="{{ artist.avatar }}"/>
                 </div>
             {% endfor %}
         {% else %}
