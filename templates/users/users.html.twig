@@ -1,0 +1,67 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} {% endblock %}
+
+
+
+{% block content %}
+<link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
+
+<div class="profileCard">
+    <h2 class="rubriqueTitle">Page de profil</h2>
+</div>
+
+    <div class="profileBox">
+        <div class="profileCard">
+         
+                {% if user is null %}
+                <p>Connectez-vous pour accéder à votre profil.</p>
+
+            {% else %}
+                <div class="profileTitle"> 
+                Bienvenue, <b> {{app.user.firstname}} {{app.user.name}} </b>
+                    </br>
+                </div>
+
+            {% endif %}
+            </br>
+        </div>
+    </div>
+
+
+    {% if user is not null %}
+
+    <div class="profileBoxVoid">
+        <img class="pictureFloat" src="{{app.user.avatar}}" width="125" height="125" onerror="this.style.display='none'"/>
+        <div class="profileCard">
+        <b> {{user.Email}} </b>
+        </br></br>
+            {{app.user.description}}
+        </div>
+    </div>
+   
+
+    {% endif %}
+
+<div class="spacingSmall"></div>
+
+<div class="profileCard">
+
+    <h2 class="rubriqueTitle">Commentaires</h2>
+
+</div>
+
+    {%for comment in comments %}
+<div class="commentBox">
+   <b>#{{comment.id}} - {{comment.product.name}} #{{comment.product.id}} -</b> {{comment.message}}
+</div>
+{%else%}
+<div class="commentBox">
+<p>(Pas de commentaires)</p>
+</div>
+{% endfor %}
+
+
+
+
+{% endblock %}
