@@ -35,10 +35,10 @@ class DashboardController extends AbstractDashboardController
             //=========================================================================================
             //Sections à gauche du menu admin
             //=========================================================================================            
-            MenuItem::section('Liste des demandes d\'adoption'),
+            MenuItem::section('Liste liées aux utilisateurs'),
             MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class),
 
-            MenuItem::section('Liste des demandes d\'adoption'),
+            MenuItem::section('Liste liées aux produits'),
             MenuItem::linkToCrud('Produits', 'fa fa-user', Product::class),
             MenuItem::linkToCrud('Categories', 'fa fa-user', Category::class),
 
