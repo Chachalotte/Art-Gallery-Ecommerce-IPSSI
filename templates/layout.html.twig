@@ -3,6 +3,20 @@
 {% block body %}
 
 <header>
+    <div  class="nav header_head">
+        {% if (app.user) %}
+            <li><a class="nav__link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+            {% if is_granted('ROLE_USER') %}
+                <li><a class="nav__link" href="{{ path('app_product') }}">Liste des produits</a></li>
+                <li><a class="nav__link" href="{{ path('admin') }}">Administration</a></li>
+                <li><a class="nav__link" href="{{ path('dossier') }}">Dossier</a></li>
+            {% endif %}
+        {% else %}
+            <li><a class="nav__link" href="{{ path('login') }}">Connexion</a></li>
+            <li><a class="nav__link" href="{{ path('app_register') }}">Inscription</a></li>
+        {% endif %}
+    </div>
+            
     <nav>
         <a href="{{path('home')}}"><img src="https://via.placeholder.com/100x85" alt="logo de la galerie"/></a>
         <div>
@@ -10,10 +24,15 @@
                 <li><a class="nav__link" href="{{path('artistList')}}">Artistes</a></li>
                 <li><a class="nav__link" href="#">Catégories</a></li>
                 <li><a class="nav__link" href="#">Evenements</a></li>
-                <li><a class="nav__link" href="#"></a></li>
             </ul>
         </div>
-        <input placeholder="Rechercher">
+        <div class="search_product">
+            {% if (app.user) %}
+                <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
+            {% endif %}
+            <i class="fas fa-search"></i>
+            <input placeholder="Rechercher">
+        </div>
     </nav>
 </header>
 
