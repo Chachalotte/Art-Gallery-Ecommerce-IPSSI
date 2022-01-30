@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block title %} {% endblock %}
+
+
+
+{% block content %}
+
+<link href="{{ asset('styles/artists.css') }}" type="text/css" rel="stylesheet" />
+
+<div>
+    </br></br>
+    <ul>
+        <h2 class="rubriqueTitle">Liste des artistes</h2>
+    </ul>
+
+    {% for artists in artist %}
+    <ul>
+        <div class="artistBox">
+            <div class="artistCard">
+            <img class="pictureFloat" src="{{artists.avatar}}" width="100" height="100" onerror="this.style.display='none'"/>
+                <h3>
+                    <a href="{{ path('artistList') }}/{{artists.id}}">
+                        {{artists.firstname}} {{artists.name}}  
+                        
+                    </a> </br>
+                    <button name="Abonnement">S'abonner</button> </br>
+                </h3>
+
+                {{artists.description}}
+                
+            </div>
+        </div>
+    </ul>
+    
+    {% endfor %}
+
+    </br></br>
+</div>
+
+{% endblock %}

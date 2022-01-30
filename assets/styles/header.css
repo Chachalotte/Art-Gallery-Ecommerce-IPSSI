@@ -1,0 +1,14 @@
+.header_head {
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav,
+nav .nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav .nav__link {
+    margin: 0 1.5vw;
+}

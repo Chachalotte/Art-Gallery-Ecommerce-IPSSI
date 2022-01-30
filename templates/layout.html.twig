@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<header>
+    <div  class="nav header_head">
+        {% if (app.user) %}
+            <li><a class="nav__link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+            {% if is_granted('ROLE_USER') %}
+                <li><a class="nav__link" href="{{ path('app_product') }}">Liste des produits</a></li>
+                <li><a class="nav__link" href="{{ path('admin') }}">Administration</a></li>
+                <li><a class="nav__link" href="{{ path('dossier') }}">Dossier</a></li>
+            {% endif %}
+        {% else %}
+            <li><a class="nav__link" href="{{ path('login') }}">Connexion</a></li>
+            <li><a class="nav__link" href="{{ path('app_register') }}">Inscription</a></li>
+        {% endif %}
+    </div>
+            
+    <nav>
+        <a href="{{path('home')}}"><img src="https://via.placeholder.com/100x85" alt="logo de la galerie"/></a>
+        <div>
+            <ul class="nav" >
+                <li><a class="nav__link" href="{{path('artistList')}}">Artistes</a></li>
+                <li><a class="nav__link" href="#">Catégories</a></li>
+                <li><a class="nav__link" href="#">Evenements</a></li>
+                {# {% if is_granted('ROLE_ARTIST') %} #}
+                    <li><a class="nav__link" href="#">Ajout oeuvre</a></li>
+                    <li><a class="nav__link" href="#">Ajout vitrine</a></li>
+                {# {% endif %} #}
+            </ul>
+        </div>
+        <div class="search_product">
+            {% if (app.user) %}
+                <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
+            {% endif %}
+            <i class="fas fa-search"></i>
+            <input placeholder="Rechercher">
+        </div>
+    </nav>
+</header>
+
+<main>{% block content %}{% endblock %}</main>
+
+<footer>
+    <div class='major'>
+        <div class='major__cat'>
+            <h4>Nos offres</h4>
+            <ul class="nav" >
+                <li><a class="nav__link" href="#">Les vitrines</a></li>
+                <li><a class="nav__link" href="{{path('artistList')}}">Les artistes</a></li>
+                <li><a class="nav__link" href="#">Les oeuvres à vendre</a></li>
+                <li><a class="nav__link" href="#">Inscription / Connexion</a></li>
+                <li><a class="nav__link" href="#">Conditions de ventes</a></li>
+                <li><a class="nav__link" href="#">Retours et remboursements</a></li>
+            </ul>
+        </div>
+        <div class='major__cat'>
+            <h4>Artistes</h4>
+            <ul class="nav" >
+                <li><a class="nav__link" href="#">Inscription / Connexion</a></li>
+                <li><a class="nav__link" href="#">Exposer et vendre</a></li>
+            </ul>
+        </div>
+        <div class='major__cat'>
+            <h4>Evenements</h4>
+            <ul class="nav" >
+                <li><a class="nav__link" href="#">Exposition du moment</a></li>
+                <li><a class="nav__link" href="#">Vernissages à venir</a></li>
+                <li><a class="nav__link" href="#">Nouveaux arrivants</a></li>
+            </ul>
+        </div>
+        <div class='major__cat'>
+            <h4>Guides et contact</h4>
+            <ul class="nav" >
+                <li><a class="nav__link" href="#">Contact</a></li>
+                <li><a class="nav__link" href="#">Relation presse</a></li>
+                <li><a class="nav__link" href="{{ path('privacy')}}">Mentions légales</a></li>
+                <li><a class="nav__link" href="#">Politique de confidentialité</a></li>
+                <li><a class="nav__link" href="{{ path('terms')}}">CGU</a></li>
+            </ul>
+        </div>
+    </div>  
+    &copy2022 ArtGalery
+</footer>
+
+{% endblock %}

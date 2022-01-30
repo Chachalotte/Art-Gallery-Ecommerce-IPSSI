@@ -1,0 +1,76 @@
+article,
+section {
+    margin: 2vw 0;
+}
+
+article div.article__header,
+section.subscription {
+    display: flex;
+    justify-content: space-between;
+}
+
+article div.article__image {
+    height: 30vw;
+    width: 100%;
+}
+
+article div.article__image--big,
+article div.article__image--big img {
+    width: 40vw;
+    height: 28vw;
+    object-fit: cover;
+}
+
+article div.article__image--small,
+article div.article__image--small img {
+    width: 20vw;
+    height: 12vw;
+    flex-wrap: wrap;
+    object-fit: cover;
+}
+
+article div.article__image--big,
+article div.article__image--small {
+    position: relative;
+}
+
+article div.article__image--big img,
+article div.article__image--small img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+article div.article__image--big h3,
+article div.article__image--big p,
+article div.article__image--small h3,
+article div.article__image--small p {
+    background-color: #EFE7DD;
+    position: absolute;
+    z-index: 3;
+}
+
+article div.article__image--big p,
+article div.article__image--small p {
+    bottom: 0;
+    right: 0;
+}
+
+section.subscription {
+    margin: 2vw;
+    padding: 1vw;
+    background-color: #FFC4A8;
+}
+
+article div.article__image,
+article div.article__image--small,
+section .order__items,
+section .partner__items {
+    display: flex;
+    justify-content: space-around;
+}
+
+section .partner__items div img {
+    width: 15vw;
+}

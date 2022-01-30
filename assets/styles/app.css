@@ -1,0 +1,15 @@
+@import url('header.css');
+@import url('footer.css');
+@import url('home.css');
+
+main {
+    margin: 0 2vw;
+}
+
+.nav {
+    list-style: none;
+}
+
+.nav__link {
+    text-decoration: none;
+}

@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        
+        {# CDN FontAwesome #}
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -14,6 +17,21 @@
         {% endblock %}
     </head>
     <body>
+        <nav>
+            {# <li><a href="{{ path('home') }}">Accueil</a></li>
+            {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('app_product') }}">Liste des produits</a></li>
+            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+            {% else  %}
+            <li><a href="{{ path('login') }}">Connexion</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('admin') }}">Administration</a></li>
+            <li><a href="{{ path('dossier') }}">Dossier</a></li>
+            {% endif %} #}
+        </nav>
+        
         {% block body %}{% endblock %}
     </body>
 </html>
