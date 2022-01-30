@@ -24,6 +24,10 @@
                 <li><a class="nav__link" href="{{path('artistList')}}">Artistes</a></li>
                 <li><a class="nav__link" href="#">Catégories</a></li>
                 <li><a class="nav__link" href="#">Evenements</a></li>
+                {# {% if is_granted('ROLE_ARTIST') %} #}
+                    <li><a class="nav__link" href="#">Ajout oeuvre</a></li>
+                    <li><a class="nav__link" href="#">Ajout vitrine</a></li>
+                {# {% endif %} #}
             </ul>
         </div>
         <div class="search_product">
