@@ -6,7 +6,7 @@
     <div  class="nav header_head">
         {% if (app.user) %}
             <li><a class="nav__link" href="{{ path('app_logout') }}">Déconnexion</a></li>
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_ADMIN') %}
                 <li><a class="nav__link" href="{{ path('app_product') }}">Liste des produits</a></li>
                 <li><a class="nav__link" href="{{ path('admin') }}">Administration</a></li>
                 <li><a class="nav__link" href="{{ path('dossier') }}">Dossier</a></li>
