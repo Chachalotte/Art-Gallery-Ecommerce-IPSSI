@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{product.name}}{% endblock %}
+
+{% block content %}
+
+    <h1>{{product.name | capitalize}}</h1>
+    <div class="filters">
+    </div>
+
+    <section>
+        <article>
+            <img src="{{ product.img }}"/>
+            {% if product.artist %}
+                <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+            {% endif %}
+            <a href="{#{path('artist', {'id': product.artist.id} ) }#}">{{ product.category.name }}</a>
+            <p>{{ product.description | capitalize }}</p>
+            <p>Prix: {{ product.price | capitalize }} €</p>
+        </article>
+
+        <aside>
+            <p>Dimensions: 120x170 cm</p>
+            <p>Prix: {{ product.price | capitalize }} €</p>
+            <button>Acheter</button>
+        </aside>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+</script>
+{% endblock %}

@@ -20,4 +20,14 @@ class ProductController extends AbstractController
             'products' => $products,
         ]);
     }
+
+    #[Route('/product/{id}', name: 'product')]
+    public function showProduct(ManagerRegistry $doctrine, $id): Response
+    {
+        $product = $doctrine->getRepository(Product::class)->find($id);
+
+        return $this->render('product/product.html.twig', [
+            'product' => $product,
+        ]);
+    }
 }

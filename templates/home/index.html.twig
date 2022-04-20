@@ -55,7 +55,7 @@
 <article>
     <div class="article__header">
         <h2>Le oeuvres uniques</h2>
-        <a href="#">+ tout voir</a>
+        <a href="{{path('app_product')}}">+ tout voir</a>
     </div>
     <div class="article__image">
         {% for product in products | reverse | slice(0, 1) %} 
