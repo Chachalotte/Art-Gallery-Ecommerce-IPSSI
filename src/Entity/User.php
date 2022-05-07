@@ -41,23 +41,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 50)]
     private $firstname;
 
-    #[ORM\Column(type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $gender;
 
-    #[ORM\Column(type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $age;
 
     #[ORM\ManyToOne(targetEntity: Ordered::class, inversedBy: 'User')]
+    #[ORM\JoinColumn(nullable: true)]
     private $ordered;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Comments::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $comments;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $avatar;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $description;
+
+    #[ORM\OneToOne(mappedBy: 'artist', targetEntity: Page::class, cascade: ['persist', 'remove'])]
+    private $artist_page;
 
     public function __construct()
     {
@@ -256,6 +261,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getArtistPage(): ?Page
+    {
+        return $this->artist_page;
+    }
+
+    public function setArtistPage(Page $artist_page): self
+    {
+        // set the owning side of the relation if necessary
+        if ($artist_page->getArtist() !== $this) {
+            $artist_page->setArtist($this);
+        }
+
+        $this->artist_page = $artist_page;
 
         return $this;
     }
