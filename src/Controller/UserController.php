@@ -4,15 +4,16 @@ namespace App\Controller;
 
 //Entitées
 use App\Entity\User;
-use App\Entity\Comments;
+use App\Entity\Artist;
 
 //Managers
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Comments;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class UserController extends AbstractController
@@ -27,20 +28,20 @@ class UserController extends AbstractController
         $comments = $doctrine->getRepository(Comments::class);
 
         $user = $this->getUser();
-        
+
         //$userID = $this->getId();
 
-        $comment = $user->getComments();
+        // $comment = $user->getComments();
 
         //$artistList = $artists->findAll();
-        
+
         //$userComments = $comments->findUserComments($userID);
         //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
-        
+
 
         return $this->render('users/users.html.twig', [
             'user' => $user,
-            'comments' => $comment
+            // 'comments' => $comment
         ]);
     }
 
@@ -55,16 +56,16 @@ class UserController extends AbstractController
         $comments = $doctrine->getRepository(Comments::class);
 
         $user = $doctrine->getRepository(User::class)->find($id);
-        
+
         //$userID = $this->getId();
 
         $comment = $user->getComments();
 
-        
-        
+
+
         //$userComments = $comments->findUserComments($userID);
         //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
-        
+
 
         return $this->render('users/users.html.twig', [
             'user' => $user,
@@ -74,9 +75,9 @@ class UserController extends AbstractController
 
 
     //=============================================
-    //        Page d'un profil (selon ID) (PAS ENCORE FAITE DU COTE TWIG)
+    //        Page d'un artiste (selon ID)
     //=============================================
-    #[Route('/profile/{id}', name: 'userProfileId')]
+    #[Route('/artist/{id}', name: 'artist')]
     public function ArtistSelect(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
 
@@ -93,5 +94,19 @@ class UserController extends AbstractController
         ]);
     }
 
+    //=============================================
+    //          Page Liste des artistes
+    //=============================================
+    #[Route('/artists', name: 'artistList')]
+    public function index(ManagerRegistry $doctrine): Response
+    {
+        $artists = $doctrine->getRepository(Artist::class);
 
+        $artistList = $artists->findAll();
+
+
+        return $this->render('artists/artistList.html.twig', [
+            'artist' => $artistList
+        ]);
+    }
 }

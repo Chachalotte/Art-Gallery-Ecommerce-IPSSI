@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Artist;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,11 +14,18 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $artists = $doctrine->getRepository(Artist::class)->findAll();
+        $user = $doctrine->getRepository(User::class)->findAll();
+        // $role = $user->getRoles();
+        // $user = $doctrine->getRepository(User::class)->findArtist();
+        // if ($user->getRoles() == ['ROLE_ARTIST']) {
+        //     $artists = $user;
+        // };
+        // $artists = $doctrine->getRepository(User::class)->findBy(["roles" => ["ROLE_ARTIST"]], [], null, null);
         $products = $doctrine->getRepository(Product::class)->findAll();
 
         return $this->render('home/index.html.twig', [
-            'artists' => $artists,
+            // 'artists' => $artists,
+            'artists' => $user,
             'products' => $products,
         ]);
     }
