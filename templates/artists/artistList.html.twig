@@ -14,14 +14,14 @@
     <ul>
         <h2 class="rubriqueTitle">Liste des artistes</h2>
     </ul>
-
+    <a href="{{path('product_new', {'id':app.user.id})}}">Exposer sur le site</a>
     {% for artists in artist %}
     <ul>
         <div class="artistBox">
             <div class="artistCard">
             <img class="pictureFloat" src="{{artists.avatar}}" width="100" height="100" onerror="this.style.display='none'"/>
                 <h3>
-                    <a href="{{ path('artistList') }}/{{artists.id}}">
+                    <a href="{{ path('artistList', {'id':artists.id}) }}">
                         {{artists.firstname}} {{artists.name}}  
                         
                     </a> </br>
@@ -33,7 +33,9 @@
             </div>
         </div>
     </ul>
-    
+    {% else %}
+
+    <p>nul</p>
     {% endfor %}
 
     </br></br>

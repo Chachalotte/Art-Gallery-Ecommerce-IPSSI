@@ -44,7 +44,7 @@
             <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
         {% endif %}
             <div>
-                <img src="{{ product.img }}"/>  
+                <img src="{{ asset('img/product/' ~ product.img) }}"/>  
                 <div>
                     <h2>
                         <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
@@ -61,6 +61,8 @@
         {% if loop.last %}
 		{# close last row #}
 		{% endif %}
+    {% else %}
+    <p>pas de produit</p>
     {% endfor %}
 	</section>
 {% endblock %}

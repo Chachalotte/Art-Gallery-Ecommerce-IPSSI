@@ -10,11 +10,11 @@
 
     <section>
         <article>
-            <img src="{{ product.img }}"/>
+            <img src="{{ asset('img/product/' ~ product.img) }}"/>
             {% if product.artist %}
                 <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
             {% endif %}
-            <a href="{#{path('artist', {'id': product.artist.id} ) }#}">{{ product.category.name }}</a>
+            <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a>
             <p>{{ product.description | capitalize }}</p>
             <p>Prix: {{ product.price | capitalize }} €</p>
         </article>

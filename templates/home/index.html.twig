@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{parent()}} - Accueil{% endblock %}
 
 {% block content %}
 <section class="promotion">
@@ -15,12 +15,12 @@
         {% for product in products | reverse | slice(0, 1) %} 
             <div class="article__image--big">
                 <h3>{{ product.name | capitalize}}</h3>
-                <img src="{{ product.img }}"/>
+                <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
             </div>
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ product.name | capitalize }}</h3>
-                    <img src="{{ product.img }}"/>
+                    <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                 </div>
             {% endfor %}
         {% else %}
@@ -38,13 +38,13 @@
             <div class="article__image--big">
                 <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
                 {# <img src="https://via.placeholder.com/200x185"> #}
-                <img src="{{ artist.avatar }}"/>
+                <a href="{{path('artist', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
             </div>
             {% for artist in artists | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
                     {# <img src="https://via.placeholder.com/100x85"> #}
-                    <img src="{{ artist.avatar }}"/>
+                    <a href="{{path('artist', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
                 </div>
             {% endfor %}
         {% else %}
@@ -61,13 +61,13 @@
         {% for product in products | reverse | slice(0, 1) %} 
             <div class="article__image--big">
                 <h3>{{ product.name | capitalize}}</h3>
-                <img src="{{ product.img }}"/>
+                <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                 <p>{{ product.price }}€</p>
             </div>
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ product.name | capitalize }}</h3>
-                    <img src="{{ product.img }}"/>
+                    <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                     <p>{{ product.price }}€</p>
                 </div>
             {% endfor %}

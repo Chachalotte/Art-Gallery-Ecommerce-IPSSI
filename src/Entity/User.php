@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -63,6 +64,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'artist', targetEntity: Page::class, cascade: ['persist', 'remove'])]
     private $artist_page;
+
+    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: Product::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private $Product;
 
     public function __construct()
     {
@@ -278,6 +283,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->artist_page = $artist_page;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProduct(): Collection
+    {
+        return $this->Product;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->Product->contains($product)) {
+            $this->Product[] = $product;
+            $product->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->Product->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getArtist() === $this) {
+                $product->setArtist(null);
+            }
+        }
 
         return $this;
     }

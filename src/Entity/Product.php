@@ -34,7 +34,7 @@ class Product
     #[ORM\JoinColumn(nullable: true)]
     private $orderItem;
 
-    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'Product')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'Product')]
     private $artist;
 
     #[ORM\OneToMany(mappedBy: 'Product', targetEntity: Comments::class)]
@@ -127,12 +127,12 @@ class Product
         return $this;
     }
 
-    public function getArtist(): ?Artist
+    public function getArtist(): ?User
     {
         return $this->artist;
     }
 
-    public function setArtist(?Artist $artist): self
+    public function setArtist(?User $artist): self
     {
         $this->artist = $artist;
 
