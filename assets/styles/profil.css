@@ -1,0 +1,30 @@
+.modaleContainer {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    /* padding-top: 100px; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* background-color: rgb(215, 232, 110); */
+    background-color: rgba(239, 231, 221, 0.6);
+}
+
+.modale-slide-side {
+    position: absolute;
+    background-color: #EFE7DD;
+    margin-left: 60%;
+    margin-top: 0;
+    padding: 20px;
+    border: 1px solid #764B36;
+    width: 40%;
+    height: 100vh;
+}
+
+.close:hover,
+.close:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
