@@ -7,7 +7,7 @@
 {% if app.user.id == user.id %}
     <h2>Mes informations</h2>
     <div class="card form">
-        <h3 class="card-title">{{app.user.name}} {{app.user.firstName}}</h3>
+        <h3 class="card-title">{{user.name}} {{user.firstName}}</h3>
         <div class="personnalInformation">
             <p class="card-text">{{app.user.email}}</p>
         </div>
@@ -29,7 +29,7 @@
         {% if is_granted("ROLE_ARTIST")%}
             <div class="personnalInformation">
                 <p class="card-text">Mes oeuvres</p>
-                <a class="whiteButton" href="#">Voir ma page artiste</a>
+                <a class="whiteButton" href="{{path('artistPage', {'id': user.id})}}">Voir ma page artiste</a>
             </div>
         {% endif %}
 

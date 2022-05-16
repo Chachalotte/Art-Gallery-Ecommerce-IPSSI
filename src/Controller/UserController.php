@@ -265,4 +265,18 @@ class UserController extends AbstractController
             'artist' => $artistList
         ]);
     }
+
+    //=============================================
+    //          Page des artistes
+    //=============================================
+    #[Route('/artistsPage/{id<\d+>}', name: 'artistPage')]
+    public function artistPage(ManagerRegistry $doctrine, $id)
+    {
+        $user = $doctrine->getRepository(User::class)->find($id); //tri par role
+        $request = Request::createFromGlobals();
+
+        return $this->render('users/artist/artistPage.html.twig', [
+            'user' => $user
+        ]);
+    }
 }

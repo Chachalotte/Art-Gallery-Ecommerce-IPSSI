@@ -2,6 +2,7 @@
 @import url('footer.css');
 @import url('home.css');
 @import url('profil.css');
+@import url('artistPage.css');
 
 main {
     margin: 0 2vw;

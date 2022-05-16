@@ -1,0 +1,31 @@
+aside{
+    width:30vw;
+    text-align: justify;
+}
+
+section.presentation,
+.follow, 
+.identity,
+div.product, 
+.otherArtists,
+.anotherArtist{
+    display: flex;
+}
+
+.identity img{
+    width: 45%;
+    object-fit: cover;
+}
+
+div.product{
+
+}
+
+.otherArtists{
+    justify-content: space-around;
+}
+
+.anotherArtist img{
+    width: 8vw;
+    object-fit: cover;
+}
