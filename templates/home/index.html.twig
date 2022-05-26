@@ -17,12 +17,14 @@
                 <h3>{{ product.name | capitalize}}</h3>
                 <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
             </div>
+            <div class="article__image--multi">
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ product.name | capitalize }}</h3>
                     <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                 </div>
             {% endfor %}
+            </div>
         {% else %}
             <p>Il n'y a pas encore d'oeuvres à présenter.</p>
         {% endfor %}
@@ -38,15 +40,17 @@
             <div class="article__image--big">
                 <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
                 {# <img src="https://via.placeholder.com/200x185"> #}
-                <a href="{{path('artist', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
+                <a href="{{path('artistPage', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
             </div>
+            <div class="article__image--multi">
             {% for artist in artists | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
                     {# <img src="https://via.placeholder.com/100x85"> #}
-                    <a href="{{path('artist', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
+                    <a href="{{path('artistPage', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
                 </div>
             {% endfor %}
+            </div>
         {% else %}
             <p>Il n'y a pas encore d'artistes à présenter.</p>
         {% endfor %}
@@ -64,6 +68,7 @@
                 <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                 <p>{{ product.price }}€</p>
             </div>
+            <div class="article__image--multi">
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ product.name | capitalize }}</h3>
@@ -71,6 +76,7 @@
                     <p>{{ product.price }}€</p>
                 </div>
             {% endfor %}
+            </div>
         {% else %}
             <p>Il n'y a pas encore d'oeuvres à présenter.</p>
         {% endfor %}

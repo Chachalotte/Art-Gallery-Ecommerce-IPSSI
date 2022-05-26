@@ -1,76 +1,84 @@
 article,
 section {
-    margin: 2vw 0;
+  margin: 2vw;
 }
 
 article div.article__header,
 section.subscription {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 article div.article__image {
-    height: 30vw;
-    width: 100%;
+  height: 30vw;
+  width: 100%;
 }
 
 article div.article__image--big,
 article div.article__image--big img {
-    width: 40vw;
-    height: 28vw;
-    object-fit: cover;
+  width: 40vw;
+  height: 28vw;
+  object-fit: cover;
 }
 
 article div.article__image--small,
 article div.article__image--small img {
-    width: 20vw;
-    height: 12vw;
-    flex-wrap: wrap;
-    object-fit: cover;
+  width: 20.5vw;
+  height: 12.5vw;
+  flex-wrap: wrap;
+  object-fit: cover;
 }
 
 article div.article__image--big,
 article div.article__image--small {
-    position: relative;
+  position: relative;
+}
+
+article div.article__image--multi {
+  margin-left: 15vw;
+  padding-left: 2vw;
+  flex-wrap: wrap;
+  width: auto;
+  height: 28vw;
 }
 
 article div.article__image--big img,
 article div.article__image--small img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 article div.article__image--big h3,
 article div.article__image--big p,
 article div.article__image--small h3,
 article div.article__image--small p {
-    background-color: #EFE7DD;
-    position: absolute;
-    z-index: 3;
+  background-color: #efe7dd;
+  position: absolute;
+  z-index: 3;
 }
 
 article div.article__image--big p,
 article div.article__image--small p {
-    bottom: 0;
-    right: 0;
+  bottom: 0;
+  right: 0;
 }
 
 section.subscription {
-    margin: 2vw;
-    padding: 1vw;
-    background-color: #FFC4A8;
+  margin: 2vw;
+  padding: 1vw;
+  background-color: #ffc4a8;
 }
 
 article div.article__image,
-article div.article__image--small,
+article div.article__image--multi,
 section .order__items,
 section .partner__items {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 section .partner__items div img {
-    width: 15vw;
+  width: 15vw;
 }

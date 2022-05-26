@@ -93,9 +93,9 @@ class ProfilType extends AbstractType
                 'label' => 'Image (JPEG/PNG)',
                 'required' => false
             ])
-            // ->add('description', TextareaType::class, [
-            //     'label' => "Description"
-            // ])
+            ->add('description', TextareaType::class, [
+                'label' => "Description"
+            ])
         ;
     }
 

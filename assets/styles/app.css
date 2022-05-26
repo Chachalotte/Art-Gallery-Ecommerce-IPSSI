@@ -3,6 +3,7 @@
 @import url('home.css');
 @import url('profil.css');
 @import url('artistPage.css');
+@import url('productPage.css');
 
 main {
     margin: 0 2vw;

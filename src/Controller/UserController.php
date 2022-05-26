@@ -4,7 +4,6 @@ namespace App\Controller;
 
 //Entitées
 use App\Entity\User;
-use App\Entity\Artist;
 
 //Managers
 use App\Entity\Comments;
@@ -238,7 +237,8 @@ class UserController extends AbstractController
     {
 
         //Lister un artiste spécifiquement par son id
-        $artist = $doctrine->getRepository(Artist::class)->find($id);
+        $artists = $doctrine->getRepository(User::class);
+        $artist = $artists->findArtist($id);
         $URL = $request->getRequestUri();
 
 
@@ -256,13 +256,16 @@ class UserController extends AbstractController
     #[Route('/artists', name: 'artistList')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $artists = $doctrine->getRepository(Artist::class);
+        $artists = $doctrine->getRepository(User::class)->findBy(
+            ['roles' => '["ROLE_ARTIST"]'],
+            ['id' => 'DESC']
+        );
 
-        $artistList = $artists->findAll();
+        // $artistList = $artists->findAllArtists();
 
 
         return $this->render('artists/artistList.html.twig', [
-            'artist' => $artistList
+            'artist' => $artists
         ]);
     }
 
