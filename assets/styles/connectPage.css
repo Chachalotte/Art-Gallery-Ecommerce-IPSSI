@@ -1,0 +1,32 @@
+section.backgroundConnect {
+  width: 96vw;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../public/img/product/7046031f3762bf4a7bab3cbbbcf7bdbc.jpg');
+  object-fit: cover;
+}
+
+div.formConnect {
+  width: 35vw;
+  height: 22vw;
+  background-color: #efe7dd;
+  margin: auto;
+  padding: 2vw;
+}
+
+form.connection {
+  display: flex;
+  flex-direction: column;
+}
+
+div.noAccount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.noAccount a {
+  margin-left: 10px;
+}

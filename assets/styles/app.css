@@ -4,15 +4,16 @@
 @import url('profil.css');
 @import url('artistPage.css');
 @import url('productPage.css');
+@import url('connectPage.css');
 
 main {
-    margin: 0 2vw;
+  margin: 0 2vw;
 }
 
 .nav {
-    list-style: none;
+  list-style: none;
 }
 
 .nav__link {
-    text-decoration: none;
+  text-decoration: none;
 }
