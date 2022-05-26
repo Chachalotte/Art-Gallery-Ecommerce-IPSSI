@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-
-<header>
+{% block header %}
     <div  class="nav header_head">
         {% if (app.user) %}
             <li><a class="nav__link" href="{{ path('app_logout') }}">Déconnexion</a></li>
@@ -39,11 +37,15 @@
             <input placeholder="Rechercher">
         </div>
     </nav>
-</header>
+{% endblock %}
+
+{% block body %}
 
 <main>{% block content %}{% endblock %}</main>
 
-<footer>
+{% endblock %}
+
+{% block footer %}
     <div class='major'>
         <div class='major__cat'>
             <h4>Nos offres</h4>
@@ -83,6 +85,4 @@
         </div>
     </div>  
     &copy2022 ArtGalery
-</footer>
-
 {% endblock %}

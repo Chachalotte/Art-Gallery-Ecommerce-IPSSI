@@ -14,7 +14,7 @@
 
     </head>
     <body>
-        <nav>
+        {# <nav> #}
             {# <li><a href="{{ path('home') }}">Accueil</a></li>
             {% if is_granted('ROLE_USER') %}
             <li><a href="{{ path('app_product') }}">Liste des produits</a></li>
@@ -27,9 +27,21 @@
             <li><a href="{{ path('admin') }}">Administration</a></li>
             <li><a href="{{ path('dossier') }}">Dossier</a></li>
             {% endif %} #}
-        </nav>
+        {# </nav> #}
+        <header>
+        {% block header %}                    
+            <nav>
+                <a href="{{path('home')}}"><img src="https://via.placeholder.com/100x85" alt="logo de la galerie"/></a>
+            </nav>
+        {% endblock %}
+        </header>
         
         {% block body %}{% endblock %}
+        <footer>
+        {% block footer %}
+            &copy2022 ArtGalery
+        {% endblock %}
+        </footer>
     </body>
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
