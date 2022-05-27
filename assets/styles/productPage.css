@@ -1,0 +1,35 @@
+section.productPres,
+.otherOeuvres {
+  display: flex;
+  justify-content: space-around;
+}
+
+article.productVue {
+  width: 63vw;
+}
+
+article.productVue img {
+  margin: auto;
+  width: 55vw;
+  object-fit: cover;
+}
+
+.actionCom {
+  display: flex;
+  justify-content: space-between;
+}
+
+aside.descriptionComplementary {
+  width: 30vw;
+}
+
+h2,
+.anotherOeuvre {
+  text-align: center;
+}
+
+.anotherOeuvre img {
+  margin: auto;
+  width: 8vw;
+  object-fit: cover;
+}

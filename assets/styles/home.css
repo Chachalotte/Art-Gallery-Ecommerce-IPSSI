@@ -1,40 +1,40 @@
-article,
-section {
+article.articleHome,
+section.sectionHome {
   margin: 2vw;
 }
 
-article div.article__header,
+article.articleHome div.article__header,
 section.subscription {
   display: flex;
   justify-content: space-between;
 }
 
-article div.article__image {
+article.articleHome div.article__image {
   height: 30vw;
   width: 100%;
 }
 
-article div.article__image--big,
-article div.article__image--big img {
+article.articleHome div.article__image--big,
+article.articleHome div.article__image--big img {
   width: 40vw;
   height: 28vw;
   object-fit: cover;
 }
 
-article div.article__image--small,
-article div.article__image--small img {
+article.articleHome div.article__image--small,
+article.articleHome div.article__image--small img {
   width: 20.5vw;
   height: 12.5vw;
   flex-wrap: wrap;
   object-fit: cover;
 }
 
-article div.article__image--big,
-article div.article__image--small {
+article.articleHome div.article__image--big,
+article.articleHome div.article__image--small {
   position: relative;
 }
 
-article div.article__image--multi {
+article.articleHome div.article__image--multi {
   margin-left: 15vw;
   padding-left: 2vw;
   flex-wrap: wrap;
@@ -42,37 +42,36 @@ article div.article__image--multi {
   height: 28vw;
 }
 
-article div.article__image--big img,
-article div.article__image--small img {
+article.articleHome div.article__image--big img,
+article.articleHome div.article__image--small img {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
 }
 
-article div.article__image--big h3,
-article div.article__image--big p,
-article div.article__image--small h3,
-article div.article__image--small p {
+article.articleHome div.article__image--big h3,
+article.articleHome div.article__image--big p,
+article.articleHome div.article__image--small h3,
+article.articleHome div.article__image--small p {
   background-color: #efe7dd;
   position: absolute;
   z-index: 3;
 }
 
-article div.article__image--big p,
-article div.article__image--small p {
+article.articleHome div.article__image--big p,
+article.articleHome div.article__image--small p {
   bottom: 0;
   right: 0;
 }
 
 section.subscription {
-  margin: 2vw;
   padding: 1vw;
   background-color: #ffc4a8;
 }
 
-article div.article__image,
-article div.article__image--multi,
+article.articleHome div.article__image,
+article.articleHome div.article__image--multi,
 section .order__items,
 section .partner__items {
   display: flex;
