@@ -5,7 +5,7 @@
 {% block content %}
 
     <h1>{{product.name | capitalize}}</h1>
-    <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+    <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
     <p>{{ product.description | capitalize }}</p>
     <div class="filters">
     </div>

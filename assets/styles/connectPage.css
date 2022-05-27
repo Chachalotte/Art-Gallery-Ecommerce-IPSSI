@@ -1,10 +1,17 @@
 section.backgroundConnect {
-  width: 96vw;
-  height: 75vh;
+  width: 99vw;
+  height: 82vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../../public/img/product/7046031f3762bf4a7bab3cbbbcf7bdbc.jpg');
+}
+
+section.backgroundConnect img {
+  position: absolute;
+  top: 5vw;
+  left: 0;
+  width: 100vw;
+  height: 82vh;
   object-fit: cover;
 }
 
@@ -14,6 +21,7 @@ div.formConnect {
   background-color: #efe7dd;
   margin: auto;
   padding: 2vw;
+  z-index: 2;
 }
 
 form.connection {

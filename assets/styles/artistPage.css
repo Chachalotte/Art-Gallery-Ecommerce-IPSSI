@@ -1,31 +1,51 @@
-aside{
-    width:30vw;
-    text-align: justify;
+section.presentation {
+  margin-top: 3vw;
+}
+
+aside {
+  width: 25vw;
+  height: 95vh;
+  text-align: justify;
 }
 
 section.presentation,
-.follow, 
+.follow,
 .identity,
-div.product, 
+div.products,
 .otherArtists,
-.anotherArtist{
-    display: flex;
+.anotherArtist {
+  display: flex;
 }
 
-.identity img{
-    width: 45%;
-    object-fit: cover;
+.follow p {
+  margin-left: 10px;
+}
+.identity img {
+  width: 45%;
+  object-fit: cover;
 }
 
-div.product{
-
+div.products {
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 68vw;
+  margin-left: 3vw;
 }
 
-.otherArtists{
-    justify-content: space-around;
+div.products div.product {
+  width: 20vw;
 }
 
-.anotherArtist img{
-    width: 8vw;
-    object-fit: cover;
+div.product img {
+  object-fit: cover;
+  width: 20vw;
+}
+
+.otherArtists {
+  justify-content: space-around;
+}
+
+.anotherArtist img {
+  width: 8vw;
+  object-fit: cover;
 }
