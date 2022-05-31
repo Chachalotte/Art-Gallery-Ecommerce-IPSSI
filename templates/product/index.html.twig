@@ -1,23 +1,68 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Les oeuvres uniques{% endblock %}
 
-{% block body %}
+{% block content %}
 
-{% for product in products %}
+{# {% for product in products %}
         {% if loop.first %}
         <section>
         {% endif %}
-        {{ product.name }}
-        {{ product.description }}
-        {{ product.img }}
+        <div>
+        {% if product.artist %}
+            <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+        {% endif %}
+            <div>
+                <img src="{{ product.img }}"/>  
+                <div>
+                    <h2><a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a></h2>                
+                    <p>{{ product.description | capitalize | slice(0, 50)}}</p>
+                </div> 
+            </div>     
+        </div>
 
         {% if loop.index % 3 == 0 %}
-		{# Après 3 boucles on reforme une section et on sépare les blocs #}
+		{# Après 3 boucles on reforme une section et on sépare les blocs }
 		</section>
+		{% endif %}     
+        {% if loop.last %}
+		{# close last row }
+		{% endif %}
+    {% endfor %} #}
+    
+    <h1>Oeuvres uniques</h1>
+    <div class="filters">
+    </div>
+
+    <section class="productsList">
+    {% for product in products %}
+        {% if loop.first %}
+
+        {% endif %}
+        <div>
+        {% if product.artist %}
+            <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+        {% endif %}
+            <div>
+                <img src="{{ asset('img/product/' ~ product.img) }}"/>  
+                <div>
+                    <h2>
+                        <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
+                        <span><a href="{#{path('artist', {'id': product.artist.id} ) }#}">({{ product.category.name }})</a></span>
+                    </h2>             
+                    <p>{{ product.description | capitalize | slice(0, 50)}}</p>
+                </div> 
+            </div>     
+        </div>
+
+        {% if loop.index % 6 == 0 %}
+		{# Après 3 boucles on reforme une section et on sépare les blocs #}
 		{% endif %}     
         {% if loop.last %}
 		{# close last row #}
 		{% endif %}
+    {% else %}
+    <p>pas de produit</p>
     {% endfor %}
+	</section>
 {% endblock %}

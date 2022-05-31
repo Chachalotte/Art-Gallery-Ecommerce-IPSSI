@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'connect.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{parent()}} - Register{% endblock %}
 
-{% block body %}
+{% block connection %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
@@ -13,8 +13,6 @@
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.name) }}
         {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.gender) }}
-        {{ form_row(registrationForm.age) }}
 
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
@@ -22,4 +20,9 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    <div class="noAccount">
+        <p>Vous avez un compte ?</p>
+        <a href="{{ path('login') }}">Se connecter</a>
+    </div>
+
 {% endblock %}

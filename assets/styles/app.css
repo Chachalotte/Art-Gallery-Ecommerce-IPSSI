@@ -1,0 +1,19 @@
+@import url('header.css');
+@import url('footer.css');
+@import url('home.css');
+@import url('profil.css');
+@import url('artistPage.css');
+@import url('productPage.css');
+@import url('connectPage.css');
+
+main {
+  margin: 0 2vw;
+}
+
+.nav {
+  list-style: none;
+}
+
+.nav__link {
+  text-decoration: none;
+}

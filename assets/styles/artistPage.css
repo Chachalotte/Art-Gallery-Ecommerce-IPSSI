@@ -1,0 +1,51 @@
+section.presentation {
+  margin-top: 3vw;
+}
+
+aside {
+  width: 25vw;
+  height: 95vh;
+  text-align: justify;
+}
+
+section.presentation,
+.follow,
+.identity,
+div.products,
+.otherArtists,
+.anotherArtist {
+  display: flex;
+}
+
+.follow p {
+  margin-left: 10px;
+}
+.identity img {
+  width: 45%;
+  object-fit: cover;
+}
+
+div.products {
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 68vw;
+  margin-left: 3vw;
+}
+
+div.products div.product {
+  width: 20vw;
+}
+
+div.product img {
+  object-fit: cover;
+  width: 20vw;
+}
+
+.otherArtists {
+  justify-content: space-around;
+}
+
+.anotherArtist img {
+  width: 8vw;
+  object-fit: cover;
+}

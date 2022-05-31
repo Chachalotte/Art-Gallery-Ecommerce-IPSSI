@@ -1,0 +1,94 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - {{product.name}}{% endblock %}
+
+{% block content %}
+
+    <h1>{{product.name | capitalize}}</h1>
+    <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+    <p>{{ product.description | capitalize }}</p>
+    <div class="filters">
+    </div>
+
+    <section class="productPres">
+        <article class="productVue">
+            <img src="{{ asset('img/product/' ~ product.img) }}"/>
+            <h2>Laissez votre commentaires</h2>
+            <input type="textarea" />
+            <div class="actionCom">
+                <p>⭐⭐⭐</p>
+                <button>Envoyer</button>
+            </div> 
+        </article>
+
+        <aside class="descriptionComplementary">
+            <div>
+                <h2>Mise en vente</h2>                
+                <p>Prix: {{ product.price | capitalize }} €</p>
+                <div class="action">
+                    <button>Ajouter au panier</button>                
+                    <button>Voir les détails d'achat</button>
+                </div>
+                <div class="action">
+                    <h3>Détails techniques du produit</h3> 
+                    <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a>
+                    <p>Dimensions: 120x170 cm</p>             
+                </div>
+            </div>
+            <div class="allComments">
+                <h2>Commentaires</h2>
+                {% for comment in product.comments %}
+                    <div class="comment">
+                        <div>
+                            <h4>De {{comment.user}}</h4>
+                            <p>⭐</p>
+                        </div>
+                        <p>{{comment}}</p>             
+                    </div>
+                {% endfor %}
+            </div>
+        </aside>
+    </section>
+
+    <section >
+    <h2>Vous aimerez aussi ...</h2>
+    {#% for  | reverse | slice(0, 3) %#}
+        <div class="otherOeuvres">
+            <div class="anotherOeuvre">
+                <div>  
+                    <h3>Autre Oeuvre</h3>
+                    <p> Début de description de l'oeuvre ....</p>
+                </div>
+                <img src="{{ asset('img/product/d813d4903ac4445a84746e8133643e95.jpg') }}"/>
+            </div>
+
+            <div class="anotherOeuvre">
+                <div>  
+                    <h3>Autre Oeuvre</h3>
+                    <p> Début de description de l'oeuvre ....</p>
+                </div>
+                <img src="{{ asset('img/product/') }}"/>
+            </div>
+            <div class="anotherOeuvre">
+                <div>  
+                    <h3>Autre Oeuvre</h3>
+                    <p> Début de description de l'oeuvre ....</p>
+                </div>
+                <img src="{{ asset('img/product/') }}"/>
+            </div>
+            <div class="anotherOeuvre">
+                <div>  
+                    <h3>Autre Oeuvre</h3>
+                    <p> Début de description de l'oeuvre ....</p>
+                </div>
+                <img src="{{ asset('img/product/') }}"/>
+            </div>
+        </div>
+    {#% endfor %#}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+</script>
+{% endblock %}

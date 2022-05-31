@@ -1,0 +1,129 @@
+
+/* =========== Box pour la page de profil des users (/profile et /profile/[id]) ============*/
+
+
+.profileBox
+{
+    background-color: #000000dc;
+	border:solid 2px  #4e4646dc;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 2%;
+    
+	border-radius: 3px;
+	width:35% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+	color: rgb(240, 235, 223);
+}
+
+
+.profileBox:hover
+{
+    background-color: #000000dc;
+	border:solid 2px  #4e4646dc;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 2%;
+    
+	border-radius: 3px;
+	width:35% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	color: rgb(240, 235, 223);
+}
+
+
+
+/* =========== Box des détails du profil (sans opacité) ============*/
+.profileBoxVoid
+{
+    /* background-color: #ffffffdc; */
+	/* border:solid 2px  #ffffffdc; */
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 1%;
+    
+	border-radius: 3px;
+	width:30% ;
+	/* box-shadow :-3px 7px 16px #ced6de; */
+	opacity: 1;
+}
+
+/* =========== Contenu de la box artiste ============*/
+
+.profileCard
+{
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: 5%;
+    margin-top: 2%;
+	/*min-height:135px; */
+	font: italic 16px "Fira Sans", serif;
+	opacity: 1;
+}
+
+.profileTitle
+{
+    font-size : 25px; 
+}
+
+/* =========== Sections/Spacing ============*/
+
+.spacingCategory
+{
+	float: left;
+}
+
+.spacingSmall
+{
+	margin-top: 50px;
+}
+
+.userSections
+{
+	float: left;
+	border:solid 2px  #4e4646dc;
+	opacity: 1;
+	background-color: #000000dc;
+}
+
+.commentBox
+{
+	
+    background-color: #ffffff;
+	border:solid 2px  #ded8cece;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 2;
+    
+	border-radius: 3px;
+	width:20% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Fira Sans", serif;
+
+}
+
+
+/* =========== Sections diverses ============*/
+
+/*  Titre de page */
+.rubriqueTitle
+{
+    font-size : 30px; 
+	letter-spacing:4px;
+	font: italic bold 30px "Fira Sans", serif;
+}
+
+/*  Images en float (les avatars, principalement) */
+.pictureFloat
+{
+	float: left;
+	margin-right: 3%;
+}
+
+body 
+{
+	background-color: rgb(240, 235, 223);
+}

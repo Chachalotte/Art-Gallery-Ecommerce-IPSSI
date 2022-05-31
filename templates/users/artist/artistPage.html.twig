@@ -1,0 +1,79 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Artiste - {{user.name}} {{user.firstName}}{% endblock %}
+
+{% block content %}
+
+<section class="presentation">
+    <aside>
+        <div class="follow">
+            <button>⭐ Suivre</button>
+            <p>abonnés</p>
+        </div>
+        <div class="identity">    
+        {% if user.avatar %}
+            <img src="{{ asset('img/user/' ~ user.avatar) }}"/>
+        {% else %}
+            {% if user.gender == "homme" %}
+                <img src="{{ asset('img/user/man.png') }}"/>
+            {% else %}
+                <img src="{{ asset('img/user/woman.png') }}"/>
+            {% endif %}
+        {% endif %}
+            <div>
+                <h2>{{user.firstName}} {{user.name}}</h2>
+                <h3>Oeuvres : {{user.product.count}}</h3>
+            </div>
+        </div>
+        {% if user.description %}
+            <p>{{user.description}}</p>
+        {% else %}
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        {% endif %}
+    </aside>
+    <div class="products">
+        {% for product in user.product %}
+            <div class="product">
+                <img src="{{ asset('img/product/' ~ product.img) }}"/>  
+                <div>
+                    <h2>
+                        <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
+                        <span><a href="{{path('category', {'id': product.category.id} ) }}">({{ product.category.name }})</a></span>
+                    </h2>             
+                    <p>{{ product.description | capitalize | slice(0, 50)}}</p>
+                </div>     
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <h2>Vous aimerez aussi ...</h2>
+    {#% for  | reverse | slice(0, 3) %#}
+        <div class="otherArtists">
+            <div class="anotherArtist">
+                <img src="{{ asset('img/user/man.png') }}"/>
+                <div>  
+                    <h3>Autre Artiste</h3>
+                    <p> Début de description du profil ....</p>
+                </div>
+            </div>
+
+            <div class="anotherArtist">
+                <img src="{{ asset('img/user/man.png') }}"/>
+                <div>  
+                    <h3>Autre Artiste</h3>
+                    <p> Début de description du profil ....</p>
+                </div>
+            </div>
+            <div class="anotherArtist">
+                <img src="{{ asset('img/user/woman.png') }}"/>
+                <div>  
+                    <h3>Autre Artiste</h3>
+                    <p> Début de description du profil ....</p>
+                </div>
+            </div>
+        </div>
+    {#% endfor %#}
+</section>
+
+{% endblock %}

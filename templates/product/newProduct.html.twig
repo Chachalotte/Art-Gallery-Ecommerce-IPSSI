@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Nouvelle oeuvre{% endblock %}
+
+{% block content %}
+
+<h2>Nouvelle oeuvre<h2>
+
+{{ form_start(form)}}
+    {{ form_widget(form)}}
+    <button type="submit">Créer le produit</button>    
+{{ form_end(form)}}
+{% endblock %}

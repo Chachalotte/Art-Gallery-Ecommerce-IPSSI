@@ -1,123 +1,134 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{parent()}} - Accueil{% endblock %}
 
 {% block content %}
-<div>Promotions du moment</div>
-<article>
+<section class="promotion sectionHome">
+    <h2>Promotions du moment</h2>
+</section>
+<article class="articleHome">
     <div class="article__header">
-        <h2>Les classiques</h2>
+        <h2>Les vitrines</h2>
         <a href="#">+ tout voir</a>
-    <div>
+    </div>
     <div class="article__image">
         {% for product in products | reverse | slice(0, 1) %} 
             <div class="article__image--big">
-                <h3>{{ product.name }}</h3>
-                <img src="{{ product.img }}"/>
-                <p>{{ product.price }}€</p>
+                <h3>{{ product.name | capitalize}}</h3>
+                <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
             </div>
+            <div class="article__image--multi">
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
-                    <h3>{{ product.name }}</h3>
-                    <img src="{{ product.img }}"/>
-                    <p>{{ product.price }}€</p>
+                    <h3>{{ product.name | capitalize }}</h3>
+                    <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                 </div>
             {% endfor %}
+            </div>
         {% else %}
             <p>Il n'y a pas encore d'oeuvres à présenter.</p>
         {% endfor %}
     </div>
 </article>
-<article>
+<article class="articleHome">
     <div class="article__header">
         <h2>Les artistes</h2>
-        <a href="#">+ tout voir</a>
-    <div>    
+        <a href="{{path('artistList')}}">+ tout voir</a>
+    </div>    
     <div class="article__image">
         {% for artist in artists | reverse | slice(0, 1) %} 
             <div class="article__image--big">
-                <h3>{{ artist.name }}</h3>
-                <img src="https://via.placeholder.com/200x185">
-                {# <img src="{{ artist.img }}"/> #}
+                <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
+                <img src="{{ asset('img/user/' ~ artist.avatar) }}">
+                <a href="{{path('artistPage', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
             </div>
+            <div class="article__image--multi">
             {% for artist in artists | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
-                    <h3>{{ artist.name }}</h3>
-                    <img src="https://via.placeholder.com/100x85">
-                    {# <img src="{{ artist.img }}"/> #}
+                    <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
+                    <img src="{{ asset('img/user/' ~ artist.avatar) }}">
+                    <a href="{{path('artistPage', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
                 </div>
             {% endfor %}
+            </div>
         {% else %}
             <p>Il n'y a pas encore d'artistes à présenter.</p>
         {% endfor %}
     </div>
 </article>
-<article>
+<article class="articleHome">
     <div class="article__header">
         <h2>Le oeuvres uniques</h2>
-        <a href="#">+ tout voir</a>
-    <div>
+        <a href="{{path('app_product')}}">+ tout voir</a>
+    </div>
     <div class="article__image">
         {% for product in products | reverse | slice(0, 1) %} 
             <div class="article__image--big">
-                <h3>{{ product.name }}</h3>
-                <img src="{{ product.img }}"/>
+                <h3>{{ product.name | capitalize}}</h3>
+                <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                 <p>{{ product.price }}€</p>
             </div>
+            <div class="article__image--multi">
             {% for product in products | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
-                    <h3>{{ product.name }}</h3>
-                    <img src="{{ product.img }}"/>
+                    <h3>{{ product.name | capitalize }}</h3>
+                    <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
                     <p>{{ product.price }}€</p>
                 </div>
             {% endfor %}
+            </div>
         {% else %}
             <p>Il n'y a pas encore d'oeuvres à présenter.</p>
         {% endfor %}
     </div>
 </article>
-<div>
+<section class='subscription sectionHome'>
     <div>
         <h2>Inscription à notre newsletter</h2>
         <p>Lorem ipsum dolor sit amet et delectus accommodare his consul copiosae legendos at vix ad putent delectus delicata usu. Vidit dissentiet eos cu eum an brute copiosae hendrerit. Eos erant</p>
-    <div>
+    </div>
     <div>
         <input placeholder="Email">
     </div>
-</div>
+</section>
 <hr>
-<section>
+<section class="order sectionHome">
     <h2>Commandes facilitées</h2>
-    <div>
-        <img src="https://via.placeholder.com/180x100" />
-        <p>Petite explication</p>
-    </div>
-    <div>
-        <img src="https://via.placeholder.com/180x100" />
-        <p>Petite explication</p>
-    </div>
-    <div>
-        <img src="https://via.placeholder.com/180x100" />
-        <p>Petite explication</p>
+    <div class="order__items">
+        <div>
+            <img src="https://via.placeholder.com/180x100" />
+            <p>Petite explication</p>
+        </div>
+        <div>
+            <img src="https://via.placeholder.com/180x100" />
+            <p>Petite explication</p>
+        </div>
+        <div>
+            <img src="https://via.placeholder.com/180x100" />
+            <p>Petite explication</p>
+        </div>
     </div>
 </section>
-<section>
+<section class="partner sectionHome">
     <h2>Ils parlent de nous</h2>
-    <div>
-        <img src="https://via.placeholder.com/120x75" />
-        <p>Partenaire</p>
-    </div>
-    <div>
-        <img src="https://via.placeholder.com/120x75" />
-        <p>Partenaire</p>
-    </div>
-    <div>
-        <img src="https://via.placeholder.com/120x75" />
-        <p>Partenaire</p>
-    </div>
-    <div>
-        <img src="https://via.placeholder.com/120x75" />
-        <p>Partenaire</p>
+    <div class="partner__items">
+        <div>
+            <img src="https://sallelesdaude.fr/application/files/7015/1783/7202/magazine_art_et_decoration_partenaire_salon_art_deco_paris_fevrier_2017_0.png" />
+            {# <p>Partenaire</p> #}
+        </div>
+        <div>
+            <img src="http://www.d4n.be/wp-content/uploads/BeauxArts_Logo.gif" />
+            {# <img src="https://via.placeholder.com/120x75" /> #}
+            {# <p>Partenaire</p> #}
+        </div>
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Art%2B_Magazine_Logo.png" />
+            {# <p>Partenaire</p> #}
+        </div>
+        <div>
+            <img src="https://i.pinimg.com/474x/7c/3f/a6/7c3fa6333bc0b9fec0df3ca511928d1a.jpg" />
+            {# <p>Partenaire</p> #}
+        </div>
     </div>
 </section>
 {% endblock %}

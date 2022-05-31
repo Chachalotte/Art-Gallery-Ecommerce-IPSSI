@@ -1,0 +1,9 @@
+footer {
+  text-align: center;
+  margin-top: 1vw;
+}
+
+footer div.major {
+  display: flex;
+  justify-content: space-around;
+}

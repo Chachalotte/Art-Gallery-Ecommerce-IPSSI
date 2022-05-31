@@ -18,7 +18,7 @@ class Product
     #[ORM\Column(type: 'string', length: 60)]
     private $name;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -27,17 +27,23 @@ class Product
     #[ORM\Column(type: 'float')]
     private $price;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $color;
 
     #[ORM\ManyToOne(targetEntity: OrderItem::class, inversedBy: 'prodId')]
+    #[ORM\JoinColumn(nullable: true)]
     private $orderItem;
 
-    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'Product')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'Product')]
     private $artist;
 
     #[ORM\OneToMany(mappedBy: 'Product', targetEntity: Comments::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $comments;
+
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $category;
 
     public function __construct()
     {
@@ -121,12 +127,12 @@ class Product
         return $this;
     }
 
-    public function getArtist(): ?Artist
+    public function getArtist(): ?User
     {
         return $this->artist;
     }
 
-    public function setArtist(?Artist $artist): self
+    public function setArtist(?User $artist): self
     {
         $this->artist = $artist;
 
@@ -161,5 +167,22 @@ class Product
         }
 
         return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

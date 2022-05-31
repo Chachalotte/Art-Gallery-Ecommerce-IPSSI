@@ -1,25 +1,30 @@
-{% block title %} {% endblock %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
+{% block title %} {{artist.firstname}} {{artist.name}} {% endblock %}
 
-<div>
-    </br></br>
+
+
+{% block content %}
+<link href="{{ asset('styles/artists.css') }}" type="text/css" rel="stylesheet" />
+<div class="artistBox">
+    <div class="artistCard">
+        <img class="pictureFloat" src="{{artist.avatar}}" width="125" height="125" onerror="this.style.display='none'"/>
     
-    <ul>
-           <b>{{artist.firstname}} {{artist.name}}  <button name="Abonnement">S'abonner</button>  </br></b>  
-    </ul>
-    <ul>
-    <tbody><tr>
-        <td><img src="https://via.placeholder.com/100x100"/></td>
-        <td>
-        Description personnelle de l'artiste. </br>
-        Quo iure deleniti eum ratione obcaecati eum error molestias est tempore dolor </br>
-        qui praesentium omnis sit sunt voluptate ad earum sunt. </br>
-        Et quae ratione ex magni quam 33 autem molestias eos voluptas odit.
-        </td></tr>
-        </tbody>
-    </ul>
+        <b> 
+            <div class="artistTitle"> 
+                {{artist.firstname}} {{artist.name}}  
+                <button name="Abonnement">S'abonner</button>  
+                </br>
+            </div>
+        </b>  
+
+
+        {{artist.description}} </br>
+        
+    </div>
 
 </div>
+
+</br></br></br></br>
 
 {% endblock %}

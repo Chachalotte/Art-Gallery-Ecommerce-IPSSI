@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
+use App\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -41,23 +44,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 50)]
     private $firstname;
 
-    #[ORM\Column(type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $gender;
 
-    #[ORM\Column(type: 'string', length: 20)]
-    private $age;
+    // /**
+    //  * @var string A "Y-m-d H:i:s" formatted value
+    //  */
+    // #[Assert\DateTime]
+    // #[ORM\Column(type: 'datetime', nullable: true)]
+    // private $age;
 
     #[ORM\ManyToOne(targetEntity: Ordered::class, inversedBy: 'User')]
+    #[ORM\JoinColumn(nullable: true)]
     private $ordered;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Comments::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $comments;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $avatar;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $description;
+
+    #[ORM\OneToOne(mappedBy: 'artist', targetEntity: Page::class, cascade: ['persist', 'remove'])]
+    private $artist_page;
+
+    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: Product::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private $Product;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $age;
 
     public function __construct()
     {
@@ -182,17 +201,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAge(): ?string
-    {
-        return $this->age;
-    }
+    // public function getAge(): ?\DateTimeInterface
+    // {
+    //     return $this->age;
+    // }
 
-    public function setAge(string $age): self
-    {
-        $this->age = $age;
+    // public function setAge(\DateTimeInterface $age): self
+    // {
+    //     $this->age = $age;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getOrdered(): ?Ordered
     {
@@ -256,6 +275,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getArtistPage(): ?Page
+    {
+        return $this->artist_page;
+    }
+
+    public function setArtistPage(Page $artist_page): self
+    {
+        // set the owning side of the relation if necessary
+        if ($artist_page->getArtist() !== $this) {
+            $artist_page->setArtist($this);
+        }
+
+        $this->artist_page = $artist_page;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProduct(): Collection
+    {
+        return $this->Product;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->Product->contains($product)) {
+            $this->Product[] = $product;
+            $product->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->Product->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getArtist() === $this) {
+                $product->setArtist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAge(): ?\DateTimeInterface
+    {
+        return $this->age;
+    }
+
+    public function setAge(?\DateTimeInterface $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }

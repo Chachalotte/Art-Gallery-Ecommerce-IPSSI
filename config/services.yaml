@@ -4,6 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    upload_file_product: '%kernel.project_dir%/public/img/product/'
+    upload_file_user: '%kernel.project_dir%/public/img/user/'
+    upload_file_category: '%kernel.project_dir%/public/img/category/'
+    upload_file_delivery: '%kernel.project_dir%/public/img/delivery/'
+    upload_file_page_Artist: '%kernel.project_dir%/public/img/pageArtist/'
 
 services:
     # default configuration for services in *this* file
