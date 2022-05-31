@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use App\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -45,8 +47,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $gender;
 
-    #[ORM\Column(type: 'string', length: 20, nullable: true)]
-    private $age;
+    // /**
+    //  * @var string A "Y-m-d H:i:s" formatted value
+    //  */
+    // #[Assert\DateTime]
+    // #[ORM\Column(type: 'datetime', nullable: true)]
+    // private $age;
 
     #[ORM\ManyToOne(targetEntity: Ordered::class, inversedBy: 'User')]
     #[ORM\JoinColumn(nullable: true)]
@@ -68,6 +74,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'artist', targetEntity: Product::class)]
     #[ORM\JoinColumn(nullable: true)]
     private $Product;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $age;
 
     public function __construct()
     {
@@ -192,17 +201,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAge(): ?string
-    {
-        return $this->age;
-    }
+    // public function getAge(): ?\DateTimeInterface
+    // {
+    //     return $this->age;
+    // }
 
-    public function setAge(string $age): self
-    {
-        $this->age = $age;
+    // public function setAge(\DateTimeInterface $age): self
+    // {
+    //     $this->age = $age;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getOrdered(): ?Ordered
     {
@@ -313,6 +322,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $product->setArtist(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAge(): ?\DateTimeInterface
+    {
+        return $this->age;
+    }
+
+    public function setAge(?\DateTimeInterface $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }

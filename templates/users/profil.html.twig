@@ -8,6 +8,15 @@
     <h2>Mes informations</h2>
     <div class="card form">
         <h3 class="card-title">{{user.name}} {{user.firstName}}</h3>
+        {% if user.avatar %}
+            <img src="{{ asset('img/user/' ~ user.avatar) }}"/>
+        {% else %}
+            {% if user.gender == "homme" %}
+                <img src="{{ asset('img/user/man.png') }}"/>
+            {% else %}
+                <img src="{{ asset('img/user/woman.png') }}"/>
+            {% endif %}
+        {% endif %}
         <div class="personnalInformation">
             <p class="card-text">{{app.user.email}}</p>
         </div>
@@ -15,14 +24,14 @@
             {% if app.user.age is empty %}
             <p class="card-text">Date de naissance</p>
             {% else %}
-            <p class="card-text">{{app.user.age}}</p>
+            <p class="card-text">Date de naissance: {{app.user.age}}</p>
             {% endif %}
         </div>
         <div class="personnalInformation">
             {% if not app.user.gender %}
             <p class="card-text">Sexe</p>
             {% else %}
-            <p class="card-text">{{app.user.gender}}</p>
+            <p class="card-text">Sexe: {{app.user.gender}}</p>
             {% endif %}
         </div>
 
@@ -68,9 +77,9 @@
             <div class="col-md-12">
                 {{ form_row(form.gender, {'attr':{'novalidate': 'novalidate'}}) }}                   
             </div>
-            {# <div class="col-md-12">
+            <div class="col-md-12">
                 {{ form_row(form.age, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div> #}
+            </div>
             <div class="col-md-12">
                 {{ form_row(form.plainPassword.first, {'attr':{'class': 'form-control'}}) }}                   
             </div>
@@ -80,9 +89,9 @@
             <div class="col-md-12">
                 {{ form_row(form.avatar, {'attr':{'novalidate': 'novalidate'}}) }}                   
             </div>
-            {# <div class="col-md-12">
+            <div class="col-md-12">
                 {{ form_row(form.description, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div> #}
+            </div>
         <div>
             {# <button class="close">❌ Annuler</button> #}
             <button type="submit">✔️ Valider</button>

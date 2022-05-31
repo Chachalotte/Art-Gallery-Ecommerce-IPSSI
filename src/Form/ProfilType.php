@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
@@ -11,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -61,12 +63,13 @@ class ProfilType extends AbstractType
                 'label' => 'Entrer votre nom',
             ])
             ->add('gender', ChoiceType::class, [
+                'label' => 'Sexe',
                 'choices' => [
                     'Homme' => 'Homme',
                     'Femme' => 'Femme'
                 ]
             ])
-            // ->add('age', IntegerType::class)
+            ->add('age', DateTimeType::class)
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
@@ -103,6 +106,10 @@ class ProfilType extends AbstractType
     {
         $resolver->setDefaults([
             'current_password_is_required' => false
+        ]);
+        
+        $resolver->setDefaults([
+            'data_class' => User::class,
         ]);
 
         $resolver->setAllowedTypes('current_password_is_required', 'bool');

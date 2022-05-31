@@ -61,14 +61,14 @@ class UserController extends AbstractController
         $comment = $user->getComments();
 
         // On récupère l'ancienne donnée
-        $oldUser = new User;
-        $oldUser->setEmail($user->getEmail());
-        $oldUser->setFirstname($user->getFirstname());
-        $oldUser->setName($user->getName());
-        $user->getGender() ? $oldUser->setGender($user->getGender()) : null;
-        $user->getAge() ? $oldUser->setAge($user->getAge()) : null;
-        $oldUser->setPassword($user->getPassword());
-        $user->getAvatar() ? $oldUser->setAvatar($user->getAvatar()) : null;
+        // $oldUser = new User;
+        // $oldUser->setEmail($user->getEmail());
+        // $oldUser->setFirstname($user->getFirstname());
+        // $oldUser->setName($user->getName());
+        // $oldUser->getGender() ? $oldUser->setGender($user->getGender()) : null;
+        // $oldUser->getAge() ? $oldUser->setAge($user->getAge()) : null;
+        // $oldUser->setPassword($user->getPassword());
+        // $oldUser->getAvatar() ? $oldUser->setAvatar($user->getAvatar()) : null;
 
         // $oldUser->setDescription($user->getDescription());
 
@@ -123,6 +123,7 @@ class UserController extends AbstractController
             }
 
             if ($form->get('avatar')->getData() !== null) {
+                dump('data avatar null');
                 $avatar = $form->get('avatar')->getData();
                 $avatarName = md5(uniqid()) . '.' . $avatar->guessExtension();
 
@@ -132,7 +133,7 @@ class UserController extends AbstractController
                 );
                 $user->setAvatar($avatarName);
             } else {
-                $user->setAvatar($oldUser->getAvatar());
+                // $user->setAvatar($oldUser->getAvatar());
             }
 
             $em = $doctrine->getManager();
