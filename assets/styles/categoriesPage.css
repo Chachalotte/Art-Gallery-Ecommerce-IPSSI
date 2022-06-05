@@ -1,0 +1,40 @@
+div.category {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+div.category a img {
+  width: 100%;
+  height: 20vw;
+  object-fit: cover;
+}
+
+/* -------------- Page d'une category -------- */
+/* div.categoryBand {
+  width: 100%;
+  height: 10vw;
+} */
+
+div.categoryBand > img {
+  width: 100%;
+  height: 10vw;
+  object-fit: cover;
+  margin-bottom: 5vw;
+}
+
+section.productsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 5vw;
+}
+
+div.productCard {
+  width: 20vw;
+}
+
+div.productCard > a > img {
+  width: 20vw;
+  object-fit: cover;
+}

@@ -5,6 +5,7 @@
 @import url('artistPage.css');
 @import url('productPage.css');
 @import url('connectPage.css');
+@import url('categoriesPage.css');
 
 main {
   margin: 0 2vw;

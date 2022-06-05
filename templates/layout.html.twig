@@ -21,8 +21,8 @@
         <div>
             <ul class="nav" >
                 <li><a class="nav__link" href="{{path('artistList')}}">Artistes</a></li>
-                <li><a class="nav__link" href="#">Catégories</a></li>
-                <li><a class="nav__link" href="#">Evenements</a></li>
+                <li><a class="nav__link" href="{{path('categories')}}">Catégories</a></li>
+                <li><a class="nav__link" href="{{path('events')}}">Evenements</a></li>
                 {% if is_granted('ROLE_ARTIST') %}
                     <li><a class="nav__link" href="{{path('product_new', {'id':app.user.id})}}">Ajout oeuvre</a></li>
                     <li><a class="nav__link" href="#">Ajout vitrine</a></li>

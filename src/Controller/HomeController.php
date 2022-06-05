@@ -29,4 +29,15 @@ class HomeController extends AbstractController
             'products' => $products,
         ]);
     }
+
+    #[Route('/events', name: 'events')]
+    public function indexEvents(ManagerRegistry $doctrine): Response
+    {
+        $events = $doctrine->getRepository(Even::class)->findAll();
+        $products = $doctrine->getRepository(Product::class)->findAll();
+
+        return $this->render('home/index.html.twig', [
+            'events' => $events,
+        ]);
+    }
 }

@@ -81,14 +81,4 @@ class ProductController extends AbstractController
             'product' => $product,
         ]);
     }
-
-    #[Route('/category/{id}', name: 'category')]
-    public function showCategory(ManagerRegistry $doctrine, $id): Response
-    {
-        $category = $doctrine->getRepository(Category::class)->find($id);
-
-        return $this->render('product/category.html.twig', [
-            'category' => $category,
-        ]);
-    }
 }
