@@ -257,16 +257,17 @@ class UserController extends AbstractController
     #[Route('/artists', name: 'artistList')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $artists = $doctrine->getRepository(User::class)->findBy(
-            ['roles' => '["ROLE_ARTIST"]'],
-            ['id' => 'DESC']
-        );
+        // $artists = $doctrine->getRepository(User::class)->findBy(
+        //     ['roles' => '["ROLE_ARTIST"]'],
+        //     ['id' => 'DESC']
+        // );
+        $artists = $doctrine->getRepository(User::class)->findAll();
 
         // $artistList = $artists->findAllArtists();
 
 
-        return $this->render('artists/artistList.html.twig', [
-            'artist' => $artists
+        return $this->render('users/artist/artistList.html.twig', [
+            'artists' => $artists
         ]);
     }
 

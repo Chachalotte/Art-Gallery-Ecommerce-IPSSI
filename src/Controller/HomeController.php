@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
@@ -33,10 +34,9 @@ class HomeController extends AbstractController
     #[Route('/events', name: 'events')]
     public function indexEvents(ManagerRegistry $doctrine): Response
     {
-        $events = $doctrine->getRepository(Even::class)->findAll();
-        $products = $doctrine->getRepository(Product::class)->findAll();
+        $events = $doctrine->getRepository(Event::class)->findAll();
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/indexEvents.html.twig', [
             'events' => $events,
         ]);
     }

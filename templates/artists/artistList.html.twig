@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 
-{% block title %} {% endblock %}
+{% block title %}{{parent()}} - Artistes {% endblock %}
 
 
 
@@ -14,28 +14,29 @@
     <ul>
         <h2 class="rubriqueTitle">Liste des artistes</h2>
     </ul>
-    <a href="{{path('product_new', {'id':app.user.id})}}">Exposer sur le site</a>
-    {% for artists in artist %}
+    <a href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
+    {# {% for artists in artist %} #}
+    {% for artist in artists %}
     <ul>
         <div class="artistBox">
             <div class="artistCard">
-            <img class="pictureFloat" src="{{artists.avatar}}" width="100" height="100" onerror="this.style.display='none'"/>
+            <img class="pictureFloat" src="{{artist.avatar}}" width="100" height="100" onerror="this.style.display='none'"/>
                 <h3>
-                    <a href="{{ path('artistList', {'id':artists.id}) }}">
-                        {{artists.firstname}} {{artists.name}}  
+                    <a href="{{ path('artistList', {'id':artist.id}) }}">
+                        {{artist.firstname}} {{artist.name}}  
                         
                     </a> </br>
                     <button name="Abonnement">S'abonner</button> </br>
                 </h3>
 
-                {{artists.description}}
+                {{artist.description}}
                 
             </div>
         </div>
     </ul>
     {% else %}
 
-    <p>nul</p>
+    <p>Il n'y a pas encore d' artistes</p>
     {% endfor %}
 
     </br></br>

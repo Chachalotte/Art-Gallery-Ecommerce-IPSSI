@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block title %}{{parent()}} - Artistes {% endblock %}
+
+
+
+{% block content %}
+
+
+<h2 class="rubriqueTitle">Liste des artistes</h2>
+{% if app.user %}
+<a href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
+{% endif %}
+<section class="artistList">
+    {% for artist in artists %}
+        <div class="artistBox">
+            <div class="artistCard">
+            {% if artist.avatar %}
+                <img src="{{ asset('img/user/' ~ artist.avatar) }}"/>
+            {% else %}
+                {% if artist.gender == "homme" %}
+                    <img src="{{ asset('img/user/man.png') }}"/>
+                {% else %}
+                    <img src="{{ asset('img/user/woman.png') }}"/>
+                {% endif %}
+            {% endif %}
+            <a href="{{ path('artistPage', {'id':artist.id}) }}">
+                <h3>{{artist.firstname}} {{artist.name}}</h3> 
+                
+            </a> 
+                    <button name="Abonnement">S'abonner</button> </br>
+                
+
+                <p>{{artist.description}}</p>
+                
+            </div>
+        </div>
+    {% else %}
+
+    <p>Il n'y a pas encore d' artistes</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

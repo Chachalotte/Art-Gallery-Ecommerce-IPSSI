@@ -1,0 +1,12 @@
+section.artistList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 5vw 0;
+}
+
+div.artistCard img {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
