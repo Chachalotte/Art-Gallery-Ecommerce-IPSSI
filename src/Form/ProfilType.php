@@ -94,6 +94,7 @@ class ProfilType extends AbstractType
             ])
             ->add('avatar', FileType::class, [
                 'label' => 'Image (JPEG/PNG)',
+                'data_class' => null,
                 'required' => false
             ])
             ->add('description', TextareaType::class, [
