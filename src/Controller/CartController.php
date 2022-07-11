@@ -126,13 +126,14 @@ class CartController extends AbstractController
         $em = $mr->getManager();
 
         $orderItems = new OrderItems();
-        $orderItems->addProdId();
-        $orderItems->
+        // $orderItems->
         
-        // foreach($cart as $productId => $quantity){
-        //     $product = $mr->getRepository(Product::class)->find($productId);
-        //     $product->addOrderItem();
-        // }
+        foreach($cart as $productId => $quantity){
+            $product = $mr->getRepository(Product::class)->find($productId);
+            $product->addOrderItem($orderItems->getId());
+            $orderItems->addProdId($productId);
+            dump($product);
+        }
 
         $em->persist($orderItems);
         $em->flush();

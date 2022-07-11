@@ -1,0 +1,13 @@
+div.eventCard{
+    width:90%;
+    display:flex;
+    justify-content: space-around;
+    border: 0.5px solid rgb(128, 124, 124);
+    padding: 2vw;
+    margin: 2vw auto;
+}
+
+div.eventCard img{
+    width:40vw;
+    object-fit: cover;
+}

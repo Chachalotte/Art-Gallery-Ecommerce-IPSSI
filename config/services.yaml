@@ -9,6 +9,7 @@ parameters:
     upload_file_category: '%kernel.project_dir%/public/img/category/'
     upload_file_delivery: '%kernel.project_dir%/public/img/delivery/'
     upload_file_page_Artist: '%kernel.project_dir%/public/img/pageArtist/'
+    upload_file_event: '%kernel.project_dir%/public/img/event/'
 
 services:
     # default configuration for services in *this* file

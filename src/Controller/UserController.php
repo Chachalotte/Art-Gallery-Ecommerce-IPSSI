@@ -53,10 +53,13 @@ class UserController extends AbstractController
     #[Route('/profil/{id<\d+>}', name: 'app_profil')]
     public function Profil(ManagerRegistry $doctrine,  Request $request, UserPasswordHasherInterface $userPasswordHasher, $id)
     {
-        $user = $doctrine->getRepository(User::class)->find($id);
+        $em = $doctrine->getManager();
+
+        $user = $em->getRepository(User::class)->find($id);
         if ($this->getUser() != $user) {
             return $this->createAccessDeniedException();
         }
+        dump($user);
 
         $comment = $user->getComments();
 
@@ -123,7 +126,6 @@ class UserController extends AbstractController
             }
 
             if ($form->get('avatar')->getData() !== null) {
-                dump('data avatar null');
                 $avatar = $form->get('avatar')->getData();
                 $avatarName = md5(uniqid()) . '.' . $avatar->guessExtension();
 
@@ -136,7 +138,7 @@ class UserController extends AbstractController
                 // $user->setAvatar($oldUser->getAvatar());
             }
 
-            $em = $doctrine->getManager();
+            
             $em->persist($user);
             $em->flush();
 

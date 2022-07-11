@@ -41,7 +41,6 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->getUser()->getRoles() == ['ROLE_USER']) {
                 $user->setRoles(['ROLE_ARTIST']);
-                dump('nowArtist');
             }
             $image = $form->get('img')->getData();
             $imageName = md5(uniqid()) . '.' . $image->guessExtension();

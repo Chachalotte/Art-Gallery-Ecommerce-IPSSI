@@ -8,6 +8,7 @@
 @import url('connectPage.css');
 @import url('categoriesPage.css');
 @import url('cart.css');
+@import url('event.css');
 
 main {
   margin: 0 2vw;

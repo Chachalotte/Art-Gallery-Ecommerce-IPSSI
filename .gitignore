@@ -1,5 +1,6 @@
 
 ###> symfony/framework-bundle ###
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -27,5 +28,7 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> uploads files
-public/img/product/
+public/img/
 ###< uploads files
+
+/migrations/

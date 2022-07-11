@@ -109,7 +109,7 @@ class ProfilType extends AbstractType
         ]);
         
         $resolver->setDefaults([
-            'data_class' => User::class,
+            // 'data_class' => User::class,
         ]);
 
         $resolver->setAllowedTypes('current_password_is_required', 'bool');
