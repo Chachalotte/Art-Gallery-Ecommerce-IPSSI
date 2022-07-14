@@ -17,7 +17,7 @@
     </div>
             
     <nav>
-        <a href="{{path('home')}}"><img src="https://via.placeholder.com/100x85" alt="logo de la galerie"/></a>
+        <a href="{{path('home')}}"><img src="{{asset('img/logo.png')}}" id="logo" alt="logo de la galerie"/></a>
         <div>
             <ul class="nav" >
                 <li><a class="nav__link" href="{{path('artistList')}}">Artistes</a></li>
@@ -79,7 +79,7 @@
                 <li><a class="nav__link" href="#">Contact</a></li>
                 <li><a class="nav__link" href="#">Relation presse</a></li>
                 <li><a class="nav__link" href="{{ path('privacy')}}">Mentions légales</a></li>
-                <li><a class="nav__link" href="#">Politique de confidentialité</a></li>
+                <li><a class="nav__link" href="{{ path('privacypolicy')}}">Politique de confidentialité</a></li>
                 <li><a class="nav__link" href="{{ path('terms')}}">CGU</a></li>
             </ul>
         </div>

@@ -21,3 +21,7 @@ main {
 .nav__link {
   text-decoration: none;
 }
+
+img#logo{
+  width: 15vw;
+}

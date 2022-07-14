@@ -18,3 +18,9 @@ terms:
   controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
   defaults:
       template: "static/terms.html.twig"
+
+privacypolicy:
+  path: /privacypolicy
+  controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+      template: "static/privacypolicy.html.twig"      

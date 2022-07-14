@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Data\SearchProduct;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Form\ProductType;
+use App\Form\SearchProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +17,22 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'app_product')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, Request $request): Response
     {
-        $products = $doctrine->getRepository(Product::class)->findAll();
+        $search = new SearchProduct();
+        $form = $this->createForm(SearchProductType::class, $search);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+           $products = $doctrine->getRepository(Product::class)->filterProduct($search);
+        } else {
+           $products = $doctrine->getRepository(Product::class)->findAll();
+        }
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
+            'form' => $form->createView(),
         ]);
     }
 
