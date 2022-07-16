@@ -3,8 +3,12 @@
 @import url('home.css');
 @import url('profil.css');
 @import url('artistPage.css');
+@import url('artistList.css');
 @import url('productPage.css');
 @import url('connectPage.css');
+@import url('categoriesPage.css');
+@import url('cart.css');
+@import url('event.css');
 
 main {
   margin: 0 2vw;
@@ -16,4 +20,8 @@ main {
 
 .nav__link {
   text-decoration: none;
+}
+
+img#logo{
+  width: 15vw;
 }

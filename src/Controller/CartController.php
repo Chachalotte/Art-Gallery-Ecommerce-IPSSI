@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\OrderItem;
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use function PHPUnit\Framework\isEmpty;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/cart', name: 'cart_')]
 class CartController extends AbstractController
@@ -15,6 +19,10 @@ class CartController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(SessionInterface $session, ProductRepository $productRepository): Response
     {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('login');
+        }
+
         $cart = $session->get("cart", []);
         $dataCart = [];
         $total = 0;
@@ -27,6 +35,7 @@ class CartController extends AbstractController
             ];
             $total += $product->getPrice() * $quantity;
         }
+        dump($session->get("cart"));
 
         return $this->render('cart/index.html.twig', compact("dataCart", "total"));
     }
@@ -34,13 +43,17 @@ class CartController extends AbstractController
     #[Route('/add/{id}', name: 'add')]
     public function add(Product $product, SessionInterface $session): Response
     {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('login');
+        }
+
         $cart = $session->get("cart", []);
         $id = $product->getId();
 
         if (!empty($cart[$id])) {
             $cart[$id]++;
         } else {
-            $panier[$id] = 1;
+            $cart[$id] = 1;
         }
 
         $session->set("cart", $cart);
@@ -51,6 +64,10 @@ class CartController extends AbstractController
     #[Route('/remove/{id}', name: 'remove')]
     public function remove(Product $product, SessionInterface $session): Response
     {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('login');
+        }
+
         $cart = $session->get("cart", []);
         $id = $product->getId();
 
@@ -70,6 +87,10 @@ class CartController extends AbstractController
     #[Route('/delete/{id}', name: 'delete')]
     public function delete(Product $product, SessionInterface $session): Response
     {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('login');
+        }
+
         $cart = $session->get("cart", []);
         $id = $product->getId();
 
@@ -85,8 +106,36 @@ class CartController extends AbstractController
     #[Route('/deleteAll', name: 'deleteAll')]
     public function deleteAll(SessionInterface $session): Response
     {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('login');
+        }
+
         $session->set("cart", []);
 
         return $this->redirectToRoute("cart_index");
+    }
+
+    #[Route('/validateCart', name: 'validateCart')]
+    public function validateCart(SessionInterface $session, ManagerRegistry $mr)
+    {
+        if(isEmpty($session->get("cart"))){
+            return $this->redirectToRoute('cart_index');
+        }
+        
+        $cart = $session->get("cart");
+        $em = $mr->getManager();
+
+        $orderItems = new OrderItems();
+        // $orderItems->
+        
+        foreach($cart as $productId => $quantity){
+            $product = $mr->getRepository(Product::class)->find($productId);
+            $product->addOrderItem($orderItems->getId());
+            $orderItems->addProdId($productId);
+            dump($product);
+        }
+
+        $em->persist($orderItems);
+        $em->flush();
     }
 }

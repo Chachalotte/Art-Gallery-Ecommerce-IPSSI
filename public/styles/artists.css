@@ -4,8 +4,8 @@
 
 .artistBox
 {
-    background-color: #ffffffdc;
-	border:solid 2px  #ffffffdc;
+    background-color:rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
 	margin-left: 5% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
     margin-top: 20;
@@ -14,12 +14,13 @@
 	width:40% ;
 	box-shadow :-3px 7px 16px #ced6de;
 	opacity: 0.85;
+	
 }
 
 
 .artistBox:hover
 {
-    background-color: #ffffff;
+    background-color: rgb(240, 235, 223);
 	border:solid 2px  #ded8cece;
 	margin-left: 5% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
@@ -47,6 +48,12 @@
     font-size : 30px; 
 }
 
+
+a {
+	color: inherit; /* blue colors for links too */
+	text-decoration: inherit; /* no underline */
+  }
+
 /* =========== Sections diverses ============*/
 
 /*  Titre de page */
@@ -65,5 +72,5 @@
 }
 
 body {
-	background-color: rgb(240, 235, 223);
+	background-color:  #ffffff;
   }

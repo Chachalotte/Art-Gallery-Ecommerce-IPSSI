@@ -1,0 +1,53 @@
+section.cart {
+  margin: 2vw;
+  height: 80vh;
+}
+
+div#cartTables {
+  width: 55wv;
+  display: flex;
+  justify-content: space-between;
+  margin: 2vw auto;
+}
+
+table#resumeTable {
+  width: 60vw;
+  border: 1px solid black;
+}
+
+table#resumeTable img {
+  width: 5vw;
+  margin: auto;
+}
+
+table#totalTable {
+  width: 25vw;
+  border: 1px solid black;
+}
+
+thead {
+  background-color: rgb(159, 151, 151);
+}
+
+td {
+  text-align: center;
+}
+
+td.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fa-trash {
+  color: red;
+}
+
+a.validBtn {
+  padding: 0.2vw;
+  border: 1px solid rgb(23, 156, 23);
+  margin-left: 80vw;
+  text-decoration: none;
+  color: white;
+  background-color: rgb(23, 156, 23);
+}

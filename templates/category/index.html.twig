@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Catégories{% endblock %}
+
+{% block content %}
+
+    <h1>Catégories</h1>
+    <section class="showCategories">
+        {% for category in categories %}
+        <div class="category">
+            <a href="{{path('category', {'id': category.id})}}">
+                <h2>{{category.name | capitalize}}</h2>
+                <img src="{{category.img}}"/>
+            </a>
+            <p>{{category.description | capitalize}}</p>
+        </div>
+        <hr/>
+        {% else %}
+        <p>Il n'y a pas encore de Catégories</p>
+        {% endfor %}
+    </section>
+    
+{% endblock %}

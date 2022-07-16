@@ -4,54 +4,89 @@
 
 {% block content %}
 
-    <h1>{{product.name | capitalize}}</h1>
-    <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
-    <p>{{ product.description | capitalize }}</p>
-    <div class="filters">
-    </div>
+<link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
 
-    <section class="productPres">
-        <article class="productVue">
-            <img src="{{ asset('img/product/' ~ product.img) }}"/>
-            <h2>Laissez votre commentaires</h2>
-            <input type="textarea" />
-            <div class="actionCom">
-                <p>⭐⭐⭐</p>
-                <button>Envoyer</button>
-            </div> 
-        </article>
+<div class="spacingSmall"></div>
+<div class="products">
+    <div class="productBox">
+        <h1>{{product.name | capitalize}}</h1>
+        <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+        <p>{{ product.description | capitalize }}</p>
+        <img src="{{ asset('img/product/' ~ product.img) }}"/>
+        <div class="filters">
+        </div>
+    </div>
+ </div>
+    
+    <section >
+
+
+        
 
         <aside class="descriptionComplementary">
-            <div>
-                <h2>Mise en vente</h2>                
-                <p>Prix: {{ product.price | capitalize }} €</p>
-                <div class="action">
-                    <button>Ajouter au panier</button>                
-                    <button>Voir les détails d'achat</button>
-                </div>
-                <div class="action">
-                    <h3>Détails techniques du produit</h3> 
-                    <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a>
-                    <p>Dimensions: 120x170 cm</p>             
-                </div>
-            </div>
-            <div class="allComments">
-                <h2>Commentaires</h2>
-                {% for comment in product.comments %}
-                    <div class="comment">
-                        <div>
-                            <h4>De {{comment.user}}</h4>
-                            <p>⭐</p>
-                        </div>
-                        <p>{{comment}}</p>             
+
+            {% if product.artist != app.user %}
+
+                <div class="productBox">
+                    <h2 class="rubriqueTitle">Mise en vente</h2>                
+                    <p>Prix: {{ product.price | capitalize }} €</p>
+                    <div class="action">
+                        <a href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>
+                        <button>Ajouter au panier</button>                
+                        <button>Voir les détails d'achat</button>
                     </div>
-                {% endfor %}
-            </div>
+                    <div class="action">
+                        <h3>Détails techniques du produit</h3> 
+                        <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a>
+                        <p>Dimensions: 120x170 cm</p>             
+                    </div>
+                </div>
+
+                {% else %}
+
+                    <div class="productBox">
+                        <h2 class="rubriqueTitle">Modifier le produit</h2>                
+                        <p>Prix: {{ product.price | capitalize }} €</p>
+
+                    </div>
+
+                {% endif %}
+                
         </aside>
+                
+                <div class="spacingSmall"></div>
+
+                <div class="allComments">
+                
+                    <div class="productBox">
+                        <h2 class="rubriqueTitle">Commentaires</h2>
+                        <h2>Laissez votre commentaire</h2>
+                        <input type="textarea" />
+                        <div class="actionCom">
+                            <p>⭐⭐⭐</p>
+                            <button>Envoyer</button>
+                    </div> 
+
+                    <div class="spacingSmall"></div>
+
+                    <h2>Tous les commentaires</h2>
+
+                    {% for comment in product.comments %}
+                        <div class="comment">
+                            <div>
+                                <h4>De {{comment.user}}</h4>
+                                <p>⭐</p>
+                            </div>
+                            <p>{{comment}}</p>             
+                        </div>
+                    {% endfor %}
+                    </div>
+                    </div>
+       
     </section>
 
     <section >
-    <h2>Vous aimerez aussi ...</h2>
+    <h2 class="rubriqueTitle">Vous aimerez aussi ...</h2>
     {#% for  | reverse | slice(0, 3) %#}
         <div class="otherOeuvres">
             <div class="anotherOeuvre">
@@ -85,7 +120,7 @@
             </div>
         </div>
     {#% endfor %#}
-    </section>
+</section>
 {% endblock %}
 
 {% block javascripts %}

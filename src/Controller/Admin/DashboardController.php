@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Carrier;
 use App\Entity\Category;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -25,7 +26,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Art Galery Ecommerce');
+            ->setTitle('The art factory');
     }
 
     public function configureMenuItems(): iterable
@@ -39,8 +40,9 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class),
 
             MenuItem::section('Liste liées aux produits'),
-            MenuItem::linkToCrud('Produits', 'fa fa-user', Product::class),
-            MenuItem::linkToCrud('Categories', 'fa fa-user', Category::class),
+            MenuItem::linkToCrud('Produits', 'fa fa-tags', Product::class),
+            MenuItem::linkToCrud('Categories', 'fa fa-list', Category::class),
+            MenuItem::linkToCrud('Carriers', 'fa fa-truck', Carrier::class),
 
             MenuItem::linkToLogout('Logout', 'fa fa-exit'),
         ];

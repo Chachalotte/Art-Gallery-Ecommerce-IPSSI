@@ -132,6 +132,7 @@ class Product
         return $this->artist;
     }
 
+
     public function setArtist(?User $artist): self
     {
         $this->artist = $artist;

@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Evènements{% endblock %}
+
+{% block content %}
+    <h1>Evènements</h1>
+    <div class="filters">
+    </div>
+
+    <section class="eventsList">
+    {% for event in events %}
+        
+        <div class="eventCard">
+            <img src="{{ asset('img/event/' ~ event.picture) }}"/> 
+            <div>
+                <h2>{{ event.title | capitalize }}</h2>  
+                <p>Date de début: {{event.dateStart |date("m/d/Y") }}</p>   
+                <p>Date de fin: {{event.dateEnd |date("m/d/Y") }}</p>           
+                <p>{{ event.article | capitalize | slice(0, 50)}}</p>
+            </div>     
+        </div>
+    {% else %}
+    <p>Il n'y a pas d'évènements</p>
+    {% endfor %}
+	</section>
+{% endblock %}

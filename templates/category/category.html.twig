@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - {{category.name | capitalize}}{% endblock %}
+
+{% block content %}
+    <div class="categoryBand">
+        <h1 style="background-image:{{category.img}}">{{category.name | capitalize}}</h1>
+        <img src="{{category.img}}"/>
+    </div>   
+
+    <section class="productsList">
+    {% for product in category.products %}
+        <div class="productCard">
+            <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+            <a href="{{path('product', {'id': product.id} )}}">
+                <img src="{{ asset('img/product/' ~ product.img) }}"/>
+                <h2>{{ product.name | capitalize }}</h2>
+            </a>             
+            <p>{{ product.description | capitalize | slice(0, 50)}}</p>
+        </div>
+    {% else %}
+        <p>Il n'y a pas encore d'oeuvres à présenter.</p>
+    {% endfor %}
+    </section>
+
+
+{% endblock %}

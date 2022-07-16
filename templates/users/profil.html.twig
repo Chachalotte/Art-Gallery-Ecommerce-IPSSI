@@ -24,7 +24,7 @@
             {% if app.user.age is empty %}
             <p class="card-text">Date de naissance</p>
             {% else %}
-            <p class="card-text">Date de naissance: {{app.user.age}}</p>
+            <p class="card-text">Date de naissance: {{app.user.age|date("m/d/Y")}}</p>
             {% endif %}
         </div>
         <div class="personnalInformation">

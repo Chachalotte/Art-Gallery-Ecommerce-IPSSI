@@ -94,6 +94,7 @@ class ProfilType extends AbstractType
             ])
             ->add('avatar', FileType::class, [
                 'label' => 'Image (JPEG/PNG)',
+                'data_class' => null,
                 'required' => false
             ])
             ->add('description', TextareaType::class, [
@@ -109,7 +110,7 @@ class ProfilType extends AbstractType
         ]);
         
         $resolver->setDefaults([
-            'data_class' => User::class,
+            // 'data_class' => User::class,
         ]);
 
         $resolver->setAllowedTypes('current_password_is_required', 'bool');

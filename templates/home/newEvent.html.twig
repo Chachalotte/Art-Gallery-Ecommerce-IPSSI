@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Nouvelle évènement{% endblock %}
+
+{% block content %}
+
+<h2>Nouvel évènement<h2>
+
+{{ form_start(form)}}
+    {{ form_widget(form)}}
+    <button type="submit">Créer l'évènement</button>    
+{{ form_end(form)}}
+{% endblock %}

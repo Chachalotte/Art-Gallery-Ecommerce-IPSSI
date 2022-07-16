@@ -1,13 +1,19 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}{{parent()}} - Nouvelle oeuvre{% endblock %}
+{% block title %}{{parent()}} - {% if app.request.get('_route') == 'product_new'%}Nouvelle{% else %}Editer une{% endif %} oeuvre{% endblock %}
 
 {% block content %}
 
-<h2>Nouvelle oeuvre<h2>
+{% if app.request.get('_route') == 'product_new'%}
+<h1>Nouvelle oeuvre</h1>
+{% else %}
+<h1>Editer une oeuvre</h1>
+{% endif %}
 
 {{ form_start(form)}}
     {{ form_widget(form)}}
-    <button type="submit">Créer le produit</button>    
+   
+    <button type="submit"> {% if app.request.get('_route') == 'product_new'%}Créer{% else %}Editer{% endif %} le produit</button>    
+    
 {{ form_end(form)}}
 {% endblock %}

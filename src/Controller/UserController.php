@@ -4,10 +4,12 @@ namespace App\Controller;
 
 //Entitées
 use App\Entity\User;
+use App\Entity\Product;
 
 //Managers
 use App\Entity\Comments;
 use App\Form\ProfilType;
+use App\Form\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,10 +55,13 @@ class UserController extends AbstractController
     #[Route('/profil/{id<\d+>}', name: 'app_profil')]
     public function Profil(ManagerRegistry $doctrine,  Request $request, UserPasswordHasherInterface $userPasswordHasher, $id)
     {
-        $user = $doctrine->getRepository(User::class)->find($id);
+        $em = $doctrine->getManager();
+
+        $user = $em->getRepository(User::class)->find($id);
         if ($this->getUser() != $user) {
             return $this->createAccessDeniedException();
         }
+        dump($user);
 
         $comment = $user->getComments();
 
@@ -123,7 +128,6 @@ class UserController extends AbstractController
             }
 
             if ($form->get('avatar')->getData() !== null) {
-                dump('data avatar null');
                 $avatar = $form->get('avatar')->getData();
                 $avatarName = md5(uniqid()) . '.' . $avatar->guessExtension();
 
@@ -136,7 +140,7 @@ class UserController extends AbstractController
                 // $user->setAvatar($oldUser->getAvatar());
             }
 
-            $em = $doctrine->getManager();
+            
             $em->persist($user);
             $em->flush();
 
@@ -223,9 +227,12 @@ class UserController extends AbstractController
         //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
 
 
+
         return $this->render('users/users.html.twig', [
             'user' => $user,
+            //'form' => $form->createView(),
             'comments' => $comment
+            
         ]);
     }
 
@@ -257,16 +264,17 @@ class UserController extends AbstractController
     #[Route('/artists', name: 'artistList')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $artists = $doctrine->getRepository(User::class)->findBy(
-            ['roles' => '["ROLE_ARTIST"]'],
-            ['id' => 'DESC']
-        );
+        // $artists = $doctrine->getRepository(User::class)->findBy(
+        //     ['roles' => '["ROLE_ARTIST"]'],
+        //     ['id' => 'DESC']
+        // );
+        $artists = $doctrine->getRepository(User::class)->findAll();
 
         // $artistList = $artists->findAllArtists();
 
 
-        return $this->render('artists/artistList.html.twig', [
-            'artist' => $artists
+        return $this->render('users/artist/artistList.html.twig', [
+            'artists' => $artists
         ]);
     }
 
@@ -276,11 +284,40 @@ class UserController extends AbstractController
     #[Route('/artistsPage/{id<\d+>}', name: 'artistPage')]
     public function artistPage(ManagerRegistry $doctrine, $id)
     {
+
+        $product = $doctrine->getRepository(Product::class)->findAll();
         $user = $doctrine->getRepository(User::class)->find($id); //tri par role
         $request = Request::createFromGlobals();
 
+        //Formulaire suppression d'un produit
+        // -------------------------
+        // $form = $this->createForm(ProductType::class, $product);
+        // $form->handleRequest($request);
+
+        // $logger->info('I just got the logger');
+        
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+        //     $productID = $form->get('id')->getData();
+        //     $product->removeProduct($productID);
+            
+
+
+            
+        //     $em->flush();
+
+        //     $this->addFlash('success', 'Produit supprimé avec succès');
+
+        //     return $this->redirectToRoute('home');
+        // } else {
+        //     $this->addFlash('error', 'Une erreur est survenue');
+        // }
+        // -------------------------
+
+
         return $this->render('users/artist/artistPage.html.twig', [
             'user' => $user
+            // 'form' => $form->createView()
         ]);
     }
 }
