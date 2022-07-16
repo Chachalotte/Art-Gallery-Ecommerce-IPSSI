@@ -85,50 +85,88 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}', name: 'product')]
-    public function showProduct(Request $request, ManagerRegistry $doctrine, $id): Response
+    public function showProduct(ManagerRegistry $doctrine, $id): Response
+    {
+        $product = $doctrine->getRepository(Product::class)->find($id);
+       
+        return $this->render('product/product.html.twig', [
+            'product' => $product
+        ]);
+    }
+
+
+    #[Route('/product/edit/{id}', name: 'product_edit')]
+    public function editProduct(Request $request, ManagerRegistry $doctrine, $id): Response
     {
 
         $em = $doctrine->getManager();
 
         $product = $doctrine->getRepository(Product::class)->find($id);
 
-
+        if(!$product || $product->getArtist() != $this->getUser()){
+            return $this->redirectToRoute('home');
+        }
         
-        // $form = $this->createForm(UpdateProductType::class, $product);
-        // $form->handleRequest($request);
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
 
-        // if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $oldImg= $product->getImg();
+            $image = $form->get('img')->getData();
+            $imageName = md5(uniqid()) . '.' . $image->guessExtension();
 
-        //     $image = $form->get('img')->getData();
-        //     $imageName = md5(uniqid()) . '.' . $image->guessExtension();
+            $image->move(
+                // $this->getParameter permet de récupérer la valeur d'un paramètre définit dans le fichier de config services.yaml
+                $this->getParameter('upload_file_product'),
+                $imageName
+            );
+        
 
-        //     $image->move(
-        //         // $this->getParameter permet de récupérer la valeur d'un paramètre définit dans le fichier de config services.yaml
-        //         $this->getParameter('upload_file_product'),
-        //         $imageName
-        //     );
-        //     $product->setImg($imageName);
-        //     $product->setArtist($user);
-        //     $product->setOrderItem(NULL);
+            // On le persist et l'enregistre en BDD
+           // $em->persist($product);
+           if($image){
+            
+            // $em->remove($oldImg);
+           // $product->remove($this->getParameter('upload_file_product'), $oldImg);
 
-        //     // On le persist et l'enregistre en BDD
-        //    // $em->persist($product);
-        //     $em->flush();
+            $product->setImg($imageName);
+           }
+           
+            $em->flush();
 
-        //     $this->addFlash('success', 'Produit ajouté avec succes');
+            $this->addFlash('success', 'Produit ajouté avec succes');
 
-        //     return $this->redirectToRoute('home');
-        // } else {
-        //     $this->addFlash('error', 'Problème dans le formulaire');
-        // }
+            return $this->redirectToRoute('home');
+        } else {
+            $this->addFlash('error', 'Problème dans le formulaire');
+        }
 
+        return $this->render('product/newProduct.html.twig', [
+            'form' => $form->createView()
 
-
-
-
-        return $this->render('product/product.html.twig', [
-            'product' => $product,
-           // 'form' => $form->createView()
         ]);
+
     }
+
+
+    #[Route('/product/delete/{id}', name: 'product_delete')]
+    public function deleteProduct(Request $request, ManagerRegistry $doctrine, $id): Response
+    {
+        $em = $doctrine->getManager();
+
+        $product = $doctrine->getRepository(Product::class)->find($id);
+
+        if($product && $product->getArtist() == $this->getUser()){
+            $em->remove($product);
+            $em->flush();
+        } else {
+            $this->addFlash('error', "Vous n'avez pas les droits pour cette action");
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->redirectToRoute('artistPage', ['id'=> $product->getArtist()->getId()]);
+
+    }
+
+
 }

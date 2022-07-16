@@ -49,10 +49,10 @@
                     </h2>
 
                     {% if user.id == app.user.id %}
-                    <a href="{{path('product', {'id': product.id} )}}"><button>Modifier</button></a> 
+                    <a href="{{path('product_edit', {'id': product.id} )}}">Modifier</a> 
                     {# {{ form_start(form)}}#}
                     
-                    <button type="submit">Supprimer</button>
+                     <a href="{{path('product_delete', {'id': product.id} )}}">Supprimer</a>
                     {# {{ form_end(form)}}#}
                     {% endif %}
                     <p>{{ product.description | capitalize | slice(0, 150)}}</p>
