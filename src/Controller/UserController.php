@@ -4,10 +4,12 @@ namespace App\Controller;
 
 //Entitées
 use App\Entity\User;
+use App\Entity\Product;
 
 //Managers
 use App\Entity\Comments;
 use App\Form\ProfilType;
+use App\Form\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -225,9 +227,12 @@ class UserController extends AbstractController
         //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
 
 
+
         return $this->render('users/users.html.twig', [
             'user' => $user,
+            //'form' => $form->createView(),
             'comments' => $comment
+            
         ]);
     }
 
@@ -279,11 +284,40 @@ class UserController extends AbstractController
     #[Route('/artistsPage/{id<\d+>}', name: 'artistPage')]
     public function artistPage(ManagerRegistry $doctrine, $id)
     {
+
+        $product = $doctrine->getRepository(Product::class)->findAll();
         $user = $doctrine->getRepository(User::class)->find($id); //tri par role
         $request = Request::createFromGlobals();
 
+        //Formulaire suppression d'un produit
+        // -------------------------
+        // $form = $this->createForm(ProductType::class, $product);
+        // $form->handleRequest($request);
+
+        // $logger->info('I just got the logger');
+        
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+        //     $productID = $form->get('id')->getData();
+        //     $product->removeProduct($productID);
+            
+
+
+            
+        //     $em->flush();
+
+        //     $this->addFlash('success', 'Produit supprimé avec succès');
+
+        //     return $this->redirectToRoute('home');
+        // } else {
+        //     $this->addFlash('error', 'Une erreur est survenue');
+        // }
+        // -------------------------
+
+
         return $this->render('users/artist/artistPage.html.twig', [
             'user' => $user
+            // 'form' => $form->createView()
         ]);
     }
 }

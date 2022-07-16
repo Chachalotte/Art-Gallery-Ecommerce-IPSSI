@@ -6,7 +6,7 @@
 
 
 {% block content %}
-
+<link href="{{ asset('styles/artists.css') }}" type="text/css" rel="stylesheet" />
 
 <h2 class="rubriqueTitle">Liste des artistes</h2>
 {% if app.user %}
@@ -35,7 +35,9 @@
                 <p>{{artist.description}}</p>
                 
             </div>
+            
         </div>
+        
     {% else %}
 
     <p>Il n'y a pas encore d' artistes</p>

@@ -3,46 +3,63 @@
 {% block title %}{{parent()}} - Artiste - {{user.name}} {{user.firstName}}{% endblock %}
 
 {% block content %}
-
+<link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
 <section class="presentation">
     <aside>
         <div class="follow">
-            <button>⭐ Suivre</button>
-            <p>abonnés</p>
+           <p> <button>⭐ Suivre</button> X Abonnés</p>
         </div>
-        <div class="identity">    
-        {% if user.avatar %}
-            <img src="{{ asset('img/user/' ~ user.avatar) }}"/>
-        {% else %}
-            {% if user.gender == "homme" %}
-                <img src="{{ asset('img/user/man.png') }}"/>
-            {% else %}
-                <img src="{{ asset('img/user/woman.png') }}"/>
-            {% endif %}
-        {% endif %}
-            <div>
-                <h2>{{user.firstName}} {{user.name}}</h2>
-                <h3>Oeuvres : {{user.product.count}}</h3>
+        
+        <div class="profileBox">   
+            <div class="profileCard"> 
+                {% if user.avatar %}
+                    <img src="{{ asset('img/user/' ~ user.avatar) }}"/>
+                {% else %}
+                    {% if user.gender == "homme" %}
+                        <img src="{{ asset('img/user/man.png') }}"/>
+                    {% else %}
+                        <img src="{{ asset('img/user/woman.png') }}"/>
+                    {% endif %}
+                {% endif %}
+                    <div>
+                        <h2>{{user.firstName}} {{user.name}}</h2>
+                        <h3>Oeuvres : {{user.product.count}}</h3>
+                    </div>
+            
+                {% if user.description %}
+                    <p>{{user.description}}</p>
+                {% else %}
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                {% endif %}
             </div>
         </div>
-        {% if user.description %}
-            <p>{{user.description}}</p>
-        {% else %}
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        {% endif %}
     </aside>
+
+    <div class="spacingSmall"></div>
+
+    <h2 class="rubriqueTitle">Oeuvres</h2>
+
     <div class="products">
         {% for product in user.product %}
-            <div class="product">
-                <img src="{{ asset('img/product/' ~ product.img) }}"/>  
+            <div class="productBox">
                 <div>
                     <h2>
                         <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
                         <span><a href="{{path('category', {'id': product.category.id} ) }}">({{ product.category.name }})</a></span>
-                    </h2>             
-                    <p>{{ product.description | capitalize | slice(0, 50)}}</p>
-                </div>     
+                    </h2>
+
+                    {% if user.id == app.user.id %}
+                    <a href="{{path('product', {'id': product.id} )}}"><button>Modifier</button></a> 
+                    {# {{ form_start(form)}}#}
+                    
+                    <button type="submit">Supprimer</button>
+                    {# {{ form_end(form)}}#}
+                    {% endif %}
+                    <p>{{ product.description | capitalize | slice(0, 150)}}</p>
+                </div>   
+                <img src="{{ asset('img/product/' ~ product.img) }}"/>  
             </div>
+            <div class="spacingRow"></div>
         {% endfor %}
     </div>
 </section>

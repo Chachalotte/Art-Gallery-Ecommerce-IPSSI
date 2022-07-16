@@ -6,6 +6,7 @@ use App\Data\SearchProduct;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\User;
+use App\Form\UpdateProductType;
 use App\Form\ProductType;
 use App\Form\SearchProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -84,12 +85,50 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}', name: 'product')]
-    public function showProduct(ManagerRegistry $doctrine, $id): Response
+    public function showProduct(Request $request, ManagerRegistry $doctrine, $id): Response
     {
+
+        $em = $doctrine->getManager();
+
         $product = $doctrine->getRepository(Product::class)->find($id);
+
+
+        
+        // $form = $this->createForm(UpdateProductType::class, $product);
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+        //     $image = $form->get('img')->getData();
+        //     $imageName = md5(uniqid()) . '.' . $image->guessExtension();
+
+        //     $image->move(
+        //         // $this->getParameter permet de récupérer la valeur d'un paramètre définit dans le fichier de config services.yaml
+        //         $this->getParameter('upload_file_product'),
+        //         $imageName
+        //     );
+        //     $product->setImg($imageName);
+        //     $product->setArtist($user);
+        //     $product->setOrderItem(NULL);
+
+        //     // On le persist et l'enregistre en BDD
+        //    // $em->persist($product);
+        //     $em->flush();
+
+        //     $this->addFlash('success', 'Produit ajouté avec succes');
+
+        //     return $this->redirectToRoute('home');
+        // } else {
+        //     $this->addFlash('error', 'Problème dans le formulaire');
+        // }
+
+
+
+
 
         return $this->render('product/product.html.twig', [
             'product' => $product,
+           // 'form' => $form->createView()
         ]);
     }
 }

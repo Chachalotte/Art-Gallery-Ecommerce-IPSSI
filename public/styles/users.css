@@ -4,34 +4,22 @@
 
 .profileBox
 {
-    background-color: #000000dc;
-	border:solid 2px  #4e4646dc;
-	margin-left: 5% ; /*centrer les elements avec margin : auto */
+    background-color: rgb(240, 235, 223);
+	border:solid 1px rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
-    margin-top: 2%;
+    margin-top: 1px;
     
-	border-radius: 3px;
-	width:35% ;
-	box-shadow :-3px 7px 16px #ced6de;
-	opacity: 0.85;
-	color: rgb(240, 235, 223);
-}
-
-
-.profileBox:hover
-{
-    background-color: #000000dc;
-	border:solid 2px  #4e4646dc;
-	margin-left: 5% ; /*centrer les elements avec margin : auto */
-	margin-right: auto;
-    margin-top: 2%;
-    
-	border-radius: 3px;
-	width:35% ;
+	border-radius: 1px;
+	width:100% ;
 	box-shadow :-3px 7px 16px #ced6de;
 	opacity: 1;
-	color: rgb(240, 235, 223);
+
+
+
 }
+
+
 
 
 
@@ -54,18 +42,122 @@
 
 .profileCard
 {
-	margin-left: 5% ; /*centrer les elements avec margin : auto */
-	margin-right: 5%;
-    margin-top: 2%;
+	margin-left: 10px ; /*centrer les elements avec margin : auto */
+	margin-right: 5px;
+
 	/*min-height:135px; */
 	font: italic 16px "Fira Sans", serif;
 	opacity: 1;
+
+	
+
 }
+
+.follow
+{
+	margin-left: 4%; /*centrer les elements avec margin : auto */
+	/*min-height:135px; */
+	font: bold 16px "Fira Sans", serif;
+}
+
 
 .profileTitle
 {
     font-size : 25px; 
 }
+
+
+/* =========== Commentaires ============*/
+
+.commentBox
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+
+	margin-right: auto;
+    margin-top: 20;
+    
+
+	width:55% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+
+
+}
+
+/* =========== Box des produits ============*/
+
+.productBox
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+    
+	border-radius: 1px;
+	width:55% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+
+
+
+}
+
+
+
+.product
+{
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: 5%;
+    margin-top: 5%;
+	min-height:135px;
+	font: italic 16px "Fira Sans", serif;
+}
+
+.products
+{
+	/*margin-left: 2% ; centrer les elements avec margin : auto */
+	margin-right: 5%; 
+    margin-top: 1%;
+	min-height:135px;
+	font: italic 16px "Fira Sans", serif;
+}
+
+
+.productPres
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+    
+	border-radius: 1px;
+	width:55% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+
+
+}
+
+
+
+/* =========== Style des links (fonctionne à moitié) ============*/
+
+a {
+	color: inherit; /* blue colors for links too */
+	text-decoration: inherit; /* no underline */
+	
+  }
+
+  a:hover {
+	color: inherit; /* blue colors for links too */
+	text-decoration: inherit; /* no underline */
+	
+  }
+
+
 
 /* =========== Sections/Spacing ============*/
 
@@ -74,9 +166,19 @@
 	float: left;
 }
 
+.spacingRow
+{
+	margin: 20px;
+}
+
 .spacingSmall
 {
-	margin-top: 50px;
+	margin: 50px;
+}
+
+.spacingMedium
+{
+	margin: 150px;
 }
 
 .userSections
@@ -112,8 +214,9 @@
 .rubriqueTitle
 {
     font-size : 30px; 
-	letter-spacing:4px;
+	letter-spacing:1px;
 	font: italic bold 30px "Fira Sans", serif;
+	margin-left: 3%;
 }
 
 /*  Images en float (les avatars, principalement) */
@@ -125,5 +228,5 @@
 
 body 
 {
-	background-color: rgb(240, 235, 223);
+	background-color:  #ffffff;
 }
