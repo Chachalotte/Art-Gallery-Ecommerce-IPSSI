@@ -54,10 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // #[ORM\Column(type: 'datetime', nullable: true)]
     // private $age;
 
-    #[ORM\ManyToOne(targetEntity: Ordered::class, inversedBy: 'User')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $ordered;
-
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Comments::class)]
     #[ORM\JoinColumn(nullable: true)]
     private $comments;
@@ -220,18 +216,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     //     return $this;
     // }
-
-    public function getOrdered(): ?Ordered
-    {
-        return $this->ordered;
-    }
-
-    public function setOrdered(?Ordered $ordered): self
-    {
-        $this->ordered = $ordered;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Comments[]

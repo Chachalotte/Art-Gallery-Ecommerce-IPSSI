@@ -31,9 +31,7 @@
                     <h2 class="rubriqueTitle">Mise en vente</h2>                
                     <p>Prix: {{ product.price | capitalize }} €</p>
                     <div class="action">
-                        <a href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>
-                        <button>Ajouter au panier</button>                
-                        <button>Voir les détails d'achat</button>
+                        <a href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>             
                     </div>
                     <div class="action">
                         <h3>Détails techniques du produit</h3> 
