@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Mon récapitulatif{% endblock %}
+
+{% block content %}
+
+    <h1>Mon récapitulatif</h1>
+    <p>Vérifiez vos informations avant de payer.</p>
+    <hr/>
+    <div>        
+        <div>
+            <h2>Adresse de livraison</h2>
+            <p>{{ delivery|raw }}</p>
+            <hr/>
+            <h2>Transporteur</h2>
+            <p>{{ carrier.name}}</p>
+            <p>{{ carrier.description}}</p>
+            <p>{{ carrier.price|number_format(2, ',', '.') }} €</p>
+        </div>
+        <div>
+            <h2>Ma commande</h2>
+            {% for product in cart %}
+                <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
+                {{product.product.name}}   
+                {{product.product.price}} €              
+            {% endfor %}
+        </div>
+    </div>
+    <hr/>
+    <div>           
+        <h2>Sous-total: {{ total|number_format(2, ',', '.') }} €</h2>
+        <h2>Livraison: {{ carrier.price|number_format(2, ',', '.') }} €</h2>
+    <hr/>
+        <h2>Total: {{ (total + carrier.price)|number_format(2, ',', '.') }} €</h2>
+    </div>
+    <a href="">Payer - {{ (total + carrier.price)|number_format(2, ',', '.') }} €</a>
+{% endblock %}

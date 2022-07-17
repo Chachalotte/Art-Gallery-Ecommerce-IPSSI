@@ -35,7 +35,6 @@ class CartController extends AbstractController
             ];
             $total += $product->getPrice() * $quantity;
         }
-        dump($session->get("cart"));
 
         return $this->render('cart/index.html.twig', compact("dataCart", "total"));
     }
@@ -132,7 +131,6 @@ class CartController extends AbstractController
             $product = $mr->getRepository(Product::class)->find($productId);
             $product->addOrderItem($orderItems->getId());
             $orderItems->addProdId($productId);
-            dump($product);
         }
 
         $em->persist($orderItems);
