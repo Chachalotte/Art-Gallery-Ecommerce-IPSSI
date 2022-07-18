@@ -15,7 +15,7 @@
             <h2>Transporteur</h2>
             <p>{{ carrier.name}}</p>
             <p>{{ carrier.description}}</p>
-            <p>{{ carrier.price|number_format(2, ',', '.') }} €</p>
+            <p>{{ (carrier.price / 100)|number_format(2, ',', '.') }} €</p>
         </div>
         <div>
             <h2>Ma commande</h2>
@@ -29,11 +29,11 @@
     <hr/>
     <div>           
         <h2>Sous-total: {{ total|number_format(2, ',', '.') }} €</h2>
-        <h2>Livraison: {{ carrier.price|number_format(2, ',', '.') }} €</h2>
+        <h2>Livraison: {{ (carrier.price / 100)|number_format(2, ',', '.') }} €</h2>
     <hr/>
-        <h2>Total: {{ (total + carrier.price)|number_format(2, ',', '.') }} €</h2>
+        <h2>Total: {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</h2>
     </div>
-    <a style="cursor: pointer;" id="checkout-button">Payer - {{ (total + carrier.price)|number_format(2, ',', '.') }} €</a>
+    <a style="cursor: pointer;" id="checkout-button">Payer - {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</a>
 {% endblock %}
 
 {% block js %}

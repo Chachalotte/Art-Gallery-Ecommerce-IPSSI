@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Confirmation de commande{% endblock %}
+
+{% block content %}
+
+    <h1>Confirmation de commande</h1>
+
+<p>Bonjour {{ order.user.firstname }} {{ order.user.name}},</p>
+<p>Nous vous remercions pour votre commande n°{{ order.reference }}</p>
+<p>Une confirmation vient de vous être envoyée par email à l'adresse {{ order.user.email }}.</p>
+<p>Votre commande sera livrée par {{order.carrierName }} à l'adresse suivante: <br/>
+   {{ order.delivery|raw }}</p>
+   <hr/>
+<p>Pour suivre votre commande rendez-vous dans votre <a href="{{path('app_profil', {'id':order.user.id}) }}">profil</a></p>
+{% endblock %}
