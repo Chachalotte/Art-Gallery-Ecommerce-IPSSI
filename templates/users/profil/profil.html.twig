@@ -5,10 +5,10 @@
 {% block content %}
 
 {% if app.user.id == user.id %}
-    <h2 class="rubriqueTitle">Mes informations</h2>
+    <h1 class="rubriqueTitle">Mes informations</h1>
     <div class="profileBoxSmall">
         <center>
-            <h3 class="card-title">{{user.name}} {{user.firstName}}</h3>
+            <h2 class="card-title">{{user.name}} {{user.firstName}}</h2>
             {% if user.avatar %}
                 <img class="imgMedium" src="{{ asset('img/user/' ~ user.avatar) }}"/>
         <center>
@@ -45,6 +45,37 @@
         <div class="spacingSmall">
             <button class="open-modale-slide-side">Modifier le profil</button>
             <a href="#" onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ? Toutes vos données seront effacées')">Supprimer mon compte</a>
+        </div>
+    </div>
+    <div class="profileBoxSmall">
+        <h2 class="rubriqueTitle">Mes commandes</h2>
+        <div class="commandes">
+        {% if orders|length == 0 %}
+        <p>Vous n'avez pas encore passé de commande.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <td>Référence</td>
+                        <td>Passée le</td>
+                        <td>Produits</td>
+                        <td>Total</td>
+                        <td>Total</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.reference }}</td>
+                        <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                        <td>{{ order.orderDetails|length }}</td>
+                        <td>{{ ((order.carrierPrice + order.total) / 100)|number_format(2, ',','.') }} €</td>
+                        <td><a href="{{ path('profil_order_show', {'id': app.user.id, 'reference': order.reference} ) }}">Voir ma commande</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
         </div>
     </div>
 

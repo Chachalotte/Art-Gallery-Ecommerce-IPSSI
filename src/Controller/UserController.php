@@ -22,140 +22,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    //=============================================
-    //          Page de profil de l'utilisateur
-    //=============================================
-    #[Route('/profile', name: 'userProfile')]
-    public function OwnProfile(ManagerRegistry $doctrine): Response
-    {
-        $artists = $doctrine->getRepository(User::class);
-        $comments = $doctrine->getRepository(Comments::class);
-
-        $user = $this->getUser();
-
-        //$userID = $this->getId();
-
-        // $comment = $user->getComments();
-
-        //$artistList = $artists->findAll();
-
-        //$userComments = $comments->findUserComments($userID);
-        //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
-
-
-        return $this->render('users/users.html.twig', [
-            'user' => $user,
-            // 'comments' => $comment
-        ]);
-    }
-
-    //=============================================
-    //          Page de profil de l'utilisateur
-    //=============================================
-    #[Route('/profil/{id<\d+>}', name: 'app_profil')]
-    public function Profil(ManagerRegistry $doctrine,  Request $request, UserPasswordHasherInterface $userPasswordHasher, $id)
-    {
-        $em = $doctrine->getManager();
-
-        $user = $em->getRepository(User::class)->find($id);
-        if ($this->getUser() != $user) {
-            return $this->createAccessDeniedException();
-        }
-        dump($user);
-
-        $comment = $user->getComments();
-
-        // On récupère l'ancienne donnée
-        // $oldUser = new User;
-        // $oldUser->setEmail($user->getEmail());
-        // $oldUser->setFirstname($user->getFirstname());
-        // $oldUser->setName($user->getName());
-        // $oldUser->getGender() ? $oldUser->setGender($user->getGender()) : null;
-        // $oldUser->getAge() ? $oldUser->setAge($user->getAge()) : null;
-        // $oldUser->setPassword($user->getPassword());
-        // $oldUser->getAvatar() ? $oldUser->setAvatar($user->getAvatar()) : null;
-
-        // $oldUser->setDescription($user->getDescription());
-
-        // $email = new Email($user->getEmail());
-        // $user->setEmail($email);
-
-        $form = $this->createForm(ProfilType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('plainEmail')->getData() !== null) {
-                $user->setEmail($form['plainEmail']->getData());
-            } else {
-                $user->setEmail($oldUser->getEmail());
-            }
-
-            if ($form->get('firstname')->getData() !== null) {
-                $user->setFirstname($form['firstname']->getData());
-            } else {
-                $user->setFirstname($oldUser->getFirstname());
-            }
-
-            if ($form->get('name')->getData() !== null) {
-                $user->setName($form['name']->getData());
-            } else {
-                $user->setName($oldUser->getName());
-            }
-
-            if ($form->get('gender')->getData() !== null) {
-                $user->setGender($form['gender']->getData());
-            } else {
-                if ($oldUser->getGender() !== null) {
-                    $user->setGender($oldUser->getGender());
-                } else {
-                    $user->setGender(null);
-                }
-            }
-
-            if ($form->get('age')->getData() !== null) {
-                $user->setAge($form['age']->getData());
-            } else {
-                $user->setAge($oldUser->getAge());
-            }
-
-            if ($form->get('plainPassword')->getData() !== null) {
-                $user->setPassword(
-                    $userPasswordHasher->hashPassword($user, $form['plainPassword']->getData())
-                );
-            } else {
-                $user->setPassword($oldUser->getPassword());
-            }
-
-            if ($form->get('avatar')->getData() !== null) {
-                $avatar = $form->get('avatar')->getData();
-                $avatarName = md5(uniqid()) . '.' . $avatar->guessExtension();
-
-                $avatar->move(
-                    $this->getParameter('upload_file_user'),
-                    $avatarName
-                );
-                $user->setAvatar($avatarName);
-            } else {
-                // $user->setAvatar($oldUser->getAvatar());
-            }
-
-            
-            $em->persist($user);
-            $em->flush();
-
-            $this->addFlash("success", "Le profil a bien été modifié");
-
-            return $this->redirectToRoute("app_profil", ['id' => $user->getId()]);
-        }
-
-        return $this->render('users/profil.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-            'comments' => $comment
-        ]);
-    }
-
     // //=============================================
     // //          Edition page de profil de l'utilisateur
     // //=============================================
@@ -207,58 +73,6 @@ class UserController extends AbstractController
     // }
 
     //=============================================
-    //          Page de profil d'un utilisateur
-    //=============================================
-    #[Route('/profile/{id}', name: 'userProfileID')]
-    public function profileSelect(ManagerRegistry $doctrine, int $id, Request $request): Response
-    {
-        $users = $doctrine->getRepository(User::class);
-        $comments = $doctrine->getRepository(Comments::class);
-
-        $user = $doctrine->getRepository(User::class)->find($id);
-
-        //$userID = $this->getId();
-
-        $comment = $user->getComments();
-
-
-
-        //$userComments = $comments->findUserComments($userID);
-        //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
-
-
-
-        return $this->render('users/users.html.twig', [
-            'user' => $user,
-            //'form' => $form->createView(),
-            'comments' => $comment
-            
-        ]);
-    }
-
-
-    //=============================================
-    //        Page d'un artiste (selon ID)
-    //=============================================
-    #[Route('/artist/{id}', name: 'artist')]
-    public function ArtistSelect(ManagerRegistry $doctrine, int $id, Request $request): Response
-    {
-
-        //Lister un artiste spécifiquement par son id
-        $artists = $doctrine->getRepository(User::class);
-        $artist = $artists->findArtist($id);
-        $URL = $request->getRequestUri();
-
-
-
-        return $this->render('artists/artist.html.twig', [
-            'controller_name' => 'ArtistController',
-            'artist' => $artist,
-            'URL' => $URL
-        ]);
-    }
-
-    //=============================================
     //          Page Liste des artistes
     //=============================================
     #[Route('/artists', name: 'artistList')]
@@ -284,36 +98,9 @@ class UserController extends AbstractController
     #[Route('/artistsPage/{id<\d+>}', name: 'artistPage')]
     public function artistPage(ManagerRegistry $doctrine, $id)
     {
-
         $product = $doctrine->getRepository(Product::class)->findAll();
         $user = $doctrine->getRepository(User::class)->find($id); //tri par role
         $request = Request::createFromGlobals();
-
-        //Formulaire suppression d'un produit
-        // -------------------------
-        // $form = $this->createForm(ProductType::class, $product);
-        // $form->handleRequest($request);
-
-        // $logger->info('I just got the logger');
-        
-        // if ($form->isSubmitted() && $form->isValid()) {
-
-        //     $productID = $form->get('id')->getData();
-        //     $product->removeProduct($productID);
-            
-
-
-            
-        //     $em->flush();
-
-        //     $this->addFlash('success', 'Produit supprimé avec succès');
-
-        //     return $this->redirectToRoute('home');
-        // } else {
-        //     $this->addFlash('error', 'Une erreur est survenue');
-        // }
-        // -------------------------
-
 
         return $this->render('users/artist/artistPage.html.twig', [
             'user' => $user

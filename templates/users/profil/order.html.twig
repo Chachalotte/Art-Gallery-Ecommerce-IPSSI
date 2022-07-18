@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Ma commande {{ order.reference }}{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Ma commande {{ order.reference }}</h1>
+        <a href="{{path('app_profil', {'id': app.user.id}) }}">Retour</a>
+    </div>
+    <hr/>
+    <div class="commande">
+        <p>Commande passée le {{ order.createdAt|date('d/m/Y') }}</p>
+        <p>Référence de ma commande {{ order.reference }}</p>
+        <p>Transporteur choisi {{ order.carrierName }}</p>                
+    </div>
+    <hr/>
+    <table>
+        <thead>
+            <tr>
+                <td>Produit</td>
+                <td>Prix</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in order.orderDetails %}
+            <tr>
+                <td>{{ product.product }}</td>
+                <td>{{ product.price|number_format(2, ',', '.') }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>        
+        <p>Sous-Total: {{ (order.getTotal /100)|number_format(2, ',', '.') }} €</p> 
+        <p>Livraison: {{ (order.carrierPrice /100)|number_format(2, ',', '.') }} €</p> 
+        <p>Total: {{ ((order.carrierPrice + order.getTotal) /100)|number_format(2, ',', '.') }} €</p> 
+    </div>
+{% endblock %}

@@ -16,7 +16,7 @@ class AddressController extends AbstractController
     #[Route('/adresses', name: 'adresses')]
     public function index(): Response
     {
-        return $this->render('users/address.html.twig');
+        return $this->render('users/profil/address.html.twig');
     }
 
     #[Route('/nouvelle_adresse', name: 'new_address')]
@@ -41,7 +41,7 @@ class AddressController extends AbstractController
             }
         }
 
-        return $this->render('users/address_new.html.twig', [
+        return $this->render('users/profil/address_new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -67,7 +67,7 @@ class AddressController extends AbstractController
             return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
         }
 
-        return $this->render('users/address_new.html.twig', [
+        return $this->render('users/profil/address_new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
