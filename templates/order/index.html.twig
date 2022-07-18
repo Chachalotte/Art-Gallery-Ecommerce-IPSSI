@@ -5,18 +5,22 @@
 {% block content %}
 
     <h1>Valider ma commande</h1>
-    <p>Choisissez os préférences avant de passer votre commande.</p>
+    <p>Choisissez vos préférences avant de passer votre commande.</p>
     <hr/>
     <div>        
         <div>
-            <b></b>
-            <b></b>
+            {% set formHtml %}
+                {{form_start(form, {action:path('order_recap')} ) }}
+                    <a href="{{ path('new_address')}}">Ajouter une nouvelle adresse</a>
+                {{form_end(form)}}
+            {% endset %}    
+            {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
         </div>
         <div>
-            <b></b>
-            <b></b>
+            {% for product in cart %}
+                <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
+                {{product.product.name}}                
+            {% endfor %}
         </div>
     </div>
-
-    
 {% endblock %}

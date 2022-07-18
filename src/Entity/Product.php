@@ -30,10 +30,6 @@ class Product
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $color;
 
-    #[ORM\ManyToOne(targetEntity: OrderItem::class, inversedBy: 'prodId')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $orderItem;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'Product')]
     private $artist;
 
@@ -111,18 +107,6 @@ class Product
     public function setColor(string $color): self
     {
         $this->color = $color;
-
-        return $this;
-    }
-
-    public function getOrderItem(): ?OrderItem
-    {
-        return $this->orderItem;
-    }
-
-    public function setOrderItem(?OrderItem $orderItem): self
-    {
-        $this->orderItem = $orderItem;
 
         return $this;
     }
