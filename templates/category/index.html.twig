@@ -3,8 +3,8 @@
 {% block title %}{{parent()}} - Catégories{% endblock %}
 
 {% block content %}
-
-    <h1>Catégories</h1>
+<link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
+    <h2 class="rubriqueTitle">Catégories</h2>
     <section class="showCategories">
         {% for category in categories %}
         <div class="category">

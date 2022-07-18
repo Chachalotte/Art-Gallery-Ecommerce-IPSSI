@@ -9,6 +9,9 @@
 @import url('categoriesPage.css');
 @import url('cart.css');
 @import url('event.css');
+@import url('artists.css');
+@import url('users.css');
+@import url('form.css');
 
 main {
   margin: 0 2vw;

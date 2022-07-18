@@ -4,29 +4,31 @@
 
 {% block content %}
 
-<link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
 
 <div class="spacingSmall"></div>
-<div class="products">
-    <div class="productBox">
-        <h1>{{product.name | capitalize}}</h1>
-        <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
-        <p>{{ product.description | capitalize }}</p>
-        <img src="{{ asset('img/product/' ~ product.img) }}"/>
-        <div class="filters">
+<section >
+    <div class="products">
+        <div class="productBox">
+            <h1>{{product.name | capitalize}}</h1>
+            <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+            <div>
+                {% if product.artist == app.user %}
+                    {% include 'product/editProductButtons.html.twig' %}
+                {% endif %}
+            </div>
+            <p>{{ product.description | capitalize }}</p>
+            <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>
+            <div class="filters">
+            </div>
         </div>
     </div>
- </div>
+  
+    <div class="spacingSmall"></div>
     
-    <section >
-
-
-        
-
-        <aside class="descriptionComplementary">
+    
 
             {% if product.artist != app.user %}
-
+            
                 <div class="productBox">
                     <h2 class="rubriqueTitle">Mise en vente</h2>                
                     <p>Prix: {{ product.price | capitalize }} €</p>
@@ -41,19 +43,14 @@
                         <p>Dimensions: 120x170 cm</p>             
                     </div>
                 </div>
+              
+              
 
-                {% else %}
-
-                    <div class="productBox">
-                        <h2 class="rubriqueTitle">Modifier le produit</h2>                
-                        <p>Prix: {{ product.price | capitalize }} €</p>
-
-                    </div>
 
                 {% endif %}
-                
-        </aside>
-                
+              
+</section>        
+                 
                 <div class="spacingSmall"></div>
 
                 <div class="allComments">
@@ -83,7 +80,7 @@
                     </div>
                     </div>
        
-    </section>
+    
 
     <section >
     <h2 class="rubriqueTitle">Vous aimerez aussi ...</h2>

@@ -23,7 +23,10 @@ class ProductType extends AbstractType
             ->add('img', FileType::class, [
                 'label' => 'Image (JPEG/PNG)',
                 'required' => false,
-                'data_class' => null
+                'data_class' => null,
+                'attr' => [
+                    'class' => 'blabla'
+                ]
             ])
             ->add('price', NumberType::class)
             ->add('color', TextType::class)

@@ -4,16 +4,20 @@
 
 {% block content %}
 
-{% if app.request.get('_route') == 'product_new'%}
-<h1>Nouvelle oeuvre</h1>
-{% else %}
-<h1>Editer une oeuvre</h1>
-{% endif %}
 
-{{ form_start(form)}}
-    {{ form_widget(form)}}
-   
-    <button type="submit"> {% if app.request.get('_route') == 'product_new'%}Créer{% else %}Editer{% endif %} le produit</button>    
-    
-{{ form_end(form)}}
+
+{% if app.request.get('_route') == 'product_new'%}
+<h2 class="rubriqueTitle">Nouvelle oeuvre</h2>
+{% else %}
+<h2 class="rubriqueTitle">Editer une oeuvre</h2>
+{% endif %}
+<div class="formBox">
+    <div class="product">
+        {{ form_start(form)}}
+            {{ form_widget(form)}}
+            <button type="submit"> {% if app.request.get('_route') == 'product_new'%}Créer{% else %}Editer{% endif %} le produit</button>    
+        {{ form_end(form)}}
+    </div>
+</div>
+
 {% endblock %}

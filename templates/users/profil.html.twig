@@ -5,11 +5,13 @@
 {% block content %}
 
 {% if app.user.id == user.id %}
-    <h2>Mes informations</h2>
-    <div class="card form">
-        <h3 class="card-title">{{user.name}} {{user.firstName}}</h3>
-        {% if user.avatar %}
-            <img src="{{ asset('img/user/' ~ user.avatar) }}"/>
+    <h2 class="rubriqueTitle">Mes informations</h2>
+    <div class="profileBoxSmall">
+        <center>
+            <h3 class="card-title">{{user.name}} {{user.firstName}}</h3>
+            {% if user.avatar %}
+                <img class="imgMedium" src="{{ asset('img/user/' ~ user.avatar) }}"/>
+        <center>
         {% else %}
             {% if user.gender == "homme" %}
                 <img src="{{ asset('img/user/man.png') }}"/>
@@ -18,37 +20,35 @@
             {% endif %}
         {% endif %}
         <div class="personnalInformation">
-            <p class="card-text">{{app.user.email}}</p>
+            <p class="card-text"><b>Mail:</b> {{app.user.email}}</p>
         </div>
         <div class="personnalInformation">
             {% if app.user.age is empty %}
-            <p class="card-text">Date de naissance</p>
+            <p class="card-text">Date de naissance non renseignée</p>
             {% else %}
-            <p class="card-text">Date de naissance: {{app.user.age|date("m/d/Y")}}</p>
+            <p class="card-text"><b>Date de naissance:</b> {{app.user.age|date("m/d/Y")}}</p>
             {% endif %}
         </div>
         <div class="personnalInformation">
             {% if not app.user.gender %}
-            <p class="card-text">Sexe</p>
+            <p class="card-text">Sexe non renseigné</p>
             {% else %}
-            <p class="card-text">Sexe: {{app.user.gender}}</p>
+            <p class="card-text"><b>Sexe:</b> {{app.user.gender}}</p>
             {% endif %}
         </div>
 
         {% if is_granted("ROLE_ARTIST")%}
             <div class="personnalInformation">
-                <p class="card-text">Mes oeuvres</p>
                 <a class="whiteButton" href="{{path('artistPage', {'id': user.id})}}">Voir ma page artiste</a>
             </div>
         {% endif %}
-
-        <div class="personnalInformation">
-            <p class="card-text">Mot de Passe</p>
+        <div class="spacingSmall">
+            <button class="open-modale-slide-side">Modifier le profil</button>
+            <a href="#" onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ? Toutes vos données seront effacées')">Supprimer mon compte</a>
         </div>
     </div>
 
-    <button class="open-modale-slide-side">Compléter Modifier le profil</button>
-    <a href="#" onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ? Toutes vos données seront effacées')">Supprimer mon compte</a>
+ 
 {% else %}
     <h2>Erreur de page</h2>
     <p>Vous n'avez pas les droits pour cette page</p>

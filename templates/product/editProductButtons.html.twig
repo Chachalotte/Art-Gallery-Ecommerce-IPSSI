@@ -1,0 +1,12 @@
+
+{% block content %}
+
+
+    <a class="editButton" href="{{path('product_edit', {'id': product.id} )}}">Modifier</a> 
+    {# {{ form_start(form)}}#}
+                    
+     <a class="deleteButton" href="{{path('product_delete', {'id': product.id} )}}">Supprimer</a>
+    {# {{ form_end(form)}}#}
+
+
+{% endblock %}

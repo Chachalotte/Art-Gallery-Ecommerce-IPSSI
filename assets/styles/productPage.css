@@ -33,3 +33,152 @@ h2,
   width: 8vw;
   object-fit: cover;
 }
+
+
+
+/* =========== Box des produits ============*/
+
+.productBox
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+  
+	border-radius: 1px;
+	width:35% ;
+	max-height:500px ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin-bottom: 10px;
+
+}
+
+.commentBox
+{
+	
+  background-color: #ffffff;
+	border:solid 2px  #ded8cece;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+  margin-top: 2;
+    
+	border-radius: 3px;
+	width:20% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+
+.product
+{
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: 5%;
+    margin-top: 5%;
+	min-height:135px;
+	font: italic 16px "Georgia", serif;
+}
+
+.products
+{
+	/*margin-left: 2% ; centrer les elements avec margin : auto */
+	margin-right: 5%; 
+    margin-top: 1%;
+	min-height:100px;
+	font: 16px "Georgia", serif;
+}
+
+
+.productPres
+{
+  background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+    
+	border-radius: 1px;
+	width:55% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+
+
+}
+
+.productSection
+{
+
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+    
+	border-radius: 1px;
+	width:60% ;
+
+	opacity: 1;
+
+
+}
+
+/* =========== Box des produits ============*/
+
+.editButton {
+	
+	border: 2px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+
+	background-color: rgb(55, 132, 132);
+  }
+
+  .editButton:hover {
+	
+	border: 2px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+
+	background-color: rgb(40, 208, 208);
+  }
+
+.deleteButton {
+	border: 2px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+
+	background-color: rgb(171, 69, 0);
+  }
+  
+  .deleteButton:hover {
+	border: 2px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+
+	background-color: rgb(255, 60, 0);
+  }

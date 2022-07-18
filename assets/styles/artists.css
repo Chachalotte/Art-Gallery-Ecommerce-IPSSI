@@ -1,0 +1,125 @@
+
+/* =========== Box pour la page liste des artistes (/artistes) ============*/
+
+.artistBox
+{
+    background-color:rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 10;
+    
+	border-radius: 3px;
+	width:40% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+	margin-bottom: 20px;
+}
+
+.artistBox:hover
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  #ded8cece;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+    
+	border-radius: 3px;
+	width:40% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin-bottom: 20px;
+}
+
+/* =========== Contenu de la box artiste ============*/
+
+.artistCard
+{
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: 5%;
+    margin-top: 5%;
+	min-height:135px;
+	font: italic 16px "Georgia", serif;
+}
+
+.artistTitle
+{
+    font-size : 30px; 
+}
+
+  /* =========== Style des links (fonctionne à moitié) ============*/
+
+  .imgSmall {
+	width:100%;
+	max-width:100px;
+  }
+
+.imgMedium {
+	width:100%;
+	max-width:250px;
+  } 
+  
+  .imgBig {
+	width:100%;
+	max-width:300px;
+  } 
+
+
+  .profileBox
+{
+    background-color: rgb(255, 232, 183);
+	border:solid 1px rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 1px;
+    
+	border-radius: 1px;
+	width:100%;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin: 10px;
+}
+
+.profileBoxSmall
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 1px rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 1px;
+    
+	border-radius: 1px;
+	width:20% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin: 10px;
+}
+
+
+
+/* =========== Box des détails du profil (sans opacité) ============*/
+.profileBoxVoid
+{
+    /* background-color: #ffffffdc; */
+	/* border:solid 2px  #ffffffdc; */
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 1%;
+    
+	border-radius: 3px;
+	width:30% ;
+	/* box-shadow :-3px 7px 16px #ced6de; */
+	opacity: 1;
+}
+
+/* =========== Contenu de la box artiste ============*/
+
+.profileCard
+{
+	margin-left: 10px ; /*centrer les elements avec margin : auto */
+	margin-right: 5px;
+
+	/*min-height:135px; */
+	font: 16px "Georgia", serif;
+	opacity: 1;
+}
