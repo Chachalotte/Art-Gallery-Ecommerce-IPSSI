@@ -161,10 +161,10 @@ class Order
         $total = null;
 
         foreach($this->getOrderDetails()->getValues() as $product){
-            $total = ($total +($product->getPrice()))*100;
+            $total = ($total + $product->getPrice());
         }
         
-        return $total;
+        return $total * 100;
     }
 
     public function getReference(): ?string

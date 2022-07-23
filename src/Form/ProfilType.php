@@ -98,7 +98,9 @@ class ProfilType extends AbstractType
                 'required' => false
             ])
             ->add('description', TextareaType::class, [
-                'label' => "Description"
+                'label' => "Description",
+                'required' => false
+
             ])
         ;
     }
