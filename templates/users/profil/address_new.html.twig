@@ -1,10 +1,65 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}{{parent()}} - Gérer mes adresse{% endblock %}
+{% block title %}{{parent()}} - Gérer mes adresses{% endblock %}
 
 {% block content %}
-    <h1>Gérer mes adresse</h1>
-
+    <h1 class="rubriqueTitle">Gérer mes adresses</h1>
+<div class="formBox">
     {{form_start(form)}}
+        <div class="formField">
+            {{ form_label(form.name) }}
+            {{ form_errors(form.name) }}
+            {{ form_help(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.firstname) }}
+            {{ form_errors(form.firstname) }}
+            {{ form_help(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.lastname) }}
+            {{ form_errors(form.lastname) }}
+            {{ form_help(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.company) }}
+            {{ form_errors(form.company) }}
+            {{ form_help(form.company) }}
+            {{ form_widget(form.company) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.address) }}
+            {{ form_errors(form.address) }}
+            {{ form_help(form.address) }}
+            {{ form_widget(form.address) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.postal) }}
+            {{ form_errors(form.postal) }}
+            {{ form_help(form.postal) }}
+            {{ form_widget(form.postal) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.city) }}
+            {{ form_errors(form.city) }}
+            {{ form_help(form.city) }}
+            {{ form_widget(form.city) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.country) }}
+            {{ form_errors(form.country) }}
+            {{ form_help(form.country) }}
+            {{ form_widget(form.country) }}
+        </div>
+        <div class="formField">
+            {{ form_label(form.phone) }}
+            {{ form_errors(form.phone) }}
+            {{ form_help(form.phone) }}
+            {{ form_widget(form.phone) }}
+        </div>
     {{form_end(form)}}
+</div>    
 {% endblock %}

@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <h1>Mon récapitulatif</h1>
+    <h1 class="rubriqueTitle">Mon récapitulatif</h1>
     <p>Vérifiez vos informations avant de payer.</p>
     <hr/>
     <div>        
@@ -19,11 +19,15 @@
         </div>
         <div>
             <h2>Ma commande</h2>
-            {% for product in cart %}
-                <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
-                {{product.product.name}}   
-                {{product.product.price}} €              
-            {% endfor %}
+            <div class="products">
+                {% for product in cart %}
+                <div class="productBox">
+                    <h2>{{product.product.name}}  </h2> 
+                     {{product.product.price}} € 
+                    <img class="imgBig" src="{{ asset('img/product/' ~ product.product.img) }}"/>
+                </div>         
+                {% endfor %}
+            </div>
         </div>
     </div>
     <hr/>
@@ -33,7 +37,7 @@
     <hr/>
         <h2>Total: {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</h2>
     </div>
-    <a style="cursor: pointer;" id="checkout-button">Payer - {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</a>
+    <a class="payButton" style="cursor: pointer;" id="checkout-button">Payer - {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</a>
 {% endblock %}
 
 {% block js %}

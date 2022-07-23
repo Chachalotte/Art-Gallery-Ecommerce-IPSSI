@@ -12,6 +12,7 @@
 @import url('artists.css');
 @import url('users.css');
 @import url('form.css');
+@import url('adress.css');
 
 main {
   margin: 0 2vw;

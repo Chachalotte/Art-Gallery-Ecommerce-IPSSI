@@ -4,20 +4,20 @@
 
 {% block content %}
     <div>
-        <h1>Mes adresses</h1>
-        <a href="{{path('new_address') }}">Ajouter une adresse</a>
+        <h1 class="rubriqueTitle">Mes adresses</h1>
+        <a class="createButton" href="{{path('new_address') }}">Ajouter une adresse</a>
     </div>
     <div class="addresses">
         {% if app.user.adresses|length == 0 %}
-        <p>Vous n'avez pas encore ajouté d'adresse dans votre compte client. Pour en ajouter une, veuillez <a href="{{path('new_address') }}">cliquer ici</a>.</p>
+        <p>Vous n'avez pas encore ajouté d'adresse dans votre compte client.</p>
         {% else %}
             {% for address in app.user.adresses %}
-            <div>
+            <div class="addressBox">
                 <h3>{{ address.name }}</h3>
                 <p>{{ address.address }}</p>
                 <p>{{ address.postal }} - {{ address.city }} - {{ address.country }}</p>
                 <div class="actionAdmin">
-                    <a href="{{ path('edit_address', {'id': address.id} )}}">Modifier</a> | <a href="{{ path('delete_address', {'id': address.id} )}}">Supprimer</a>
+                    <a class="editButton" href="{{ path('edit_address', {'id': address.id} )}}">Modifier</a>  <a class="deleteButton" href="{{ path('delete_address', {'id': address.id} )}}">Supprimer</a>
                 </div>    
             </div>
             {% endfor %}

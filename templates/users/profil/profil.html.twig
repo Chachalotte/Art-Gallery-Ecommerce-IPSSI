@@ -94,35 +94,70 @@
         </div>
         {{ form_start(form)}}
             <div class="col-md-12">
-                {{ form_row(form.plainEmail.first, {'attr':{'novalidate': 'novalidate'}}) }}                   
+                <div class="formField">
+                    {{ form_label(form.plainEmail.first) }}
+                    {{ form_errors(form.plainEmail.first) }}
+                    {{ form_help(form.plainEmail.first) }}
+                    {{ form_widget(form.plainEmail.first) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.plainEmail.second) }}
+                    {{ form_errors(form.plainEmail.second) }}
+                    {{ form_help(form.plainEmail.second) }}
+                    {{ form_widget(form.plainEmail.second) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.firstname) }}
+                    {{ form_errors(form.firstname) }}
+                    {{ form_help(form.firstname) }}
+                    {{ form_widget(form.firstname) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.name) }}
+                    {{ form_errors(form.name) }}
+                    {{ form_help(form.name) }}
+                    {{ form_widget(form.name) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.gender) }}
+                    {{ form_errors(form.gender) }}
+                    {{ form_help(form.gender) }}
+                    {{ form_widget(form.gender) }}
+                </div>
+            
+                <div class="formField">
+                    {{ form_label(form.age) }}
+                    {{ form_errors(form.age) }}
+                    {{ form_help(form.age) }}
+                    {{ form_widget(form.age) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.plainPassword.first) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                    {{ form_help(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.plainPassword.second) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                    {{ form_help(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.avatar) }}
+                    {{ form_errors(form.avatar) }}
+                    {{ form_help(form.avatar) }}
+                    {{ form_widget(form.avatar) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.description) }}
+                    {{ form_errors(form.description) }}
+                    {{ form_help(form.description) }}
+                    {{ form_widget(form.description) }}
+                </div>
             </div>
-            <div class="col-md-12">
-                {{ form_row(form.plainEmail.second, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.firstname, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.name, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.gender, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.age, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.plainPassword.first, {'attr':{'class': 'form-control'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.plainPassword.second, {'attr':{'class': 'form-control'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.avatar, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div>
-            <div class="col-md-12">
-                {{ form_row(form.description, {'attr':{'novalidate': 'novalidate'}}) }}                   
-            </div>
+
+
         <div>
             {# <button class="close">❌ Annuler</button> #}
             <button type="submit">✔️ Valider</button>

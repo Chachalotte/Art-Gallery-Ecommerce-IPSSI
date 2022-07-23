@@ -1,0 +1,32 @@
+
+/* =========== Box des produits ============*/
+
+.addressBox
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; 
+	margin-right: auto;
+    margin-top: 20;
+  
+	border-radius: 1px;
+	width:30% ;
+	max-height:500px ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin-bottom: 10px;
+
+}
+
+
+.addresses
+{
+	margin-left: 2% ; 
+	margin-right: 5%;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	
+	font: 16px "Georgia", serif;
+	display: flex;
+}
+
