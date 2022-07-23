@@ -16,14 +16,7 @@ section.backgroundConnect img {
   object-fit: cover;
 }
 
-div.formConnect {
-  width: 35vw;
-  height: 22vw;
-  background-color: #efe7dd;
-  margin: auto;
-  padding: 2vw;
-  z-index: 2;
-}
+
 
 form.connection {
   display: flex;

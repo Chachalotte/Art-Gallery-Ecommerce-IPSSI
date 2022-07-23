@@ -28,6 +28,11 @@ h2,
   text-align: center;
 }
 
+h1,
+.anotherOeuvre {
+  text-align: center;
+}
+
 .anotherOeuvre img {
   margin: auto;
   width: 8vw;

@@ -65,7 +65,7 @@ class ProductController extends AbstractController
             );
             $product->setImg($imageName);
             $product->setArtist($user);
-            $product->setOrderItem(NULL);
+            //$product->setOrderItem(NULL);
 
             // On le persist et l'enregistre en BDD
             $em->persist($product);
