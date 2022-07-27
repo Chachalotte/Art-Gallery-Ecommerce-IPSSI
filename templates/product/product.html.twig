@@ -6,7 +6,8 @@
 
 
 <div class="spacingSmall"></div>
-<section >
+<section  class="presentation">
+<aside>
     <div class="products">
         <div class="productBox">
             <h1>{{product.name | capitalize}}</h1>
@@ -22,18 +23,18 @@
             </div>
         </div>
     </div>
-  
-    <div class="spacingSmall"></div>
+  </aside>
+    {# <div class="spacingSmall"></div> #}
     
     
 
             {% if product.artist != app.user %}
             
-                <div class="productBox">
+                <div class="SaleInfoBox">
                     <h2 class="rubriqueTitle">Mise en vente</h2>                
                     <p>Prix: {{ product.price | capitalize }} €</p>
                     <div class="action">
-                        <a href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>             
+                        <a class="addCartButton" href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>             
                     </div>
                     <div class="action">
                         <h3>Détails techniques du produit</h3> 

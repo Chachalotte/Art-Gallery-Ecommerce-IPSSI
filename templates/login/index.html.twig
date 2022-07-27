@@ -8,7 +8,8 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<h1>Se connecter</h1>
+<h1 class="rubriqueTitle">Se connecter</h1>
+
 <form class="connection" action="{{ path('login') }}" method="post">
     <label for="username">Email:</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}"/>

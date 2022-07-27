@@ -4,22 +4,26 @@
 
 {% block content %}
 
-    <h1>Valider ma commande</h1>
+    <h1 class="rubriqueTitle">Valider ma commande</h1>
     <p>Choisissez vos préférences avant de passer votre commande.</p>
     <hr/>
     <div>        
         <div>
             {% set formHtml %}
                 {{form_start(form, {action:path('order_recap')} ) }}
-                    <a href="{{ path('new_address')}}">Ajouter une nouvelle adresse</a>
+                    <div class="spacingSmall">
+                        <a class="createButton"href="{{ path('new_address')}}">Ajouter une nouvelle adresse</a>
+                    </div>
                 {{form_end(form)}}
             {% endset %}    
             {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
         </div>
-        <div>
+        <div class="products">
             {% for product in cart %}
-                <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
-                {{product.product.name}}                
+                <div class="productBox">
+                <h2>{{product.product.name}} </h2>
+                    <img class="imgBig" src="{{ asset('img/product/' ~ product.product.img) }}"/>
+                </div>             
             {% endfor %}
         </div>
     </div>

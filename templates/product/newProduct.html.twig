@@ -12,12 +12,59 @@
 <h2 class="rubriqueTitle">Editer une oeuvre</h2>
 {% endif %}
 <div class="formBox">
-    <div class="product">
+    
         {{ form_start(form)}}
+
+        <div class="formField">
+            {{ form_label(form.name) }}
+            {{ form_errors(form.name) }}
+            {{ form_help(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+
+        <div class="formField">
+            {{ form_label(form.description) }}
+            {{ form_errors(form.description) }}
+            {{ form_help(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+
+        <div class="formField">
+            {{ form_label(form.img) }}
+            {{ form_errors(form.img) }}
+            {{ form_help(form.img) }}
+            {{ form_widget(form.img) }}
+        </div>
+
+        <div class="formField">
+            {{ form_label(form.price) }}
+            {{ form_errors(form.price) }}
+            {{ form_help(form.price) }}
+            {{ form_widget(form.price) }}
+        </div>
+
+        <div class="formField">
+            {{ form_label(form.color) }}
+            {{ form_errors(form.color) }}
+            {{ form_help(form.color) }}
+            {{ form_widget(form.color) }}
+        </div>
+
+        <div class="formField">
+            {{ form_label(form.category) }}
+            {{ form_errors(form.category) }}
+            {{ form_help(form.category) }}
+            {{ form_widget(form.category) }}
+        </div>
+
             {{ form_widget(form)}}
-            <button type="submit"> {% if app.request.get('_route') == 'product_new'%}Créer{% else %}Editer{% endif %} le produit</button>    
+            
+        <div class="formField">
+            <button type="submit"> {% if app.request.get('_route') == 'product_new'%}Créer{% else %}Editer{% endif %} le produit</button> 
+        </div>
+
         {{ form_end(form)}}
-    </div>
+    
 </div>
 
 {% endblock %}
