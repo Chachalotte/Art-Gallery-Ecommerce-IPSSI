@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product', name: 'app_product')]
+    #[Route('/products', name: 'app_product')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
         $search = new SearchProduct();
@@ -28,10 +28,30 @@ class ProductController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
            $products = $doctrine->getRepository(Product::class)->filterProduct($search);
         } else {
-           $products = $doctrine->getRepository(Product::class)->findAll();
+            $products = $doctrine->getRepository(Product::class)->findBy(['isSold' => false]);     
         }
 
         return $this->render('product/index.html.twig', [
+            'products' => $products,
+            'form' => $form->createView(),
+        ]);
+    }
+    
+    #[Route('/products-sold', name: 'products_sold')]
+    public function productSoldList(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $search = new SearchProduct();
+        $form = $this->createForm(SearchProductType::class, $search);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+           $products = $doctrine->getRepository(Product::class)->filterProduct($search);
+        } else {
+            $products = $doctrine->getRepository(Product::class)->findBy(['isSold' => true]);
+        }
+
+        return $this->render('product/productsSold.html.twig', [
             'products' => $products,
             'form' => $form->createView(),
         ]);

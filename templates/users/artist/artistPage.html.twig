@@ -36,10 +36,6 @@
         </div>
     </aside>
 
-
-
-
-
     
     <div class="products">
         {% for product in user.product %}
@@ -50,7 +46,7 @@
                         <span><a href="{{path('category', {'id': product.category.id} ) }}">({{ product.category.name }})</a></span>
                     </h2>
                     <center>
-                        {% if user.id == app.user.id %}
+                        {% if app.user and user.id == app.user.id %}
                             {% include 'product/editProductButtons.html.twig' %}
                         {% endif %}
                         <p>{{ product.description | capitalize | slice(0, 150)}}</p>

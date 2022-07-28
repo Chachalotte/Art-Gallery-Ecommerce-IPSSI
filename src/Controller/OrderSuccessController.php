@@ -21,9 +21,9 @@ class OrderSuccessController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        if(!$order->getIsPaid()){
+        if($order->getState() == 0){
             $session->set("cart", []);
-            $order->setIsPaid(1);
+            $order->setState(1);
             $doctrine->getManager()->flush();
 
             //envoi d'email mailjet

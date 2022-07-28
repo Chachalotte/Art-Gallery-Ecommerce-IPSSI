@@ -57,6 +57,7 @@
                 <thead>
                     <tr>
                         <td>Référence</td>
+                        <td>Statut</td>
                         <td>Passée le</td>
                         <td>Produits</td>
                         <td>Total</td>
@@ -67,6 +68,15 @@
                 {% for order in orders %}
                     <tr>
                         <td>{{ order.reference }}</td>
+                        <td>
+                            {% if order.state == 1 %}
+                                Paiement accepté
+                            {% if order.state == 2 %}
+                                Préparation en cours
+                            {% if order.state == 3 %}
+                                Livraison en cours
+                            {% endif %}
+                        </td>
                         <td>{{ order.createdAt|date('d/m/Y') }}</td>
                         <td>{{ order.orderDetails|length }}</td>
                         <td>{{ ((order.carrierPrice + order.total) / 100)|number_format(2, ',','.') }} €</td>
