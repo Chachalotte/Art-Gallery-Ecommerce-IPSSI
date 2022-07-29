@@ -50,8 +50,16 @@
                             {% include 'product/editProductButtons.html.twig' %}
                         {% endif %}
                         <p>{{ product.description | capitalize | slice(0, 150)}}</p>
-                    
-                        <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>  
+
+                        <div>
+                            <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>  
+                            {% if product.isSold %}
+                                <img class="sold" alt="Vendu icônes créées par Alfredo Hernandez - Flaticon" title="Oeuvre vendue" src="{{ asset('img/vendu.png')}}">
+                            {% else %}
+                                <p class="price">{{ product.price}}€</p>
+                            {% endif %}
+                        </div>
+                        
                     </center>
             </div>
             <div class="spacingRow"></div>
