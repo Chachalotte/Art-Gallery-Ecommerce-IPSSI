@@ -5,13 +5,13 @@
 {% block content %}
 
 
-
+<div class="formBox">
 {% if app.request.get('_route') == 'product_new'%}
 <h2 class="rubriqueTitle">Nouvelle oeuvre</h2>
 {% else %}
 <h2 class="rubriqueTitle">Editer une oeuvre</h2>
 {% endif %}
-<div class="formBox">
+
     
         {{ form_start(form)}}
 

@@ -1,3 +1,49 @@
+.profileBoxSmall
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 1px rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 1px;
+    
+	border-radius: 1px;
+	width:25% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin: 10px;
+}
+
+.deleteAccountButton {
+	border: 2px solid #764B36;
+	
+    padding-left: 0.1vw;
+	padding-right: 0.1vw;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+
+	background-color: rgb(171, 69, 0);
+  }
+  
+  .deleteAccountButton:hover {
+	border: 2px solid #764B36;
+	padding-left: 0.1vw;
+	padding-right: 0.1vw;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+
+	background-color: rgb(255, 60, 0);
+  }
+
+
+
 .modaleContainer {
     display: none;
     position: fixed;

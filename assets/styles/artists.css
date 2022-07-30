@@ -86,19 +86,10 @@
 	margin: 10px;
 }
 
-.profileBoxSmall
+
+.profileTitle
 {
-    background-color: rgb(240, 235, 223);
-	border:solid 1px rgb(240, 235, 223);
-	margin-left: 2% ; /*centrer les elements avec margin : auto */
-	margin-right: auto;
-    margin-top: 1px;
-    
-	border-radius: 1px;
-	width:20% ;
-	box-shadow :-3px 7px 16px #ced6de;
-	opacity: 1;
-	margin: 10px;
+    font-size : 25px; 
 }
 
 

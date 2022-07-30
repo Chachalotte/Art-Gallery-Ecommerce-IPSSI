@@ -17,10 +17,6 @@
 }
 
 
-.profileTitle
-{
-    font-size : 25px; 
-}
 
 
 /* =========== Commentaires ============*/
@@ -97,9 +93,13 @@ a {
 /*  Titre de page */
 .rubriqueTitle
 {
-    font-size : 30px; 
-	
-	font: italic bold 30px "Georgia", serif;
+	font: italic bold "Georgia", serif;
+	margin-left: 3%;
+}
+
+.secondaryTitle
+{
+	font: italic bold 18px "Georgia", serif;
 	margin-left: 3%;
 }
 
@@ -121,7 +121,7 @@ body
 
 .rubriqueTitle
 {
-    font-size : 30px; 
+    
 	
 	font: italic bold 30px "Georgia", serif;
 }

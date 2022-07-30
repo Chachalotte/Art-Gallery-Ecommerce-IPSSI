@@ -8,34 +8,38 @@
     <p>Vérifiez vos informations avant de payer.</p>
     <hr/>
     <div>        
-        <div>
-            <h2>Adresse de livraison</h2>
-            <p>{{ delivery|raw }}</p>
+        <div class="recapInfo">
+            <h2 class="secondaryTitle">Adresse de livraison</h2>
+            <p >{{ delivery|raw }}</p>
             <hr/>
-            <h2>Transporteur</h2>
-            <p>{{ carrier.name}}</p>
+            <h2 class="secondaryTitle">Transporteur</h2>
+            
+            <p><b>{{ carrier.name}}</b></p>
             <p>{{ carrier.description}}</p>
-            <p>{{ (carrier.price / 100)|number_format(2, ',', '.') }} €</p>
+            <p class="priceTag">{{ (carrier.price / 100)|number_format(2, ',', '.') }} €</p>
         </div>
         <div>
-            <h2>Ma commande</h2>
+            <h2 class="secondaryTitle">Ma commande</h2>
             <div class="products">
                 {% for product in cart %}
                 <div class="productBox">
-                    <h2>{{product.product.name}}  </h2> 
-                     {{product.product.price}} € 
+                <center>
+                <h3><a href="{{path('product', {'id': product.product.id} )}}">{{product.product.name}}</a> </h3>
+                <a class="cartArtistName" href="{{path('artistPage', {'id': product.product.artist.id} ) }}">{{ product.product.artist.firstname }} {{ product.product.artist.name }}</a>
+                <p class="priceTag">{{product.product.price}} €</p>
                     <img class="imgBig" src="{{ asset('img/product/' ~ product.product.img) }}"/>
-                </div>         
+                </div>   
+                </center>          
                 {% endfor %}
             </div>
         </div>
     </div>
     <hr/>
     <div>           
-        <h2>Sous-total: {{ total|number_format(2, ',', '.') }} €</h2>
-        <h2>Livraison: {{ (carrier.price / 100)|number_format(2, ',', '.') }} €</h2>
+        <h2 class="priceTag">Sous-total: {{ total|number_format(2, ',', '.') }} €</h2>
+        <h2 class="priceTag">Livraison: {{ (carrier.price / 100)|number_format(2, ',', '.') }} €</h2>
     <hr/>
-        <h2>Total: {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</h2>
+        <h2 class="priceTag">Total: {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</h2>
     </div>
     <a class="payButton" style="cursor: pointer;" id="checkout-button">Payer - {{ (total + (carrier.price / 100))|number_format(2, ',', '.') }} €</a>
 {% endblock %}

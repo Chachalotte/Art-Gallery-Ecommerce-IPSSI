@@ -5,13 +5,14 @@
 {% block content %}
 
     <section class="cart">
-        <h1>Mon Panier</h1>
+        <h1 class="rubriqueTitle">Mon Panier</h1>
 
         <div id="cartTables">
             <table id="resumeTable">
                 <thead>
                     <th>Produit</th>
                     <th>Prix</th>
+                    <th>Description</th>
                     {# <th>Quantité</th> #}
                     {# <th>Total</th> #}
                     <th>Actions</th>
@@ -21,11 +22,16 @@
                     {% for product in dataCart %}
                         <tr>
                             <td class="product">
-                            {{product.product.name}}
-                            <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
-                            
+                                <a class="cartProductTitle" href="{{path('product', {'id': product.product.id} )}}">{{product.product.name}}</a>
+                                <a class="cartArtistTitle" href="{{path('artistPage', {'id': product.product.artist.id} ) }}">{{ product.product.artist.firstname }} {{ product.product.artist.name }}</a>
+                                <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
                             </td>
-                            <td>{{product.product.price}} €</td>
+                            <td class="priceTag">
+                                {{product.product.price}} €
+                            </td>
+                            <td>
+                                {{product.product.description}}
+                            </td>
                             {# <td>{{product.quantity}}</td> #}
                             {# <td>{{product.quantity * product.product.price}} €</td> #}
                             <td>
@@ -54,7 +60,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ total }} €</td>
+                        <td class="priceTag">{{ total }} €</td>
                         <td>
                             <a href="{{path('cart_deleteAll')}}">
                                 <i title="Supprimer le panier" class="fas fa-trash"></i>

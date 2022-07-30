@@ -31,13 +31,13 @@
             {% if product.artist != app.user %}
             
                 <div class="SaleInfoBox">
-                    <h2 class="rubriqueTitle">Mise en vente</h2>                
-                    <p>Prix: {{ product.price | capitalize }} €</p>
+                    <h2 class="secondaryTitle">Mise en vente</h2>                
+                    <p class="priceTag">Prix: {{ product.price | capitalize }} €</p>
                     <div class="action">
                         <a class="addCartButton" href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>             
                     </div>
                     <div class="action">
-                        <h3>Détails techniques du produit</h3> 
+                        <h2>Détails techniques du produit</h2> 
                         <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a>
                         <p>Dimensions: 120x170 cm</p>             
                     </div>
@@ -54,18 +54,23 @@
 
                 <div class="allComments">
                 
-                    <div class="productBox">
-                        <h2 class="rubriqueTitle">Commentaires</h2>
-                        <h2>Laissez votre commentaire</h2>
-                        <input type="textarea" />
-                        <div class="actionCom">
-                            <p>⭐⭐⭐</p>
-                            <button>Envoyer</button>
-                    </div> 
+                    <div class="commentBox">
+                        
+                        <h2 class="secondaryTitle">Laissez un commentaire</h2>
+                        <div class="formField">
+                            <input placeholder="Votre commentaire..." type="textarea" />
+                        </div>
+                        {# Ancienne classe du rating+button : actionCom #}
+                        <div class="formField">
+                            <p>⭐⭐⭐⭐⭐</p>
+                            <button class="comment">Envoyer</button>
+                        </div>
+                            
+                    
 
                     <div class="spacingSmall"></div>
 
-                    <h2>Tous les commentaires</h2>
+                    <h2 class="secondaryTitle">Tous les commentaires</h2>
 
                     {% for comment in product.comments %}
                         <div class="comment">

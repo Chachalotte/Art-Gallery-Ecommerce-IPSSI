@@ -21,9 +21,13 @@
         <div class="products">
             {% for product in cart %}
                 <div class="productBox">
-                <h2>{{product.product.name}} </h2>
+                <center>
+                <h3><a href="{{path('product', {'id': product.product.id} )}}">{{product.product.name}}</a> </h3>
+                <a class="cartArtistName" href="{{path('artistPage', {'id': product.product.artist.id} ) }}">{{ product.product.artist.firstname }} {{ product.product.artist.name }}</a>
+                <p class="priceTag">{{product.product.price}} €</p>
                     <img class="imgBig" src="{{ asset('img/product/' ~ product.product.img) }}"/>
-                </div>             
+                </div>   
+                </center>          
             {% endfor %}
         </div>
     </div>
