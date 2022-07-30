@@ -41,6 +41,9 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isSold;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -169,5 +172,17 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function isSold(): ?bool
+    {
+        return $this->isSold;
+    }
+
+    public function setIsSold(bool $isSold): self
+    {
+        $this->isSold = $isSold;
+
+        return $this;
     }
 }

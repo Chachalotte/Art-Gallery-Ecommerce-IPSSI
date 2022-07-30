@@ -42,7 +42,7 @@ class CartController extends AbstractController
     #[Route('/add/{id}', name: 'add')]
     public function add(Product $product, SessionInterface $session): Response
     {
-        if(!$this->getUser()){
+        if(!$this->getUser() || $product->isSold()){
             return $this->redirectToRoute('login');
         }
 

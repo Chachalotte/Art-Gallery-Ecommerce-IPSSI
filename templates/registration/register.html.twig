@@ -5,10 +5,17 @@
 {% block connection %}
    <h1 class="rubriqueTitle">S'inscrire</h1>
 <div class="formContent">
-    {% for flashError in app.flashes('verify_email_error') %}
+    {% for flashError in app.session.flashBag.get('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
+
+    <h1>Register</h1>
+
+    {% if notification %}
+        <div>{{ notification }}</div>
+    {% endif %}
+    
     {{ form_start(registrationForm) }}
         <div class="formField">
             {{ form_label(registrationForm.email) }}

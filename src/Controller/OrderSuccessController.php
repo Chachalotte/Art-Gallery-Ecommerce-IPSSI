@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Data\Mail;
 use App\Entity\Order;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,12 +21,16 @@ class OrderSuccessController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        if(!$order->getIsPaid()){
+        if($order->getState() == 0){
             $session->set("cart", []);
-            $order->setIsPaid(1);
+            $order->setState(1);
             $doctrine->getManager()->flush();
+
+            //envoi d'email mailjet
+            $mail = new Mail();
+            $content = $order->getUser()->getFirstname().' '.$order->getUser()->getName().", merci pour votre achat !<br/>Votre commande The art Factory est bien validée";
+            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname().' '.$order->getUser()->getName(), 'Votre commande The art Factory est bien validée', $content);
         }
-        //Envoie d'email au client pour confirmer la commande
 
         return $this->render('order_success/index.html.twig', [
             'order' => $order,

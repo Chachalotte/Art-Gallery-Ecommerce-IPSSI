@@ -9,6 +9,16 @@
     </div>
     <hr/>
     <div class="commande">
+        <p>
+            Statut de la commande 
+            {% if order.state == 1 %}
+                Paiement accepté
+            {% if order.state == 2 %}
+                Préparation en cours
+            {% if order.state == 3 %}
+                Livraison en cours
+            {% endif %}
+        </p>
         <p>Commande passée le {{ order.createdAt|date('d/m/Y') }}</p>
         <p>Référence de ma commande {{ order.reference }}</p>
         <p>Transporteur choisi {{ order.carrierName }}</p>                

@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Réinitialiser le mot de passe{% endblock %}
+
+{% block content %}
+
+<div>
+    {% for message in app.session.flashBag.get('success') %}
+        <div>{{ message }}</div>
+    {% endfor %}
+</div>
+
+<h1>Réinitialiser le mot de passe</h1>
+{{ form(form) }}
+   
+{% endblock %}

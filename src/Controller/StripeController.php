@@ -21,9 +21,7 @@ class StripeController extends AbstractController
     {
         $products_for_stripe = [];
         $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
-        dump($reference);
         $order = $doctrine->getRepository(Order::class)->findOneBy(['reference' => $reference]);
-        dump($doctrine->getRepository(Order::class)->findOneBy(['reference' => $reference]));
         if(!$order){
             new JsonResponse(['error' => 'order']);
         }

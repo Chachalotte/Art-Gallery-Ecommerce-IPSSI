@@ -7,6 +7,11 @@
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
+<div>
+    {% for message in app.session.flashBag.get('success') %}
+        <div>{{ message }}</div>
+    {% endfor %}
+</div>
 
 <h1 class="rubriqueTitle">Se connecter</h1>
 
@@ -21,8 +26,8 @@
         {# If you want to control the URL the user is redirected to on success
         <input type="hidden" name="_target_path" value="/account"/> #}
 
-        <button type="submit">Connexion</button>
-    </div>
+    <button type="submit">Connexion</button>
+    <a href="{{ path('reset_password') }}">Mot de passe oublié</a>
 </form>
 <div class="noAccount">
     <p>Pas encore de compte ?</p>
