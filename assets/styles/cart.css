@@ -64,7 +64,7 @@ td.product {
 
 .validBtn {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	margin-left: 80vw;
 	-webkit-appearance: button;
@@ -73,13 +73,13 @@ td.product {
 
     text-decoration: none;
     color: white;
-
+    font:  14px "Georgia", serif;
 	background-color: rgb(15, 125, 0);
   }
 
   .validBtn:hover {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
   margin-left: 80vw;
 	-webkit-appearance: button;
@@ -88,13 +88,13 @@ td.product {
 
     text-decoration: none;
 	color: white;
-
+  font:  14px "Georgia", serif;
 	background-color: rgb(18, 215, 15);
   }
 
   .payButton {
 	
-    border: 2px solid #764B36;
+    border: 1px solid #764B36;
     padding: 0.2vw;
     margin-left: 43vw;
     -webkit-appearance: button;
@@ -103,13 +103,13 @@ td.product {
   
       text-decoration: none;
       color: white;
-  
+      font:  14px "Georgia", serif;
     background-color: rgb(15, 125, 0);
     }
   
     .payButton:hover {
     
-    border: 2px solid #764B36;
+    border: 1px solid #764B36;
     padding: 0.2vw;
     margin-left: 43vw;
     -webkit-appearance: button;
@@ -118,7 +118,7 @@ td.product {
   
       text-decoration: none;
     color: white;
-  
+    font:  14px "Georgia", serif;
     background-color: rgb(18, 215, 15);
     }
 
@@ -146,8 +146,13 @@ td.product {
   border:linear-gradient(.25turn, rgb(0, 0, 0), 20%, rgba(255, 119, 0, 0));
   margin: auto;
   padding: 0.5vw;
-
+  width: 300px;
   background:linear-gradient(.25turn, #ffc4a877, 10%, rgba(255, 119, 0, 0));
   font-size:  16px;
   color: rgb(75, 66, 30);
+}
+
+.recapFlex
+{
+  display: flex;
 }

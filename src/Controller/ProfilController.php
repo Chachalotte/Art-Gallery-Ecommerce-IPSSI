@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Order;
+use App\Entity\Subscriptions;
 use App\Form\ProfilType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ class ProfilController extends AbstractController
         }
 
         $comment = $user->getComments();
-
+        $follows = $doctrine->getRepository(Subscriptions::class)->findBy(['User' => $id]);
         $orders = $doctrine->getRepository(Order::class)->findSuccessOrders($this->getUser()); 
         // On récupère l'ancienne donnée
         // $oldUser = new User;
@@ -118,6 +119,7 @@ class ProfilController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
             'comments' => $comment,
+            'follows' => $follows,
             'orders' => $orders,
         ]);
     }

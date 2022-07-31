@@ -159,7 +159,7 @@ h1,
 
 button {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding-top: 0.1vw;
 	padding-bottom: 0.1vw;
 	padding-left: 0.2vw;
@@ -172,13 +172,13 @@ button {
 
     text-decoration: none;
     color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(139, 139, 139);
   }
 
 button:hover {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding-top: 0.1vw;
 	padding-bottom: 0.1vw;
 	padding-left: 0.2vw;
@@ -191,13 +191,13 @@ button:hover {
 
     text-decoration: none;
 	color: rgb(255, 255, 255);
-
+	font:  14px "Georgia", serif;
 	background-color: #d9a300;
   }
 
   button.comment {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding-top: 0.1vw;
 	padding-bottom: 0.1vw;
 	padding-left: 0.2vw;
@@ -210,13 +210,13 @@ button:hover {
 	margin-left: 80%;
     text-decoration: none;
     color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(139, 139, 139);
   }
 
 button.comment:hover {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding-top: 0.1vw;
 	padding-bottom: 0.1vw;
 	padding-left: 0.2vw;
@@ -229,7 +229,7 @@ button.comment:hover {
 	margin-left: 80%;
     text-decoration: none;
 	color: rgb(255, 255, 255);
-
+	font:  14px "Georgia", serif;
 	background-color: #d9a300;
   }
 
@@ -237,7 +237,7 @@ button.comment:hover {
 
 .createButton {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -246,13 +246,13 @@ button.comment:hover {
 
     text-decoration: none;
     color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(15, 125, 0);
   }
 
   .createButton:hover {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -261,13 +261,13 @@ button.comment:hover {
 
     text-decoration: none;
 	color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(18, 215, 15);
   }
 
 .editButton {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -276,13 +276,13 @@ button.comment:hover {
 
     text-decoration: none;
     color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(55, 132, 132);
   }
 
   .editButton:hover {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -291,12 +291,12 @@ button.comment:hover {
 
     text-decoration: none;
 	color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(40, 208, 208);
   }
 
 .deleteButton {
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -305,12 +305,12 @@ button.comment:hover {
 
     text-decoration: none;
     color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(171, 69, 0);
   }
   
   .deleteButton:hover {
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -319,13 +319,13 @@ button.comment:hover {
 
     text-decoration: none;
     color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(255, 60, 0);
   }
 
   .addCartButton {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -334,13 +334,13 @@ button.comment:hover {
 
     text-decoration: none;
     color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(102, 65, 0);
   }
 
   .addCartButton:hover {
 	
-	border: 2px solid #764B36;
+	border: 1px solid #764B36;
 	padding: 0.2vw;
 	
 	-webkit-appearance: button;
@@ -349,7 +349,7 @@ button.comment:hover {
 
     text-decoration: none;
 	color: white;
-
+	font:  14px "Georgia", serif;
 	background-color: rgb(255, 153, 0);
   }
 

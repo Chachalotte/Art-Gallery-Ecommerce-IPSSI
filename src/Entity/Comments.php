@@ -14,7 +14,7 @@ class Comments
     private $id;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    private $message;
+    private $Message;
 
     #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'comments')]
     private $Product;
@@ -29,8 +29,16 @@ class Comments
 
     public function getMessage(): ?string
     {
-        return $this->message;
+        return $this->Message;
     }
+
+    // public function setMessage(string $Message): self
+    // {
+    //     $this->message = $Message;
+
+    //     return $this;
+    // }
+
 
     public function getProduct(): ?Product
     {

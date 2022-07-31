@@ -13,6 +13,78 @@
 	margin: 10px;
 }
 
+
+.profileBoxOrders
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 1px rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-bottom: 6px;
+	border-radius: 1px;
+	width:52% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin: 10px;
+    
+}
+
+
+.profilFlex
+{
+  display: flex;
+}
+
+
+.followsFlexbox
+{
+  display: flex;
+
+  background-color: rgb(255, 255, 255);
+  border:solid 1px rgb(188, 188, 188);
+  margin-left: 2% ; /*centrer les elements avec margin : auto */
+  margin-right: auto;
+  margin-top: 1px;
+  
+  border-radius: 1px;
+  width:90% ;
+  box-shadow :-3px 7px 16px #ced6de;
+  opacity: 1;
+  margin: 10px;
+}
+
+.followsFlexbox:hover
+{
+  display: flex;
+
+  background-color: rgb(179, 252, 255);
+  border:solid 1px rgb(134, 173, 179);
+  margin-left: 2% ; /*centrer les elements avec margin : auto */
+  margin-right: auto;
+  margin-top: 1px;
+  
+  border-radius: 1px;
+  width:90% ;
+  box-shadow :-3px 7px 16px #ced6de;
+  opacity: 1;
+  margin: 10px;
+}
+
+
+.followCard {
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    object-fit: cover;
+
+    font: bold 15px "Georgia", serif;
+  }
+
 .deleteAccountButton {
 	border: 2px solid #764B36;
 	

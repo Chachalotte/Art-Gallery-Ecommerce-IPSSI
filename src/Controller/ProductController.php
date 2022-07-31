@@ -6,9 +6,11 @@ use App\Data\SearchProduct;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\User;
+use App\Entity\Comments;
 use App\Form\UpdateProductType;
 use App\Form\ProductType;
 use App\Form\SearchProductType;
+use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -104,12 +106,32 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}', name: 'product')]
-    public function showProduct(ManagerRegistry $doctrine, $id): Response
+    public function showProduct(Request $request, ManagerRegistry $doctrine, $id): Response
     {
+        $em = $doctrine->getManager();
+        $connectedUser = $this->getUser();
         $product = $doctrine->getRepository(Product::class)->find($id);
-       
+        // $newComment = new Comments();
+
+        // $form = $this->createForm(CommentType::class, $newComment);
+        // $form->handleRequest($request);
+
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $newComment->setProduct($product);
+        //     $newComment->setUser($connectedUser);
+        //     // On le persist et l'enregistre en BDD
+        //     $em->persist($newComment);
+        //     $em->flush();
+        // }
+        //  else {
+        // $this->addFlash('error', 'Problème dans le formulaire');
+        // }
+
+
         return $this->render('product/product.html.twig', [
-            'product' => $product
+            'product' => $product,
+            // 'formComment' => $form->createView()
         ]);
     }
 

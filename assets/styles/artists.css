@@ -5,31 +5,18 @@
 {
     background-color:rgb(240, 235, 223);
 	border:solid 2px  rgb(240, 235, 223);
-	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
     margin-top: 10;
-    
+    display: flex;
 	border-radius: 3px;
-	width:40% ;
+	width:45% ;
 	box-shadow :-3px 7px 16px #ced6de;
-	opacity: 0.85;
+
 	margin-bottom: 20px;
 }
 
-.artistBox:hover
-{
-    background-color: rgb(240, 235, 223);
-	border:solid 2px  #ded8cece;
-	margin-left: 5% ; /*centrer les elements avec margin : auto */
-	margin-right: auto;
-    margin-top: 20;
-    
-	border-radius: 3px;
-	width:40% ;
-	box-shadow :-3px 7px 16px #ced6de;
-	opacity: 1;
-	margin-bottom: 20px;
-}
+
 
 /* =========== Contenu de la box artiste ============*/
 
@@ -38,6 +25,7 @@
 	margin-left: 5% ; /*centrer les elements avec margin : auto */
 	margin-right: 5%;
     margin-top: 5%;
+	width:45%;
 	min-height:135px;
 	font: italic 16px "Georgia", serif;
 }
@@ -54,6 +42,13 @@
 	max-width:100px;
 	height:100%;
 	max-height:100px;
+  }
+
+  .imgMini {
+	width:100%;
+	max-width:40px;
+	height:100%;
+	max-height:40px;
   }
 
 .imgMedium {
@@ -78,7 +73,7 @@
 	margin-left: 2% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
     margin-top: 1px;
-    
+    margin-bottom:auto;
 	border-radius: 1px;
 	width:100%;
 	box-shadow :-3px 7px 16px #ced6de;

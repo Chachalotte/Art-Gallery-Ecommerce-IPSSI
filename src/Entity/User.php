@@ -80,11 +80,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class, orphanRemoval: true)]
     private $orders;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Subscriptions::class, orphanRemoval: true)]
+    private $subscriptions;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->adresses = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->subscription = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,6 +245,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+       /**
+     * @return Collection|Subscriptions[]
+     */
+    public function getSubscriptions(): Collection
+    {
+        return $this->subscriptions;
+    }
+
+    public function addSubscriptions(Comments $subscriptions): self
+    {
+        if (!$this->subscriptions->contains($subscriptions)) {
+            $this->subscriptions[] = $subscriptions;
+            $subscriptions->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscriptions(Comments $subscriptions): self
+    {
+        if ($this->subscriptions->removeElement($subscriptions)) {
+            // set the owning side to null (unless already changed)
+            if ($subscriptions->getUser() === $this) {
+                $subscriptions->setUser(null);
             }
         }
 

@@ -10,17 +10,18 @@
 <aside>
     <div class="products">
         <div class="productBox">
-            <h1>{{product.name | capitalize}}</h1>
-            <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
-            <div>
-                {% if product.artist == app.user %}
-                    {% include 'product/editProductButtons.html.twig' %}
-                {% endif %}
-            </div>
-            <p>{{ product.description | capitalize }}</p>
-            <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>
-            <div class="filters">
-            </div>
+            <center>
+                <h1>{{product.name | capitalize}}</h1>
+                <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+                <div>
+                    {% if product.artist == app.user %}
+                        {% include 'product/editProductButtons.html.twig' %}
+                    {% endif %}
+                </div>
+                <p>{{ product.description | capitalize }}</p>
+                <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>
+
+            </center>
         </div>
     </div>
   </aside>
@@ -38,7 +39,7 @@
                     </div>
                     <div class="action">
                         <h2>Détails techniques du produit</h2> 
-                        <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a>
+                        <p>Catégorie : <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a></p>  
                         <p>Dimensions: 120x170 cm</p>             
                     </div>
                 </div>
@@ -55,7 +56,8 @@
                 <div class="allComments">
                 
                     <div class="commentBox">
-                        
+                        {# {{ form_start(formComment)}}
+                        {{ form_end(formComment)}} #}
                         <h2 class="secondaryTitle">Laissez un commentaire</h2>
                         <div class="formField">
                             <input placeholder="Votre commentaire..." type="textarea" />
