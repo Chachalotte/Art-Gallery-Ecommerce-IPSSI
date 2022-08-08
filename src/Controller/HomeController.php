@@ -28,10 +28,23 @@ class HomeController extends AbstractController
         // $artists = $doctrine->getRepository(User::class)->findBy(["roles" => ["ROLE_ARTIST"]], [], null, null);
         $productsToSell = $doctrine->getRepository(Product::class)->findBy(['isSold' => false]); 
         $productsSold = $doctrine->getRepository(Product::class)->findBy(['isSold' => true]);
-                
+
+        $artistArray = array();
+
+        foreach ($user as $userInst) {
+            //Récupération id de l'artiste
+            $userId = $userInst->getId(); 
+            $userRoles = $userInst->getRoles(); 
+
+            if(in_array('ROLE_ARTIST', $userRoles))
+            {
+                $artistArray[$userId] = $userInst;
+            }
+        }
+
         return $this->render('home/index.html.twig', [
             // 'artists' => $artists,
-            'artists' => $user,
+            'artists' => $artistArray,
             'products' => $productsToSell,
             'solds' => $productsSold,
         ]);

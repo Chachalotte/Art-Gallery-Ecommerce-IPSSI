@@ -69,23 +69,155 @@ h1,
 
 }
 
+
+.productBoxBig
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+	
+	border-radius: 1px;
+	width:40vw;
+	max-height:500px;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin-bottom: 10px;
+
+}
+
+.productFullSection
+{
+	font: italic 18px "Georgia", serif;
+	border:solid 2px  rgb(219, 207, 179);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+	padding-left: 4vw;
+	padding-right: 4vw;
+	border-radius: 1px;
+	width:36vw;
+	height:40vw;
+	max-height:600px;
+	opacity: 1;
+	margin-bottom: 10px;
+
+}
+
+.nameTitle
+{
+	margin-top: 25px;
+	margin-bottom: 5px;
+	font: italic Bold 32px "Georgia", serif;
+}
+.nameSecondaryTitle
+{
+	margin-top: 5px;
+	font: italic 24px "Georgia", serif;
+}
+
+/* =========== Commentaires ============*/
+
+
 .commentBox
 {
 	
-  background-color: #ffffff;
-	border:solid 2px  #ded8cece;
+  background-color: #e4e4e4;
+	border:solid 1px  #ffffffce;
 	margin-left: 5% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
-  margin-top: 2;
-    
+  	margin-top: 20px;
+	margin-bottom: 50px;
+	padding-bottom: 20px;
+    display:grid;
 	border-radius: 3px;
-	width:20% ;
+	width:44vw;
 	box-shadow :-3px 7px 16px #ced6de;
 	opacity: 0.85;
 	color: rgb(0, 0, 0);
 	font: italic 16px "Georgia", serif;
 }
 
+.commentFlexBox
+{
+	
+    background-color:#e4e4e4;
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 10;
+	padding:5px;
+    display: flex;
+	border-radius: 3px;
+	width:45%;
+	box-shadow :-3px 7px 16px #ced6de;
+
+	margin-bottom: 20px;
+}
+
+.commentFormBox
+{
+	
+  background-color: #e4e4e4;
+	border:solid 1px  #ffffffce;
+	margin-left: 30%; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+  	margin-top: 20px;
+	margin-bottom: 50px;
+	padding-bottom: 20px;
+    display:grid;
+	border-radius: 3px;
+	width:34vw;
+	box-shadow :-3px 7px 16px #ced6de;
+	margin-left: 35%;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+.commentCard
+{
+	
+  	background-color: #ffffff;
+	border:solid 2px  #ffffffce;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+  	margin-top: 2;
+	margin-top: 2px;
+	padding-left: 5px;
+    
+	border-radius: 1px;
+	width:90% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+.commentVoidCard
+{
+	
+  	
+	
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+	margin-top: 2px;
+	padding-left: 5px;
+	border-radius: 1px;
+	width:90% ;
+	
+	opacity: 0.85;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+.commentTitle {
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    object-fit: cover;
+    font: 15px "Georgia", serif;
+  }
 
 .product
 {
@@ -142,17 +274,22 @@ h1,
 {
     background-color: rgb(240, 235, 223);
 	border:solid 2px  rgb(240, 235, 223);
-	margin-left: 15%; /*centrer les elements avec margin : auto */
+	margin-left: 35%; /*centrer les elements avec margin : auto */
 	margin-right: auto;
     margin-top: 20;
-	padding-left: 5px;
+	padding-left: 10px;
 	border-radius: 1px;
 	width:25vw ;
 	max-height:300px ;
 	box-shadow :-3px 7px 16px #ced6de;
 	opacity: 1;
 	margin-bottom: 10px;
+	font: 16px "Georgia", serif;
+}
 
+.indication{
+	font: bold 16px "Georgia", serif;
+	color: rgb(168, 84, 0);
 }
 
 /* =========== Boutons ============*/
@@ -234,6 +371,72 @@ button.comment:hover {
   }
 
 
+  .commentButton {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	margin-top: 1%;
+	
+	/* margin-left: 5%; */
+	width: 150px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(75, 94, 100);
+  }
+
+  .commentButton:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(0, 154, 209);
+  }
+
+
+  .cancelButton {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	margin-top: 1%;
+	margin-bottom: 10px;
+	margin-left: 5%; 
+	width: 60px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(163, 86, 86);
+  }
+
+  .cancelButton:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(217, 0, 0);
+  }
 
 .createButton {
 	

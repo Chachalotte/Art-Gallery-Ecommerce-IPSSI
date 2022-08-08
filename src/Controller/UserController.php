@@ -83,10 +83,30 @@ class UserController extends AbstractController
 
         //Récupération utilisateur connecté
         $connectedUser = $this->getUser();
-        $idConnected = $connectedUser->getId();
+        
+        if ($connectedUser){
+            $idConnected = $connectedUser->getId();
+        }
+        else{
+            $idConnected = 0;
+        }
 
 
-        foreach ($artists as $artistsInst) {
+        $artistArray = array();
+
+        foreach ($artists as $userInst) {
+            //Récupération id de l'artiste
+            $userId = $userInst->getId(); 
+            $userRoles = $userInst->getRoles(); 
+
+            if(in_array('ROLE_ARTIST', $userRoles))
+            {
+                $artistArray[$userId] = $userInst;
+            }
+        }
+
+
+        foreach ($artistArray as $artistsInst) {
             //Récupération id de l'artiste
             $artistId = $artistsInst->getId(); 
 
@@ -112,7 +132,7 @@ class UserController extends AbstractController
 
 
         return $this->render('users/artist/artistList.html.twig', [
-            'artists' => $artists,
+            'artists' => $artistArray,
             'followers' => $followerCountArray,
             'isFollowed' => $IsFollowedArray
         ]);
@@ -129,7 +149,12 @@ class UserController extends AbstractController
         $request = Request::createFromGlobals();
 
         $connectedUser = $this->getUser();
-        $idConnected = $connectedUser->getId();
+        if ($connectedUser){
+            $idConnected = $connectedUser->getId();
+        }
+        else{
+            $idConnected = 0;
+        }
 
         $subscriptionsFound = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id, 'User' => $idConnected]);
         $subscribers = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id]);
@@ -243,50 +268,6 @@ class UserController extends AbstractController
     }
 
 
-    //=============================================
-    //          Page Liste des abonnements
-    //=============================================
-    #[Route('/artistsfollowed', name: 'FollowedArtistsList')]
-    public function indexFollowed(ManagerRegistry $doctrine): Response
-    {
-
-        //Récupération utilisateur connecté
-        $connectedUser = $this->getUser();
-        $idConnected = $connectedUser->getId();
-
-        $follows = $doctrine->getRepository(Subscriptions::class)->findBy(['User' => $idConnected]);
-
-        foreach ($follows as $artistsInst) {
-            //Récupération id de l'artiste
-            $artistId = $artistsInst->getId(); 
-
-            //Récupération nombre d'abonnés de l'artiste
-            $subscribers = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $artistId]); //
-            $subscribersCount = count($subscribers);
-            $followerCountArray[$artistId] = $subscribersCount;
-
-            //Récupération de si l'utilisateur connecté est abonné à cet artiste ou non
-            $subscriptionsFound = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $artistId, 'User' => $idConnected]);
-
-            $subscribedCount = count($subscriptionsFound);
-            if ($subscribedCount > 0){
-                $IsFollowedArray[$artistId] = true;
-            }
-            else{
-                $IsFollowedArray[$artistId] = false;
-            }
-            
-
-        }
-
-
-
-        return $this->render('users/profil/subscriptions.twig', [
-            'artists' => $follows,
-            'followers' => $followerCountArray,
-            'isFollowed' => $IsFollowedArray
-        ]);
-    }
 
 
 }
