@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="L'email que vous avez renseigné existe déjà.")
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -54,10 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // #[ORM\Column(type: 'datetime', nullable: true)]
     // private $age;
 
-    #[ORM\ManyToOne(targetEntity: Ordered::class, inversedBy: 'User')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $ordered;
-
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Comments::class)]
     #[ORM\JoinColumn(nullable: true)]
     private $comments;
@@ -84,11 +80,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class, orphanRemoval: true)]
     private $orders;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Subscriptions::class, orphanRemoval: true)]
+    private $subscriptions;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->adresses = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->subscription = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,18 +221,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //     return $this;
     // }
 
-    public function getOrdered(): ?Ordered
-    {
-        return $this->ordered;
-    }
-
-    public function setOrdered(?Ordered $ordered): self
-    {
-        $this->ordered = $ordered;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Comments[]
      */
@@ -257,6 +245,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+       /**
+     * @return Collection|Subscriptions[]
+     */
+    public function getSubscriptions(): Collection
+    {
+        return $this->subscriptions;
+    }
+
+    public function addSubscriptions(Comments $subscriptions): self
+    {
+        if (!$this->subscriptions->contains($subscriptions)) {
+            $this->subscriptions[] = $subscriptions;
+            $subscriptions->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscriptions(Comments $subscriptions): self
+    {
+        if ($this->subscriptions->removeElement($subscriptions)) {
+            // set the owning side to null (unless already changed)
+            if ($subscriptions->getUser() === $this) {
+                $subscriptions->setUser(null);
             }
         }
 

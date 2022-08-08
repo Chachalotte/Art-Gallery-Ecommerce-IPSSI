@@ -30,10 +30,6 @@ class Product
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $color;
 
-    #[ORM\ManyToOne(targetEntity: OrderItem::class, inversedBy: 'prodId')]
-    #[ORM\JoinColumn(nullable: true)]
-    private $orderItem;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'Product')]
     private $artist;
 
@@ -44,6 +40,9 @@ class Product
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isSold;
 
     public function __construct()
     {
@@ -115,18 +114,6 @@ class Product
         return $this;
     }
 
-    public function getOrderItem(): ?OrderItem
-    {
-        return $this->orderItem;
-    }
-
-    public function setOrderItem(?OrderItem $orderItem): self
-    {
-        $this->orderItem = $orderItem;
-
-        return $this;
-    }
-
     public function getArtist(): ?User
     {
         return $this->artist;
@@ -185,5 +172,17 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function isSold(): ?bool
+    {
+        return $this->isSold;
+    }
+
+    public function setIsSold(bool $isSold): self
+    {
+        $this->isSold = $isSold;
+
+        return $this;
     }
 }

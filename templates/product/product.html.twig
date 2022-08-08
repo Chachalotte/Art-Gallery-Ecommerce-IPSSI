@@ -4,86 +4,111 @@
 
 {% block content %}
 
-<link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
 
 <div class="spacingSmall"></div>
-<div class="products">
-    <div class="productBox">
-        <h1>{{product.name | capitalize}}</h1>
-        <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
-        <p>{{ product.description | capitalize }}</p>
-        <img src="{{ asset('img/product/' ~ product.img) }}"/>
-        <div class="filters">
+<section  class="presentation">
+<aside>
+    <div class="products">
+        <div class="productFullSection">
+            
+                <p class="nameTitle">
+                    {{product.name | capitalize}}    
+                    {% if product.artist == app.user %}
+                            {% include 'product/editProductButtons.html.twig' %}
+                    {% endif %}
+                
+                <p class="nameSecondaryTitle">Par <u><a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a></u></p></p>
+                
+         
+                
+                <p>{{ product.description | capitalize }}</p>
+                
+                <img class="imgProduct" src="{{ asset('img/product/' ~ product.img) }}"/>
+
+            
         </div>
     </div>
- </div>
+  </aside>
+    {# <div class="spacingSmall"></div> #}
     
-    <section >
+    
 
+            
+            
+                <div class="SaleInfoBox">
+                    <h2 class="secondaryTitle">Mise en vente</h2> 
+                    {% if product.isSold != true %}               
+                        <p class="priceTag">Prix: {{ product.price | capitalize }} €</p>
+                    {% endif %} 
 
-        
-
-        <aside class="descriptionComplementary">
-
-            {% if product.artist != app.user %}
-
-                <div class="productBox">
-                    <h2 class="rubriqueTitle">Mise en vente</h2>                
-                    <p>Prix: {{ product.price | capitalize }} €</p>
                     <div class="action">
-                        <a href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>
-                        <button>Ajouter au panier</button>                
-                        <button>Voir les détails d'achat</button>
+                    {% if product.artist != app.user %}
+                        {% if product.isSold != true %}
+                            <a class="addCartButton" href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>  
+                        {% else %}
+                            <p class="indication">Ce produit n'est actuellement pas en vente.</p>
+                        {% endif %}  
+                    {% else %}
+                        <p class="indication">Il s'agit de l'un de vos produits.</p>
+                    {% endif %}           
                     </div>
                     <div class="action">
-                        <h3>Détails techniques du produit</h3> 
-                        <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a>
+                        <h2 class="secondaryTitle">Détails techniques du produit</h2> 
+                        <p>Catégorie : <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a></p>  
                         <p>Dimensions: 120x170 cm</p>             
                     </div>
                 </div>
-
-                {% else %}
-
-                    <div class="productBox">
-                        <h2 class="rubriqueTitle">Modifier le produit</h2>                
-                        <p>Prix: {{ product.price | capitalize }} €</p>
-
-                    </div>
-
-                {% endif %}
+              
                 
-        </aside>
-                
-                <div class="spacingSmall"></div>
+              
+</section>    
 
-                <div class="allComments">
-                
-                    <div class="productBox">
-                        <h2 class="rubriqueTitle">Commentaires</h2>
-                        <h2>Laissez votre commentaire</h2>
-                        <input type="textarea" />
-                        <div class="actionCom">
-                            <p>⭐⭐⭐</p>
-                            <button>Envoyer</button>
-                    </div> 
+   <div class="spacingBig"></div>
+            
+<section >                 
+         
 
-                    <div class="spacingSmall"></div>
-
-                    <h2>Tous les commentaires</h2>
-
-                    {% for comment in product.comments %}
-                        <div class="comment">
-                            <div>
-                                <h4>De {{comment.user}}</h4>
-                                <p>⭐</p>
+                    <div class="commentBox">
+                    <h2 class="rubriqueTitle">Commentaires</h2>
+                    {% if (app.request.get('_route') == 'productComments') or (app.request.get('_route') == 'editComments') %}
+                        <a class="cancelButton" href="{{path('product', {'id': product.id} ) }}">< Retour</a>
+                        <h2>Laisser un commentaire</h2>
+                        
+                                {{ form_start(formComment)}} 
+                            <div class="formField">
+                                
+                                    {{ form_label(formComment.Message) }}
+                                    {{ form_errors(formComment.Message) }}
+                                    {{ form_help(formComment.Message) }}
+                                    {{ form_widget(formComment.Message) }}
+                                {{ form_end(formComment)}}
+                                
                             </div>
-                            <p>{{comment}}</p>             
+                    {% else %}
+                    
+                         <center><a class="commentButton" href="{{path('productComments', {'id': product.id} ) }}">Laisser un commentaire</a>  </center> 
+                    
+                    {% endif %}
+                        
+                        <div class="spacingSmallMargin">
+                        
                         </div>
-                    {% endfor %}
+                        {% for comment in comments %}
+                            <div class="commentCard">
+                                    <p>
+                                        De <b><a href="{{path('artistPage', {'id': comment.user.id} ) }}">{{ comment.user.firstname }} {{ comment.user.name }}</a></b>
+                                        {% if comment.user ==  app.user and (app.request.get('_route') == 'product') %} 
+                                            <a class="editButton" href="{{path('editComments', {'id': product.id, 'idCom': comment.id} ) }}">Editer</a>
+                                            <a class="deleteButton" href="{{path('deleteComments', {'idCom': comment.id} ) }}">Supprimer</a> 
+                                        {% endif %}
+                                    </p>
+                                <p>{{comment.message}}</p>             
+                            </div>
+                        {% endfor %}
                     </div>
-                    </div>
+</section> 
+                
        
-    </section>
 
     <section >
     <h2 class="rubriqueTitle">Vous aimerez aussi ...</h2>
@@ -120,7 +145,15 @@
             </div>
         </div>
     {#% endfor %#}
+
+
+
+
+    
 </section>
+
+
+
 {% endblock %}
 
 {% block javascripts %}

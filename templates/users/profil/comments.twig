@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block title %}{{parent()}} - Artistes {% endblock %}
+
+
+
+{% block content %}
+
+<h2 class="rubriqueTitle">Mes commentaires</h2>
+{% if app.user and is_granted('ROLE_ARTIST') == false %}
+<a class="createButton" href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
+{% endif %}
+<section class="artistList">
+    {% for comment in comments %}
+        <div class="commentFlexBox">
+            
+                {% if comment.product.img %}
+                    <img class="imgSmall" src="{{ asset('img/product/' ~ comment.product.img) }}"/>
+                {% endif %}
+
+            <div class="commentVoidCard">    
+                
+                <h3 class="commentTitle">
+                    <a href="{{ path('product', {'id': comment.Product.id}) }}"><b><i>{{comment.Product.name}}</b></i> </a>
+                    de <a href="{{ path('artistPage', {'id': comment.Product.Artist.id}) }}"><b>{{comment.Product.Artist.firstname}} {{comment.Product.Artist.name}}</b></a>
+                
+                    <a class="editButton" href="{{path('editComments', {'id': comment.product.id, 'idCom': comment.id} ) }}">Editer</a>
+                    <a class="deleteButton" href="{{path('deleteComments', {'idCom': comment.id} ) }}">Supprimer</a> 
+                
+                </h3>
+
+                <p>{{comment.Message}}</p>    
+            
+            </div>
+            
+        </div>
+        
+    {% else %}
+
+    <p>Vous n'avez aucun abonnement.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

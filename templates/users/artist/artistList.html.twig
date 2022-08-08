@@ -6,34 +6,43 @@
 
 
 {% block content %}
-<link href="{{ asset('styles/artists.css') }}" type="text/css" rel="stylesheet" />
 
 <h2 class="rubriqueTitle">Liste des artistes</h2>
-{% if app.user %}
-<a href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
+{% if app.user and is_granted('ROLE_ARTIST') == false %}
+<a class="createButton" href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
 {% endif %}
 <section class="artistList">
     {% for artist in artists %}
         <div class="artistBox">
-            <div class="artistCard">
-            {% if artist.avatar %}
-                <img src="{{ asset('img/user/' ~ artist.avatar) }}"/>
-            {% else %}
-                {% if artist.gender == "homme" %}
-                    <img src="{{ asset('img/user/man.png') }}"/>
+            
+                {% if artist.avatar %}
+                    <img class="imgMedium" src="{{ asset('img/user/' ~ artist.avatar) }}"/>
                 {% else %}
-                    <img src="{{ asset('img/user/woman.png') }}"/>
+                    {% if artist.gender == "homme" %}
+                        <img class="imgMedium" src="{{ asset('img/user/man.png') }}"/>
+                    {% else %}
+                        <img class="imgMedium" src="{{ asset('img/user/woman.png') }}"/>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-            <a href="{{ path('artistPage', {'id':artist.id}) }}">
-                <h3>{{artist.firstname}} {{artist.name}}</h3> 
-                
-            </a> 
-                    <button name="Abonnement">S'abonner</button> </br>
-                
 
-                <p>{{artist.description}}</p>
+            <div class="artistCard">    
+                <a href="{{ path('artistPage', {'id':artist.id}) }}">
+                    <h3>{{artist.firstname}} {{artist.name}}</h3> 
                 
+                </a> 
+                {% set artistId = artist.id %}
+                <div><p>
+                {% if isFollowed[artistId] %}  
+                <a class="unfollowButton" href="{{path('unfollow', {'id': artist.id}) }}">⭐ Ne plus suivre</a>
+                {% else %}
+                <a class="followButton" href="{{path('follow', {'id': artist.id}) }}">⭐ Suivre</a>
+                {% endif %}
+                {{followers[artistId] }} Abonné{% if followers[artistId] != 1 %}s{% endif %}</p>
+            </div>
+                <p>{{artist.description | capitalize | slice(0, 150)}}
+                {% if artist.description|length > 150 %}
+                ...
+                {% endif %}</p>
             </div>
             
         </div>

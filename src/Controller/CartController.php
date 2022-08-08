@@ -35,7 +35,6 @@ class CartController extends AbstractController
             ];
             $total += $product->getPrice() * $quantity;
         }
-        dump($session->get("cart"));
 
         return $this->render('cart/index.html.twig', compact("dataCart", "total"));
     }
@@ -43,7 +42,7 @@ class CartController extends AbstractController
     #[Route('/add/{id}', name: 'add')]
     public function add(Product $product, SessionInterface $session): Response
     {
-        if(!$this->getUser()){
+        if(!$this->getUser() || $product->isSold()){
             return $this->redirectToRoute('login');
         }
 
@@ -132,7 +131,6 @@ class CartController extends AbstractController
             $product = $mr->getRepository(Product::class)->find($productId);
             $product->addOrderItem($orderItems->getId());
             $orderItems->addProdId($productId);
-            dump($product);
         }
 
         $em->persist($orderItems);

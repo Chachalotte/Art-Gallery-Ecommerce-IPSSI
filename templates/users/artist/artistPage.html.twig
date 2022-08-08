@@ -3,22 +3,28 @@
 {% block title %}{{parent()}} - Artiste - {{user.name}} {{user.firstName}}{% endblock %}
 
 {% block content %}
-<link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
+
 <section class="presentation">
-    <aside>
-        <div class="follow">
-           <p> <button>⭐ Suivre</button> X Abonnés</p>
-        </div>
-        
+    <aside>   
         <div class="profileBox">   
             <div class="profileCard"> 
+
+            <div class="follow"><p>
+            {% if subscription %}  
+            <a class="unfollowButton" href="{{path('unfollow', {'id': user.id}) }}">⭐ Ne plus suivre</a>
+            {% else %}
+            <a class="followButton" href="{{path('follow', {'id': user.id}) }}">⭐ Suivre</a>
+            {% endif %}
+              {{nbSubscribers}} Abonné{% if nbSubscribers != 1 %}s{% endif %}</p>
+            </div>
+
                 {% if user.avatar %}
-                    <img src="{{ asset('img/user/' ~ user.avatar) }}"/>
+                    <center><img class="imgMedium" src="{{ asset('img/user/' ~ user.avatar) }}"/></center>
                 {% else %}
                     {% if user.gender == "homme" %}
-                        <img src="{{ asset('img/user/man.png') }}"/>
+                        <img class="imgMedium" src="{{ asset('img/user/man.png') }}"/>
                     {% else %}
-                        <img src="{{ asset('img/user/woman.png') }}"/>
+                        <img class="imgMedium" src="{{ asset('img/user/woman.png') }}"/>
                     {% endif %}
                 {% endif %}
                     <div>
@@ -27,43 +33,50 @@
                     </div>
             
                 {% if user.description %}
-                    <p>{{user.description}}</p>
+                    <p>
+                        {{user.description | capitalize | slice(0, 150)}}
+                        {% if user.description | length > 150 %}
+                            ...
+                        {% endif %}
+                    </p>
                 {% else %}
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p>(Aucune description)</p>
                 {% endif %}
             </div>
         </div>
     </aside>
 
-    <div class="spacingSmall"></div>
-
-    <h2 class="rubriqueTitle">Oeuvres</h2>
-
+    
     <div class="products">
         {% for product in user.product %}
             <div class="productBox">
-                <div>
+                
                     <h2>
                         <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
                         <span><a href="{{path('category', {'id': product.category.id} ) }}">({{ product.category.name }})</a></span>
                     </h2>
+                    <center>
+                        {% if app.user and user.id == app.user.id %}
+                            {% include 'product/editProductButtons.html.twig' %}
+                        {% endif %}
+                        <p>{{ product.description | capitalize | slice(0, 150)}}</p>
 
-                    {% if user.id == app.user.id %}
-                    <a href="{{path('product_edit', {'id': product.id} )}}">Modifier</a> 
-                    {# {{ form_start(form)}}#}
-                    
-                     <a href="{{path('product_delete', {'id': product.id} )}}">Supprimer</a>
-                    {# {{ form_end(form)}}#}
-                    {% endif %}
-                    <p>{{ product.description | capitalize | slice(0, 150)}}</p>
-                </div>   
-                <img src="{{ asset('img/product/' ~ product.img) }}"/>  
+                        <div>
+                            <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>  
+                            {% if product.isSold %}
+                                <img class="sold" alt="Vendu icônes créées par Alfredo Hernandez - Flaticon" title="Oeuvre vendue" src="{{ asset('img/vendu.png')}}">
+                            {% else %}
+                                <p class="price">{{ product.price}}€</p>
+                            {% endif %}
+                        </div>
+                        
+                    </center>
             </div>
             <div class="spacingRow"></div>
         {% endfor %}
     </div>
 </section>
-<section>
+<section >
     <h2>Vous aimerez aussi ...</h2>
     {#% for  | reverse | slice(0, 3) %#}
         <div class="otherArtists">

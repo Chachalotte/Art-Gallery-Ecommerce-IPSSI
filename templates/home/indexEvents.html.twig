@@ -3,7 +3,7 @@
 {% block title %}{{parent()}} - Evènements{% endblock %}
 
 {% block content %}
-    <h1>Evènements</h1>
+    <h1 class="rubriqueTitle">Evènements</h1>
     <div class="filters">
     </div>
 
@@ -13,10 +13,10 @@
         <div class="eventCard">
             <img src="{{ asset('img/event/' ~ event.picture) }}"/> 
             <div>
-                <h2>{{ event.title | capitalize }}</h2>  
-                <p>Date de début: {{event.dateStart |date("m/d/Y") }}</p>   
-                <p>Date de fin: {{event.dateEnd |date("m/d/Y") }}</p>           
-                <p>{{ event.article | capitalize | slice(0, 50)}}</p>
+                <h2 class="secondaryTitle">{{ event.title | capitalize }}</h2>  
+                <p><b>Date de début: </b>{{event.dateStart |date("m/d/Y") }}</p>   
+                <p><b>Date de fin: </b>{{event.dateEnd |date("m/d/Y") }}</p>           
+                <p>{{ event.article | capitalize | slice(0, 150)}}</p>
             </div>     
         </div>
     {% else %}

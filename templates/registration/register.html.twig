@@ -3,26 +3,59 @@
 {% block title %}{{parent()}} - Register{% endblock %}
 
 {% block connection %}
-    {% for flashError in app.flashes('verify_email_error') %}
+   <h1 class="rubriqueTitle">S'inscrire</h1>
+<div class="formContent">
+    {% for flashError in app.session.flashBag.get('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
+
     <h1>Register</h1>
 
+    {% if notification %}
+        <div>{{ notification }}</div>
+    {% endif %}
+    
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.firstname) }}
+        <div class="formField">
+            {{ form_label(registrationForm.email) }}
+            {{ form_errors(registrationForm.email) }}
+            {{ form_help(registrationForm.email) }}
+            {{ form_widget(registrationForm.email) }}
+        </div>
 
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+        <div class="formField">
+            {{ form_label(registrationForm.name) }}
+            {{ form_errors(registrationForm.name) }}
+            {{ form_help(registrationForm.name) }}
+            {{ form_widget(registrationForm.name) }}
+        </div>
 
-        <button type="submit" class="btn">Register</button>
+         <div class="formField">
+            {{ form_label(registrationForm.firstname) }}
+            {{ form_errors(registrationForm.firstname) }}
+            {{ form_help(registrationForm.firstname) }}
+            {{ form_widget(registrationForm.firstname) }}
+        </div>
+
+         <div class="formField">
+            {{ form_label(registrationForm.plainPassword) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+            {{ form_help(registrationForm.plainPassword) }}
+            {{ form_widget(registrationForm.plainPassword) }}
+        </div>
+
+        <div class="formField">
+        <button type="submit" class="btn">S'inscrire</button>
+        </div>  
+        
+        
     {{ form_end(registrationForm) }}
     <div class="noAccount">
         <p>Vous avez un compte ?</p>
         <a href="{{ path('login') }}">Se connecter</a>
+        
     </div>
-
+    
+</div>
 {% endblock %}

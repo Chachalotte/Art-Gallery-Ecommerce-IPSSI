@@ -6,7 +6,7 @@ section.artistList {
 }
 
 div.artistCard img {
-  width: 100%;
+  width: 30%;
   height: 15vw;
   object-fit: cover;
 }

@@ -5,7 +5,7 @@ namespace App\Controller;
 //Entitées
 use App\Entity\User;
 use App\Entity\Product;
-
+use App\Entity\Subscriptions;
 //Managers
 use App\Entity\Comments;
 use App\Form\ProfilType;
@@ -22,140 +22,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    //=============================================
-    //          Page de profil de l'utilisateur
-    //=============================================
-    #[Route('/profile', name: 'userProfile')]
-    public function OwnProfile(ManagerRegistry $doctrine): Response
-    {
-        $artists = $doctrine->getRepository(User::class);
-        $comments = $doctrine->getRepository(Comments::class);
-
-        $user = $this->getUser();
-
-        //$userID = $this->getId();
-
-        // $comment = $user->getComments();
-
-        //$artistList = $artists->findAll();
-
-        //$userComments = $comments->findUserComments($userID);
-        //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
-
-
-        return $this->render('users/users.html.twig', [
-            'user' => $user,
-            // 'comments' => $comment
-        ]);
-    }
-
-    //=============================================
-    //          Page de profil de l'utilisateur
-    //=============================================
-    #[Route('/profil/{id<\d+>}', name: 'app_profil')]
-    public function Profil(ManagerRegistry $doctrine,  Request $request, UserPasswordHasherInterface $userPasswordHasher, $id)
-    {
-        $em = $doctrine->getManager();
-
-        $user = $em->getRepository(User::class)->find($id);
-        if ($this->getUser() != $user) {
-            return $this->createAccessDeniedException();
-        }
-        dump($user);
-
-        $comment = $user->getComments();
-
-        // On récupère l'ancienne donnée
-        // $oldUser = new User;
-        // $oldUser->setEmail($user->getEmail());
-        // $oldUser->setFirstname($user->getFirstname());
-        // $oldUser->setName($user->getName());
-        // $oldUser->getGender() ? $oldUser->setGender($user->getGender()) : null;
-        // $oldUser->getAge() ? $oldUser->setAge($user->getAge()) : null;
-        // $oldUser->setPassword($user->getPassword());
-        // $oldUser->getAvatar() ? $oldUser->setAvatar($user->getAvatar()) : null;
-
-        // $oldUser->setDescription($user->getDescription());
-
-        // $email = new Email($user->getEmail());
-        // $user->setEmail($email);
-
-        $form = $this->createForm(ProfilType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('plainEmail')->getData() !== null) {
-                $user->setEmail($form['plainEmail']->getData());
-            } else {
-                $user->setEmail($oldUser->getEmail());
-            }
-
-            if ($form->get('firstname')->getData() !== null) {
-                $user->setFirstname($form['firstname']->getData());
-            } else {
-                $user->setFirstname($oldUser->getFirstname());
-            }
-
-            if ($form->get('name')->getData() !== null) {
-                $user->setName($form['name']->getData());
-            } else {
-                $user->setName($oldUser->getName());
-            }
-
-            if ($form->get('gender')->getData() !== null) {
-                $user->setGender($form['gender']->getData());
-            } else {
-                if ($oldUser->getGender() !== null) {
-                    $user->setGender($oldUser->getGender());
-                } else {
-                    $user->setGender(null);
-                }
-            }
-
-            if ($form->get('age')->getData() !== null) {
-                $user->setAge($form['age']->getData());
-            } else {
-                $user->setAge($oldUser->getAge());
-            }
-
-            if ($form->get('plainPassword')->getData() !== null) {
-                $user->setPassword(
-                    $userPasswordHasher->hashPassword($user, $form['plainPassword']->getData())
-                );
-            } else {
-                $user->setPassword($oldUser->getPassword());
-            }
-
-            if ($form->get('avatar')->getData() !== null) {
-                $avatar = $form->get('avatar')->getData();
-                $avatarName = md5(uniqid()) . '.' . $avatar->guessExtension();
-
-                $avatar->move(
-                    $this->getParameter('upload_file_user'),
-                    $avatarName
-                );
-                $user->setAvatar($avatarName);
-            } else {
-                // $user->setAvatar($oldUser->getAvatar());
-            }
-
-            
-            $em->persist($user);
-            $em->flush();
-
-            $this->addFlash("success", "Le profil a bien été modifié");
-
-            return $this->redirectToRoute("app_profil", ['id' => $user->getId()]);
-        }
-
-        return $this->render('users/profil.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-            'comments' => $comment
-        ]);
-    }
-
     // //=============================================
     // //          Edition page de profil de l'utilisateur
     // //=============================================
@@ -207,74 +73,68 @@ class UserController extends AbstractController
     // }
 
     //=============================================
-    //          Page de profil d'un utilisateur
-    //=============================================
-    #[Route('/profile/{id}', name: 'userProfileID')]
-    public function profileSelect(ManagerRegistry $doctrine, int $id, Request $request): Response
-    {
-        $users = $doctrine->getRepository(User::class);
-        $comments = $doctrine->getRepository(Comments::class);
-
-        $user = $doctrine->getRepository(User::class)->find($id);
-
-        //$userID = $this->getId();
-
-        $comment = $user->getComments();
-
-
-
-        //$userComments = $comments->findUserComments($userID);
-        //$userEmail = $doctrine->getRepository(User::class)->find($user->getEmail());
-
-
-
-        return $this->render('users/users.html.twig', [
-            'user' => $user,
-            //'form' => $form->createView(),
-            'comments' => $comment
-            
-        ]);
-    }
-
-
-    //=============================================
-    //        Page d'un artiste (selon ID)
-    //=============================================
-    #[Route('/artist/{id}', name: 'artist')]
-    public function ArtistSelect(ManagerRegistry $doctrine, int $id, Request $request): Response
-    {
-
-        //Lister un artiste spécifiquement par son id
-        $artists = $doctrine->getRepository(User::class);
-        $artist = $artists->findArtist($id);
-        $URL = $request->getRequestUri();
-
-
-
-        return $this->render('artists/artist.html.twig', [
-            'controller_name' => 'ArtistController',
-            'artist' => $artist,
-            'URL' => $URL
-        ]);
-    }
-
-    //=============================================
     //          Page Liste des artistes
     //=============================================
     #[Route('/artists', name: 'artistList')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        // $artists = $doctrine->getRepository(User::class)->findBy(
-        //     ['roles' => '["ROLE_ARTIST"]'],
-        //     ['id' => 'DESC']
-        // );
+
         $artists = $doctrine->getRepository(User::class)->findAll();
 
-        // $artistList = $artists->findAllArtists();
+        //Récupération utilisateur connecté
+        $connectedUser = $this->getUser();
+        
+        if ($connectedUser){
+            $idConnected = $connectedUser->getId();
+        }
+        else{
+            $idConnected = 0;
+        }
+
+
+        $artistArray = array();
+
+        foreach ($artists as $userInst) {
+            //Récupération id de l'artiste
+            $userId = $userInst->getId(); 
+            $userRoles = $userInst->getRoles(); 
+
+            if(in_array('ROLE_ARTIST', $userRoles))
+            {
+                $artistArray[$userId] = $userInst;
+            }
+        }
+
+
+        foreach ($artistArray as $artistsInst) {
+            //Récupération id de l'artiste
+            $artistId = $artistsInst->getId(); 
+
+            //Récupération nombre d'abonnés de l'artiste
+            $subscribers = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $artistId]); //
+            $subscribersCount = count($subscribers);
+            $followerCountArray[$artistId] = $subscribersCount;
+
+            //Récupération de si l'utilisateur connecté est abonné à cet artiste ou non
+            $subscriptionsFound = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $artistId, 'User' => $idConnected]);
+
+            $subscribedCount = count($subscriptionsFound);
+            if ($subscribedCount > 0){
+                $IsFollowedArray[$artistId] = true;
+            }
+            else{
+                $IsFollowedArray[$artistId] = false;
+            }
+            
+
+        }
+
 
 
         return $this->render('users/artist/artistList.html.twig', [
-            'artists' => $artists
+            'artists' => $artistArray,
+            'followers' => $followerCountArray,
+            'isFollowed' => $IsFollowedArray
         ]);
     }
 
@@ -284,40 +144,130 @@ class UserController extends AbstractController
     #[Route('/artistsPage/{id<\d+>}', name: 'artistPage')]
     public function artistPage(ManagerRegistry $doctrine, $id)
     {
-
         $product = $doctrine->getRepository(Product::class)->findAll();
-        $user = $doctrine->getRepository(User::class)->find($id); //tri par role
+        $user = $doctrine->getRepository(User::class)->find($id); 
         $request = Request::createFromGlobals();
 
-        //Formulaire suppression d'un produit
-        // -------------------------
-        // $form = $this->createForm(ProductType::class, $product);
-        // $form->handleRequest($request);
+        $connectedUser = $this->getUser();
+        if ($connectedUser){
+            $idConnected = $connectedUser->getId();
+        }
+        else{
+            $idConnected = 0;
+        }
 
-        // $logger->info('I just got the logger');
-        
-        // if ($form->isSubmitted() && $form->isValid()) {
-
-        //     $productID = $form->get('id')->getData();
-        //     $product->removeProduct($productID);
-            
-
-
-            
-        //     $em->flush();
-
-        //     $this->addFlash('success', 'Produit supprimé avec succès');
-
-        //     return $this->redirectToRoute('home');
-        // } else {
-        //     $this->addFlash('error', 'Une erreur est survenue');
-        // }
-        // -------------------------
+        $subscriptionsFound = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id, 'User' => $idConnected]);
+        $subscribers = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id]);
+        $subscribersCount = count($subscribers);
 
 
         return $this->render('users/artist/artistPage.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'subscription' => $subscriptionsFound,
+            'nbSubscribers' => $subscribersCount
+        ]);
+    }
+
+
+    //=============================================
+    //          Page des artistes (> Action de s'abonner)
+    //=============================================
+    #[Route('/artistsPage/add/{id<\d+>}', name: 'follow')]
+    public function add(Request $request, ManagerRegistry $doctrine, $id, User $user)
+    {
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+        else
+        {
+            $em = $doctrine->getManager();
+            $user = $em->getRepository(User::class)->find($id);
+    
+            //$product = $doctrine->getRepository(Product::class)->findAll();
+            $connectedUser = $this->getUser();
+            //$request = Request::createFromGlobals();
+    
+            $idConnected = $connectedUser->getId();
+            $subscriptionsFound = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id, 'User' => $idConnected], [],  1);
+
+
+            $follow = new Subscriptions();
+            $follow->setUser($connectedUser);
+            $follow->setUserFollowed($user);
+    
+
+            if(!$subscriptionsFound || !$connectedUser){
+                // On le persist et l'enregistre en BDD
+                $em->persist($follow);
+                $em->flush();
+                $this->addFlash('success','Vous vous êtes abonné à cet artiste.');
+
+            } else {
+                $this->addFlash('error', "Vous n'avez pas les droits pour cette action");
+            }
+
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+            //return $this->redirectToRoute('artistPage', ['id'=>$id]);
+
+
+        }
+        return $this->render('users/artist/artistPage.html.twig', [
+            'user' => $user,
+            'connectedUser' => $connectedUser
             // 'form' => $form->createView()
         ]);
     }
+
+
+    //=============================================
+    //          Page des artistes (> Action de se désabonner)
+    //=============================================
+    #[Route('/artistsPage/remove/{id<\d+>}', name: 'unfollow')]
+    public function remove(Request $request, ManagerRegistry $doctrine, $id, User $user)
+    {
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+        else
+        {
+            $em = $doctrine->getManager();
+            $user = $em->getRepository(User::class)->find($id);
+    
+            $connectedUser = $this->getUser();
+            $idConnected = $connectedUser->getId();
+    
+            $subscriptionsFound = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id, 'User' => $idConnected], [],  1);
+      
+
+            if($subscriptionsFound && $connectedUser){
+                foreach ($subscriptionsFound as $subscriptionsFoundInst) {
+                    $em->remove($subscriptionsFoundInst);
+                }
+                //$em->remove($subscriptionsFound);
+                $em->flush();
+                $this->addFlash('success','Vous vous êtes désabonné de cet artiste.');
+
+                $referer = $request->headers->get('referer');
+                return $this->redirect($referer);
+
+                //return $this->redirectToRoute('artistPage', ['id'=>$id]);
+            } else {
+                $this->addFlash('error', "Vous n'avez pas les droits pour cette action");
+                return $this->redirectToRoute('home');
+            }
+
+        }
+        return $this->render('users/artist/artistPage.html.twig', [
+            'user' => $user,
+            'connectedUser' => $connectedUser
+            // 'form' => $form->createView()
+        ]);
+    }
+
+
+
+
 }

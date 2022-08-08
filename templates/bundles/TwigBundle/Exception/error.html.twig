@@ -1,0 +1,11 @@
+{% extends 'connect.html.twig' %}
+
+{% block title %}{{parent()}} - Page introuvable {% endblock %}
+
+{% block connection %}
+
+    <h1 class="rubriqueTitle">Page introuvable</h1>
+
+    <p>Désolé cette page n'existe pas</p>
+    <a href="{{ path('home') }}">Revenir à l'acceuil</a>
+{% endblock %}

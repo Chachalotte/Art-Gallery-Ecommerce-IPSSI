@@ -3,22 +3,24 @@
 {% block title %}{{parent()}} - Accueil{% endblock %}
 
 {% block content %}
+
 <section class="promotion sectionHome">
     <h2>Promotions du moment</h2>
 </section>
 <article class="articleHome">
     <div class="article__header">
-        <h2>Les vitrines</h2>
-        <a href="#">+ tout voir</a>
+        <h2>Les oeuvres vendues</h2>
+        <a href="{{path('products_sold')}}">+ tout voir</a>
     </div>
     <div class="article__image">
-        {% for product in products | reverse | slice(0, 1) %} 
+    
+        {% for product in solds | reverse | slice(0, 1) %} 
             <div class="article__image--big">
                 <h3>{{ product.name | capitalize}}</h3>
                 <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>
             </div>
             <div class="article__image--multi">
-            {% for product in products | reverse | slice(1, 4) %} 
+            {% for product in solds | reverse | slice(1, 4) %} 
                 <div class="article__image--small">
                     <h3>{{ product.name | capitalize }}</h3>
                     <a href="{{path('product', {'id':product.id})}}"><img src="{{ asset('img/product/' ~ product.img) }}"/></a>

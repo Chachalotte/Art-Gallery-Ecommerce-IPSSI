@@ -4,19 +4,31 @@
 
 {% block content %}
 
-    <h1>Valider ma commande</h1>
-    <p>Choisissez os préférences avant de passer votre commande.</p>
+    <h1 class="rubriqueTitle">Valider ma commande</h1>
+    <p>Choisissez vos préférences avant de passer votre commande.</p>
     <hr/>
     <div>        
         <div>
-            <b></b>
-            <b></b>
+            {% set formHtml %}
+                {{form_start(form, {action:path('order_recap')} ) }}
+                    <div class="spacingSmall">
+                        <a class="createButton"href="{{ path('new_address')}}">Ajouter une nouvelle adresse</a>
+                    </div>
+                {{form_end(form)}}
+            {% endset %}    
+            {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
         </div>
-        <div>
-            <b></b>
-            <b></b>
+        <div class="products">
+            {% for product in cart %}
+                <div class="productBox">
+                <center>
+                <h3><a href="{{path('product', {'id': product.product.id} )}}">{{product.product.name}}</a> </h3>
+                <a class="cartArtistName" href="{{path('artistPage', {'id': product.product.artist.id} ) }}">{{ product.product.artist.firstname }} {{ product.product.artist.name }}</a>
+                <p class="priceTag">{{product.product.price}} €</p>
+                    <img class="imgBig" src="{{ asset('img/product/' ~ product.product.img) }}"/>
+                </div>   
+                </center>          
+            {% endfor %}
         </div>
     </div>
-
-    
 {% endblock %}

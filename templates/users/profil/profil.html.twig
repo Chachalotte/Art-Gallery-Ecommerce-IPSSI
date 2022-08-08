@@ -1,0 +1,253 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - {{user.name}} {{user.firstName}}{% endblock %}
+
+{% block content %}
+
+{% if app.user.id == user.id %}
+    <h1 class="rubriqueTitle">Mes informations</h1>
+
+    <section class="profilFlex">
+        <div class="profileBoxSmall">
+            <center>
+                <h2 class="card-title">{{user.firstName}} {{user.name}}</h2>
+                {% if user.avatar %}
+                    <img class="imgMedium" src="{{ asset('img/user/' ~ user.avatar) }}"/>
+            <center>
+            {% else %}
+                {% if user.gender == "homme" %}
+                    <img class="imgMedium" src="{{ asset('img/user/man.png') }}"/>
+                {% else %}
+                    <img class="imgMedium" src="{{ asset('img/user/woman.png') }}"/>
+                {% endif %}
+            {% endif %}
+            <div class="personnalInformation">
+                <p class="card-text"><b>Mail:</b> {{app.user.email}}</p>
+            </div>
+            <div class="personnalInformation">
+                {% if app.user.age is empty %}
+                <p class="card-text">Date de naissance non renseignée</p>
+                {% else %}
+                <p class="card-text"><b>Date de naissance:</b> {{app.user.age|date("m/d/Y")}}</p>
+                {% endif %}
+            </div>
+            <div class="personnalInformation">
+                {% if not app.user.gender %}
+                <p class="card-text">Sexe non renseigné</p>
+                {% else %}
+                <p class="card-text"><b>Sexe:</b> {{app.user.gender}}</p>
+                {% endif %}
+            </div>
+
+            {% if is_granted("ROLE_ARTIST")%}
+                <div class="personnalInformation">
+                    <a class="whiteButton" href="{{path('artistPage', {'id': user.id})}}">Voir ma page artiste</a>
+                </div>
+            {% endif %}
+            <div class="spacingSmall">
+                <button class="open-modale-slide-side">Modifier le profil</button>
+                <a class="deleteAccountButton" href="#" onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ? Toutes vos données seront effacées')">Supprimer mon compte</a>
+            </div>
+        </div>
+
+        <div class="profileBoxSmall"><h2 class="secondaryTitle">Mes abonnements</h2>
+            {% for follow in follows | reverse | slice(0, 7) %}
+            <a href="{{ path('artistPage', {'id':follow.UserFollowed.id}) }}">
+                <div class="followsFlexbox"> 
+                
+                    {% if follow.UserFollowed.avatar %}
+                        <img class="imgMini" src="{{ asset('img/user/' ~ follow.UserFollowed.avatar) }}"/>
+                    <center>
+                    {% else %}
+                        {% if follow.UserFollowed.gender == "homme" %}
+                            <img class="imgMini" src="{{ asset('img/user/man.png') }}"/>
+                        {% else %}
+                            <img class="imgMini" src="{{ asset('img/user/woman.png') }}"/>
+                        {% endif %}
+                    {% endif %}
+                    <div class="followCard">
+                        {{follow.UserFollowed.firstname}} {{follow.UserFollowed.name}} 
+                        <a class="unfollowRightButton" href="{{path('unfollow', {'id': follow.UserFollowed.id}) }}">Annuler</a>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+
+            <center> <a href="{{ path('FollowedArtistsList') }}">+ Tout voir</a></center>
+        </div>
+
+        <div class="profileBoxSmall"><h2 class="secondaryTitle">Mes commentaires</h2>
+            {% for comment in comments | reverse | slice(0, 5) %}
+            <a href="{{ path('product', {'id':comment.product.id}) }}">
+                <div class="followsFlexbox"> 
+                
+ 
+                    <div class="profileCommentCard">
+                       <b><i>{{comment.Product.name}}</i></b> de <b>{{comment.Product.Artist.firstname}} {{comment.Product.Artist.name}}</b>
+                       <p class="profileCommentMessage">
+                            {{comment.Message | capitalize | slice(0, 90)}}
+                            {% if comment.Message|length > 90 %}
+                                ...
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+
+            <center> <a href="{{ path('myComments') }}">+ Tout voir</a></center>
+        </div>
+</section>
+
+    <div class="profileBoxOrders">
+        <h2 class="secondaryTitle">Mes commandes</h2>
+        <div class="commandes">
+            <center>
+            {% if orders|length == 0 %}
+            <p>Vous n'avez pas encore passé de commande.</p>
+            {% else %}
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Référence</td>
+                            <td>Statut</td>
+                            <td>Passée le</td>
+                            <td>Produits</td>
+                            <td>Total</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.reference }}</td>
+                            <td>
+                                {% if order.state == 1 %}
+                                    Paiement accepté
+                                {% endif %}
+                                {% if order.state == 2 %}
+                                    Préparation en cours
+                                {% endif %}
+                                {% if order.state == 3 %}
+                                    Livraison en cours
+                                {% endif %}
+                            </td>
+                            <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                            <td>{{ order.orderDetails|length }}</td>
+                            <td>{{ ((order.carrierPrice + order.total) / 100)|number_format(2, ',','.') }} €</td>
+                            <td><a href="{{ path('profil_order_show', {'id': app.user.id, 'reference': order.reference} ) }}">Voir ma commande</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            <center>
+        </div>
+    </div>
+
+ 
+{% else %}
+    <h2>Erreur de page</h2>
+    <p>Vous n'avez pas les droits pour cette page</p>
+    <a href="{{ path('home')}}">Retour à la page d'accueil</a>
+{% endif %}
+
+<div class="modaleContainer">
+    <div class="modale-slide-side">
+        <div>
+            <p class="close">❌</p>
+            <h2>Editer le profil</h2>
+        </div>
+        {{ form_start(form)}}
+            <div class="col-md-12">
+                <div class="formField">
+                    {{ form_label(form.plainEmail.first) }}
+                    {{ form_errors(form.plainEmail.first) }}
+                    {{ form_help(form.plainEmail.first) }}
+                    {{ form_widget(form.plainEmail.first) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.plainEmail.second) }}
+                    {{ form_errors(form.plainEmail.second) }}
+                    {{ form_help(form.plainEmail.second) }}
+                    {{ form_widget(form.plainEmail.second) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.firstname) }}
+                    {{ form_errors(form.firstname) }}
+                    {{ form_help(form.firstname) }}
+                    {{ form_widget(form.firstname) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.name) }}
+                    {{ form_errors(form.name) }}
+                    {{ form_help(form.name) }}
+                    {{ form_widget(form.name) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.gender) }}
+                    {{ form_errors(form.gender) }}
+                    {{ form_help(form.gender) }}
+                    {{ form_widget(form.gender) }}
+                </div>
+            
+                <div class="formField">
+                    {{ form_label(form.age) }}
+                    {{ form_errors(form.age) }}
+                    {{ form_help(form.age) }}
+                    {{ form_widget(form.age) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.plainPassword.first) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                    {{ form_help(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.plainPassword.second) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                    {{ form_help(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.avatar) }}
+                    {{ form_errors(form.avatar) }}
+                    {{ form_help(form.avatar) }}
+                    {{ form_widget(form.avatar) }}
+                </div>
+                <div class="formField">
+                    {{ form_label(form.description) }}
+                    {{ form_errors(form.description) }}
+                    {{ form_help(form.description) }}
+                    {{ form_widget(form.description) }}
+                </div>
+            </div>
+
+
+        <div>
+            {# <button class="close">❌ Annuler</button> #}
+            <button type="submit">✔️ Valider</button>
+        </div> 
+        {{ form_end(form)}}
+    </div>
+</div>
+
+<script>
+let $open = document.querySelector('.open-modale-slide-side');
+let $close = document.querySelectorAll('.close');
+let $modale = document.querySelector('.modaleContainer');
+
+$open.addEventListener('click', function(){
+    $modale.style.display = "block";
+});
+
+$close.addEventListener('click', function(){
+    $modale.style.display = "none";
+});
+</script>
+
+{% endblock %}
+
+{# {% block javascripts %}
+    <script  type="text/javascript" src="{{ asset('js/modale-slide-side.js') }}"></script>
+{% endblock %} #}

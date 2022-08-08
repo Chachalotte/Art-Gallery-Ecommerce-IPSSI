@@ -8,19 +8,23 @@
         <img src="{{category.img}}"/>
     </div>   
 
-    <section class="productsList">
+    <section class="productsList"><div class="products">
     {% for product in category.products %}
-        <div class="productCard">
-            <a href="{{path('artist', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a>
+    <div class="productBox">
+        <div class="product">
+            
             <a href="{{path('product', {'id': product.id} )}}">
-                <img src="{{ asset('img/product/' ~ product.img) }}"/>
-                <h2>{{ product.name | capitalize }}</h2>
-            </a>             
-            <p>{{ product.description | capitalize | slice(0, 50)}}</p>
+            <h2>{{ product.name | capitalize }}</h2>
+                <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>
+            </a>
+            <h2><a class="authorName" href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a></h2>             
+            <p>{{ product.description | capitalize | slice(0, 150)}}</p>
         </div>
+    </div>
     {% else %}
         <p>Il n'y a pas encore d'oeuvres à présenter.</p>
     {% endfor %}
+    </div>
     </section>
 
 

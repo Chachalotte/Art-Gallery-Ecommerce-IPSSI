@@ -28,8 +28,531 @@ h2,
   text-align: center;
 }
 
+h1,
+.anotherOeuvre {
+  text-align: center;
+}
+
 .anotherOeuvre img {
   margin: auto;
   width: 8vw;
   object-fit: cover;
 }
+
+
+.authorName {
+  text-align: center;
+  font: italic 20px "Georgia", serif;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5;
+  margin-bottom: 5;
+}
+
+
+/* =========== Box des produits ============*/
+
+.productBox
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+  
+	border-radius: 1px;
+	width:30% ;
+	max-height:500px ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin-bottom: 10px;
+
+}
+
+
+.productBoxBig
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+	
+	border-radius: 1px;
+	width:40vw;
+	max-height:500px;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin-bottom: 10px;
+
+}
+
+.productFullSection
+{
+	font: italic 18px "Georgia", serif;
+	border:solid 2px  rgb(219, 207, 179);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+	padding-left: 4vw;
+	padding-right: 4vw;
+	border-radius: 1px;
+	width:36vw;
+	height:40vw;
+	max-height:600px;
+	opacity: 1;
+	margin-bottom: 10px;
+
+}
+
+.nameTitle
+{
+	margin-top: 25px;
+	margin-bottom: 5px;
+	font: italic Bold 32px "Georgia", serif;
+}
+.nameSecondaryTitle
+{
+	margin-top: 5px;
+	font: italic 24px "Georgia", serif;
+}
+
+/* =========== Commentaires ============*/
+
+
+.commentBox
+{
+	
+  background-color: #e4e4e4;
+	border:solid 1px  #ffffffce;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+  	margin-top: 20px;
+	margin-bottom: 50px;
+	padding-bottom: 20px;
+    display:grid;
+	border-radius: 3px;
+	width:44vw;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+.commentFlexBox
+{
+	
+    background-color:#e4e4e4;
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 10;
+	padding:5px;
+    display: flex;
+	border-radius: 3px;
+	width:45%;
+	box-shadow :-3px 7px 16px #ced6de;
+
+	margin-bottom: 20px;
+}
+
+.commentFormBox
+{
+	
+  background-color: #e4e4e4;
+	border:solid 1px  #ffffffce;
+	margin-left: 30%; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+  	margin-top: 20px;
+	margin-bottom: 50px;
+	padding-bottom: 20px;
+    display:grid;
+	border-radius: 3px;
+	width:34vw;
+	box-shadow :-3px 7px 16px #ced6de;
+	margin-left: 35%;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+.commentCard
+{
+	
+  	background-color: #ffffff;
+	border:solid 2px  #ffffffce;
+	margin-left: 5% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+  	margin-top: 2;
+	margin-top: 2px;
+	padding-left: 5px;
+    
+	border-radius: 1px;
+	width:90% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+.commentVoidCard
+{
+	
+  	
+	
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+	margin-top: 2px;
+	padding-left: 5px;
+	border-radius: 1px;
+	width:90% ;
+	
+	opacity: 0.85;
+	color: rgb(0, 0, 0);
+	font: italic 16px "Georgia", serif;
+}
+
+.commentTitle {
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    object-fit: cover;
+    font: 15px "Georgia", serif;
+  }
+
+.product
+{
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: 5%;
+    margin-top: 5%;
+	min-height:135px;
+	font: italic 16px "Georgia", serif;
+}
+
+.products
+{
+	/*margin-left: 2% ; centrer les elements avec margin : auto */
+	margin-right: 5%; 
+    margin-top: 1%;
+	min-height:100px;
+	font: 16px "Georgia", serif;
+}
+
+
+.productPres
+{
+  background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+    
+	border-radius: 1px;
+	width:55% ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 0.85;
+
+
+}
+
+.productSection
+{
+
+	margin-left: 2% ; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+    
+	border-radius: 1px;
+	width:60% ;
+
+	opacity: 1;
+
+
+}
+
+
+.SaleInfoBox
+{
+    background-color: rgb(240, 235, 223);
+	border:solid 2px  rgb(240, 235, 223);
+	margin-left: 35%; /*centrer les elements avec margin : auto */
+	margin-right: auto;
+    margin-top: 20;
+	padding-left: 10px;
+	border-radius: 1px;
+	width:25vw ;
+	max-height:300px ;
+	box-shadow :-3px 7px 16px #ced6de;
+	opacity: 1;
+	margin-bottom: 10px;
+	font: 16px "Georgia", serif;
+}
+
+.indication{
+	font: bold 16px "Georgia", serif;
+	color: rgb(168, 84, 0);
+}
+
+/* =========== Boutons ============*/
+
+button {
+	
+	border: 1px solid #764B36;
+	padding-top: 0.1vw;
+	padding-bottom: 0.1vw;
+	padding-left: 0.2vw;
+	padding-right: 0.2vw;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(139, 139, 139);
+  }
+
+button:hover {
+	
+	border: 1px solid #764B36;
+	padding-top: 0.1vw;
+	padding-bottom: 0.1vw;
+	padding-left: 0.2vw;
+	padding-right: 0.2vw;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: rgb(255, 255, 255);
+	font:  14px "Georgia", serif;
+	background-color: #d9a300;
+  }
+
+  button.comment {
+	
+	border: 1px solid #764B36;
+	padding-top: 0.1vw;
+	padding-bottom: 0.1vw;
+	padding-left: 0.2vw;
+	padding-right: 0.2vw;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+	margin-left: 80%;
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(139, 139, 139);
+  }
+
+button.comment:hover {
+	
+	border: 1px solid #764B36;
+	padding-top: 0.1vw;
+	padding-bottom: 0.1vw;
+	padding-left: 0.2vw;
+	padding-right: 0.2vw;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+	margin-left: 80%;
+    text-decoration: none;
+	color: rgb(255, 255, 255);
+	font:  14px "Georgia", serif;
+	background-color: #d9a300;
+  }
+
+
+  .commentButton {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	margin-top: 1%;
+	
+	/* margin-left: 5%; */
+	width: 150px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(75, 94, 100);
+  }
+
+  .commentButton:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(0, 154, 209);
+  }
+
+
+  .cancelButton {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	margin-top: 1%;
+	margin-bottom: 10px;
+	margin-left: 5%; 
+	width: 60px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(163, 86, 86);
+  }
+
+  .cancelButton:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(217, 0, 0);
+  }
+
+.createButton {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(15, 125, 0);
+  }
+
+  .createButton:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(18, 215, 15);
+  }
+
+.editButton {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(55, 132, 132);
+  }
+
+  .editButton:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(40, 208, 208);
+  }
+
+.deleteButton {
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(171, 69, 0);
+  }
+  
+  .deleteButton:hover {
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(255, 60, 0);
+  }
+
+  .addCartButton {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(102, 65, 0);
+  }
+
+  .addCartButton:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+	font:  14px "Georgia", serif;
+	background-color: rgb(255, 153, 0);
+  }
+

@@ -12,7 +12,10 @@ div#cartTables {
 
 table#resumeTable {
   width: 60vw;
-  border: 1px solid black;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background-color: rgb(255, 232, 183);
+  font:  16px "Georgia", serif;
 }
 
 table#resumeTable img {
@@ -22,32 +25,134 @@ table#resumeTable img {
 
 table#totalTable {
   width: 25vw;
-  border: 1px solid black;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 5px;
 }
 
 thead {
-  background-color: rgb(159, 151, 151);
+  background-color: rgb(176, 151, 98);
+	/* border:solid 2px  rgb(240, 235, 223); */
+  border-radius: 5px;
 }
 
 td {
   text-align: center;
+}
+tr {
+  background-color: rgba(255, 254, 251, 0.444);
 }
 
 td.product {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
 }
 
 .fa-trash {
   color: red;
 }
 
-a.validBtn {
+/* a.validBtn {
   padding: 0.2vw;
   border: 1px solid rgb(23, 156, 23);
   margin-left: 80vw;
   text-decoration: none;
   color: white;
   background-color: rgb(23, 156, 23);
+} */
+
+.validBtn {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+	margin-left: 80vw;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: white;
+    font:  14px "Georgia", serif;
+	background-color: rgb(15, 125, 0);
+  }
+
+  .validBtn:hover {
+	
+	border: 1px solid #764B36;
+	padding: 0.2vw;
+  margin-left: 80vw;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+	color: white;
+  font:  14px "Georgia", serif;
+	background-color: rgb(18, 215, 15);
+  }
+
+  .payButton {
+	
+    border: 1px solid #764B36;
+    padding: 0.2vw;
+    margin-left: 43vw;
+    -webkit-appearance: button;
+      -moz-appearance: button;
+      appearance: button;
+  
+      text-decoration: none;
+      color: white;
+      font:  14px "Georgia", serif;
+    background-color: rgb(15, 125, 0);
+    }
+  
+    .payButton:hover {
+    
+    border: 1px solid #764B36;
+    padding: 0.2vw;
+    margin-left: 43vw;
+    -webkit-appearance: button;
+      -moz-appearance: button;
+      appearance: button;
+  
+      text-decoration: none;
+    color: white;
+    font:  14px "Georgia", serif;
+    background-color: rgb(18, 215, 15);
+    }
+
+.cartProductTitle
+{
+    font-size : 18px; 
+}
+
+.cartArtistTitle
+{
+    font-size : 13px; 
+}
+
+.priceTag
+{
+  margin: auto;
+ 
+  margin-bottom: 0.5vw;
+  font-size:  18px;
+  color: rgb(75, 66, 30);
+}
+
+.recapInfo
+{
+  border:linear-gradient(.25turn, rgb(0, 0, 0), 20%, rgba(255, 119, 0, 0));
+  margin: auto;
+  padding: 0.5vw;
+  width: 300px;
+  background:linear-gradient(.25turn, #ffc4a877, 10%, rgba(255, 119, 0, 0));
+  font-size:  16px;
+  color: rgb(75, 66, 30);
+}
+
+.recapFlex
+{
+  display: flex;
 }

@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block title %}{{parent()}} - Artistes {% endblock %}
+
+
+
+{% block content %}
+
+<h2 class="rubriqueTitle">Mes abonnements</h2>
+{% if app.user and is_granted('ROLE_ARTIST') == false %}
+<a class="createButton" href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
+{% endif %}
+<section class="artistList">
+    {% for artist in artists %}
+        <div class="artistBox">
+            
+                {% if artist.userFollowed.avatar %}
+                    <img class="imgMedium" src="{{ asset('img/user/' ~ artist.userFollowed.avatar) }}"/>
+                {% else %}
+                    {% if artist.userFollowed.gender == "homme" %}
+                        <img class="imgMedium" src="{{ asset('img/user/man.png') }}"/>
+                    {% else %}
+                        <img class="imgMedium" src="{{ asset('img/user/woman.png') }}"/>
+                    {% endif %}
+                {% endif %}
+
+            <div class="artistCard">    
+                <a href="{{ path('artistPage', {'id':artist.userFollowed.id}) }}">
+                    <h3>{{artist.userFollowed.firstname}} {{artist.userFollowed.name}}</h3> 
+                
+                </a> 
+                {% set artistId = artist.userFollowed.id %}
+                <div><p>
+                <a class="unfollowButton" href="{{path('unfollow', {'id': artist.userFollowed.id}) }}">⭐ Ne plus suivre</a>
+
+            </div>
+                <p>{{artist.userFollowed.description | capitalize | slice(0, 150)}}
+                {% if artist.userFollowed.description|length > 150 %}
+                ...
+                {% endif %}</p>
+            </div>
+            
+        </div>
+        
+    {% else %}
+
+    <p>Vous n'avez aucun abonnement.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

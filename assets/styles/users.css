@@ -1,0 +1,129 @@
+
+/* =========== Box pour la page de profil des users (/profile et /profile/[id]) ============*/
+
+
+.displayArticles
+{
+	display: flex;
+}
+
+
+
+.follow
+{
+	margin-left: 4%; /*centrer les elements avec margin : auto */
+	/*min-height:135px; */
+	font: bold 16px "Georgia", serif;
+}
+
+
+
+
+
+
+/* =========== Style des links (fonctionne à moitié) ============*/
+
+
+a {
+	color: #764B36; /* blue colors for links too */
+	text-decoration: inherit; /* no underline */
+  }
+
+  a:hover {
+	color: #ed824c; /* blue colors for links too */
+	text-decoration: inherit; /* no underline */
+  }
+
+
+
+
+/* =========== Sections/Spacing ============*/
+
+.spacingCategory
+{
+	float: left;
+}
+
+.spacingRow
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.spacingSmall
+{
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.spacingSmallMargin
+{
+	margin-top: 25px;
+	margin-bottom: 25px;
+	margin-left: 5% ;
+}
+
+.spacingMedium
+{
+	margin-top: 75px;
+	margin-bottom: 75px;
+}
+
+.spacingBig
+{
+	margin-top: 130px;
+	margin-bottom: 110px;
+}
+
+.userSections
+{
+	float: left;
+	border:solid 2px  #4e4646dc;
+	opacity: 1;
+	background-color: #000000dc;
+}
+
+/* =========== Sections diverses ============*/
+
+/*  Titre de page */
+.rubriqueTitle
+{
+	font: italic bold "Georgia", serif;
+	margin-left: 3%;
+}
+
+.secondaryTitle
+{
+	font: italic bold 18px "Georgia", serif;
+	margin-left: 3%;
+}
+
+/*  Images en float (les avatars, principalement) */
+.pictureFloat
+{
+	float: left;
+	margin-right: 3%;
+}
+
+body 
+{
+	background-color:  #ffffff;
+}
+
+/* =========== Sections diverses ============*/
+
+/*  Titre de page */
+
+.rubriqueTitle
+{
+	font: italic bold 30px "Georgia", serif;
+}
+
+/*  Images en float (les avatars, principalement) */
+
+.pictureFloat
+{
+	float: left;
+	margin-right: 3%;
+}
+

@@ -35,6 +35,15 @@ class Order
     #[ORM\OneToMany(mappedBy: 'myOrder', targetEntity: OrderDetails::class, orphanRemoval: true)]
     private $orderDetails;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $reference;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $stripeSessionId;
+
+    #[ORM\Column(type: 'integer')]
+    private $state;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -131,6 +140,53 @@ class Order
                 $orderDetail->setMyOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotal()
+    {
+        $total = null;
+
+        foreach($this->getOrderDetails()->getValues() as $product){
+            $total = ($total + $product->getPrice());
+        }
+        
+        return $total * 100;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getStripeSessionId(): ?string
+    {
+        return $this->stripeSessionId;
+    }
+
+    public function setStripeSessionId(?string $stripeSessionId): self
+    {
+        $this->stripeSessionId = $stripeSessionId;
+
+        return $this;
+    }
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+
+    public function setState(int $state): self
+    {
+        $this->state = $state;
 
         return $this;
     }

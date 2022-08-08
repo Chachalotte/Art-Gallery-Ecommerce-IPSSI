@@ -14,13 +14,19 @@ class Comments
     private $id;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    private $message;
+    private $Message;
 
-    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'comments')]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'commented')]
     private $Product;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commenter')]
     private $User;
+
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
@@ -29,8 +35,16 @@ class Comments
 
     public function getMessage(): ?string
     {
-        return $this->message;
+        return $this->Message;
     }
+
+    public function setMessage(string $Message): self
+    {
+        $this->Message = $Message;
+
+        return $this;
+    }
+
 
     public function getProduct(): ?Product
     {

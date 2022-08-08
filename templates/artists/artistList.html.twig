@@ -14,7 +14,7 @@
     <ul>
         <h2 class="rubriqueTitle">Liste des artistes</h2>
     </ul>
-    <a href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
+    <a class="validBtn" href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
     {# {% for artists in artist %} #}
     {% for artist in artists %}
     <ul>

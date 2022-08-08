@@ -5,15 +5,16 @@
 {% block content %}
 
     <section class="cart">
-        <h1>Mon Panier</h1>
+        <h1 class="rubriqueTitle">Mon Panier</h1>
 
         <div id="cartTables">
             <table id="resumeTable">
                 <thead>
                     <th>Produit</th>
                     <th>Prix</th>
-                    <th>Quantité</th>
-                    <th>Total</th>
+                    <th>Description</th>
+                    {# <th>Quantité</th> #}
+                    {# <th>Total</th> #}
                     <th>Actions</th>
                 </thead>
                 <tbody>
@@ -21,19 +22,25 @@
                     {% for product in dataCart %}
                         <tr>
                             <td class="product">
-                            <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
-                            {{product.product.name}}
+                                <a class="cartProductTitle" href="{{path('product', {'id': product.product.id} )}}">{{product.product.name}}</a>
+                                <a class="cartArtistTitle" href="{{path('artistPage', {'id': product.product.artist.id} ) }}">{{ product.product.artist.firstname }} {{ product.product.artist.name }}</a>
+                                <img src="{{ asset('img/product/' ~ product.product.img) }}"/>
                             </td>
-                            <td>{{product.product.price}} €</td>
-                            <td>{{product.quantity}}</td>
-                            <td>{{product.quantity * product.product.price}} €</td>
+                            <td class="priceTag">
+                                {{product.product.price}} €
+                            </td>
                             <td>
-                                <a href="{{path('cart_add', {id: product.product.id})}}">
+                                {{product.product.description}}
+                            </td>
+                            {# <td>{{product.quantity}}</td> #}
+                            {# <td>{{product.quantity * product.product.price}} €</td> #}
+                            <td>
+                                {# <a href="{{path('cart_add', {id: product.product.id})}}">
                                     <i class="fas fa-cart-plus"></i>
-                                </a>
-                                <a href="{{path('cart_remove', {id: product.product.id})}}">
+                                </a> #}
+                                {# <a href="{{path('cart_remove', {id: product.product.id})}}">
                                     <i class="fas fa-cart-arrow-down"></i>
-                                </a>
+                                </a> #}
                                 <a href="{{path('cart_delete', {id: product.product.id})}}">
                                     <i class="fas fa-trash" title="Supprimer la ligne"></i>
                                 </a>
@@ -53,7 +60,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ total }} €</td>
+                        <td class="priceTag">{{ total }} €</td>
                         <td>
                             <a href="{{path('cart_deleteAll')}}">
                                 <i title="Supprimer le panier" class="fas fa-trash"></i>
@@ -63,7 +70,7 @@
                 </tbody>
             </table>
         </div>
-        <a class="validBtn" href="{{path('cart_validateCart')}}">Valider mon panier</a>
+        <a class="validBtn" href="{{path('order')}}">Valider mon panier</a> {#ancienne classe :class="validBtn"#}
     </section>
     
 {% endblock %}

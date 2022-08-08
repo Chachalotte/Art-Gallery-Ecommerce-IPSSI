@@ -5,21 +5,22 @@ namespace App\Controller;
 use App\Entity\Adress;
 use App\Form\AddressType;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AddressController extends AbstractController
 {
     #[Route('/adresses', name: 'adresses')]
     public function index(): Response
     {
-        return $this->render('users/address.html.twig');
+        return $this->render('users/profil/address.html.twig');
     }
 
     #[Route('/nouvelle_adresse', name: 'new_address')]
-    public function add(Request $request, ManagerRegistry $doctrine): Response
+    public function add(SessionInterface $session, Request $request, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
         
@@ -29,15 +30,18 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            dump($address);
             $address->setUser($this->getUser());
             $em->persist($address);
             $em->flush();
 
-            return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
+            if($session->get("cart")){
+                return $this->redirectToRoute('order');
+            } else {
+                return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
+            }
         }
 
-        return $this->render('users/address_new.html.twig', [
+        return $this->render('users/profil/address_new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -63,7 +67,7 @@ class AddressController extends AbstractController
             return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
         }
 
-        return $this->render('users/address_new.html.twig', [
+        return $this->render('users/profil/address_new.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -9,9 +9,14 @@
 @import url('categoriesPage.css');
 @import url('cart.css');
 @import url('event.css');
+@import url('artists.css');
+@import url('users.css');
+@import url('form.css');
+@import url('adress.css');
 
 main {
   margin: 0 2vw;
+  font:  14px "Georgia", serif;
 }
 
 .nav {
