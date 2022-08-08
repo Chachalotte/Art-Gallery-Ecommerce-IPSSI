@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{parent()}} - Devenir admin{% endblock %}
+
+{% block content %}
+    {{form_start(form)}}
+        <div class="formBox">
+            <div class="formField">
+            {{ form_label(form.secret) }}
+            {{ form_errors(form.secret) }}
+            {{ form_help(form.secret) }}
+            {{ form_widget(form.secret, {attr: {placeholder: "Mot de passe admin"}}) }}
+            </div>
+        </div>
+    {{form_end(form)}}
+{% endblock %}
