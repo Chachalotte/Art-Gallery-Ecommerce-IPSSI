@@ -85,6 +85,6 @@ class ProductRepository extends ServiceEntityRepository
                         ->setParameter('categories', $search->categories);
         }
 
-        return $query->getQuery()->getResult();
+            return $query->getQuery()->getResult();
     }
 }

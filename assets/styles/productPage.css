@@ -4,6 +4,10 @@ section.productPres,
   justify-content: space-around;
 }
 
+section#other{
+	height: 50vh;
+}
+
 article.productVue {
   width: 63vw;
 }
@@ -30,12 +34,15 @@ h2,
 
 h1,
 .anotherOeuvre {
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+  /* text-align: center; */
 }
 
 .anotherOeuvre img {
   margin: auto;
-  width: 8vw;
+  width: 17vw;
+  height: auto;
   object-fit: cover;
 }
 
