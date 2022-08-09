@@ -26,12 +26,8 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchProductType::class, $search);
 
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-           $products = $doctrine->getRepository(Product::class)->filterProduct($search);
-        } else {
-            $products = $doctrine->getRepository(Product::class)->findBy(['isSold' => false]);     
-        }
+        
+        $products = $doctrine->getRepository(Product::class)->filterProduct($search);
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
@@ -46,12 +42,7 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchProductType::class, $search);
 
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-           $products = $doctrine->getRepository(Product::class)->filterProduct($search);
-        } else {
-            $products = $doctrine->getRepository(Product::class)->findBy(['isSold' => true]);
-        }
+        $products = $doctrine->getRepository(Product::class)->filterSoldProduct($search);
 
         return $this->render('product/productsSold.html.twig', [
             'products' => $products,

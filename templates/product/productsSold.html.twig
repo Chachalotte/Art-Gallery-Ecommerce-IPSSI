@@ -7,7 +7,17 @@
     <h1>Oeuvres vendues</h1>
     <div class="filters">
         {{form_start(form)}}
-        {{form_end(form)}}
+            {{ form_label(form.string) }}</br>
+            {{ form_errors(form.string) }}
+            {{ form_help(form.string) }}
+            {{ form_widget(form.string) }}
+
+            {{ form_label(form.categories) }}
+            {{ form_widget(form.categories) }}
+
+            {{ form_widget(form.minPrice, {attr: {style: "display:none"}}) }}
+            {{ form_widget(form.maxPrice, {attr: {style: "display:none"}}) }}
+        {{form_end(form)}} 
     </div>
 
     <section class="productsList">

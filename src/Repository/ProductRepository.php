@@ -29,20 +29,62 @@ class ProductRepository extends ServiceEntityRepository
         $query = $this
             ->createQueryBuilder('p')
             ->select('c', 'p')
-            ->join('p.category', 'c');
+            ->join('p.category', 'c')
+            ->andWhere('p.isSold = 0');
 
-        if(!empty($search->categories)){
-            $query = $query
-                ->andWhere('c.id IN (:categories)')
-                ->setParameter('categories', $search->categories);
-        }
 
         if(!empty($search->string)){
             $query = $query
-                ->andWhere('p.name LIKE (:string)')
+                ->andWhere('p.name LIKE :string')
                 ->setParameter('string', "%{$search->string}%");
         }
-            
+
+        if(!empty($search->categories)){
+            $query = $query
+                        ->andWhere('c.id IN (:categories)')
+                        ->setParameter('categories', $search->categories);
+        }
+
+        if(!empty($search->getMaxPrice())){
+            $query = $query
+                        ->andWhere('p.price <= :maxprice')
+                        ->setParameter('maxprice', $search->getMaxPrice());
+        }
+
+        if(!empty($search->getMinPrice())){
+            $query = $query
+                        ->andWhere('p.price >= :minprice')
+                        ->setParameter('minprice', $search->getMinPrice());
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @return Product[] 
+     * Returns an array of Product objects filtered
+     */
+    public function filterSoldProduct(SearchProduct $search)
+    {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->select('c', 'p')
+            ->join('p.category', 'c')
+            ->andWhere('p.isSold = 1');
+
+
+        if(!empty($search->string)){
+            $query = $query
+                ->andWhere('p.name LIKE :string')
+                ->setParameter('string', "%{$search->string}%");
+        }
+
+        if(!empty($search->categories)){
+            $query = $query
+                        ->andWhere('c.id IN (:categories)')
+                        ->setParameter('categories', $search->categories);
+        }
+
         return $query->getQuery()->getResult();
     }
 }
