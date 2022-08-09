@@ -112,7 +112,7 @@ class ProductController extends AbstractController
         $products = $doctrine->getRepository(Product::class)->findAll();
         $productsother = [];
         foreach($products as $p){
-            if(!$p->isSold() && ($p->getArtist()->getId() != $product->getArtist()->getId())){
+            if((!$product->isSold() && !$p->isSold() && ($p->getArtist()->getId() != $product->getArtist()->getId())) || $product->isSold()){
                 $productsother[] = $p;
             }
         }
