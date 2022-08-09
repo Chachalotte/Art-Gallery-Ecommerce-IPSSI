@@ -2,26 +2,27 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Carrier;
-use App\Entity\Category;
+use App\Entity\User;
 use App\Entity\Order;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-
+use App\Entity\Carrier;
+use App\Entity\Product;
+use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
-use App\Entity\Product;
-
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
-    public function index(): Response
+    public function index():Response
     {
-        return $this->render('@EasyAdmin/page/content.html.twig');
+        // $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        // return $this->render('@EasyAdmin/page/content.html.twig');
+        return $this->render('admin/dashboard.html.twig', []);
     }
 
     public function configureDashboard(): Dashboard

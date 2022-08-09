@@ -26,12 +26,8 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchProductType::class, $search);
 
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-           $products = $doctrine->getRepository(Product::class)->filterProduct($search);
-        } else {
-            $products = $doctrine->getRepository(Product::class)->findBy(['isSold' => false]);     
-        }
+        
+        $products = $doctrine->getRepository(Product::class)->filterProduct($search);
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
@@ -46,12 +42,7 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchProductType::class, $search);
 
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-           $products = $doctrine->getRepository(Product::class)->filterProduct($search);
-        } else {
-            $products = $doctrine->getRepository(Product::class)->findBy(['isSold' => true]);
-        }
+        $products = $doctrine->getRepository(Product::class)->filterSoldProduct($search);
 
         return $this->render('product/productsSold.html.twig', [
             'products' => $products,
@@ -118,6 +109,15 @@ class ProductController extends AbstractController
         $form = $this->createForm(CommentType::class, $newComment);
         $form->handleRequest($request);
 
+        $products = $doctrine->getRepository(Product::class)->findAll();
+        $productsother = [];
+        foreach($products as $p){
+            if(!$p->isSold() && ($p->getArtist()->getId() != $product->getArtist()->getId())){
+                $productsother[] = $p;
+            }
+        }
+        shuffle($productsother);
+        $others = array_slice($productsother, 0, 4);
 
         if ($form->isSubmitted() && $form->isValid() && $connectedUser !== null) {
 
@@ -140,8 +140,8 @@ class ProductController extends AbstractController
         return $this->render('product/product.html.twig', [
             'product' => $product,
             'comments' => $postedComments,
-            'formComment' => $form->createView()
-            
+            'formComment' => $form->createView(),
+            'others' => $others            
         ]);
     }
 

@@ -11,7 +11,7 @@
 @import url('event.css');
 @import url('artists.css');
 @import url('users.css');
-@import url('form.css');
+@import url('form.scss');
 @import url('adress.css');
 
 main {

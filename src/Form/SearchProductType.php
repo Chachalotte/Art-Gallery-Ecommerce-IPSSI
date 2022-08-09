@@ -6,6 +6,7 @@ use App\Data\SearchProduct;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +27,20 @@ class SearchProductType extends AbstractType
             'class' => Category::class,
             'multiple' => true,
             'expanded' => true
+        ])
+        ->add('minPrice', IntegerType::class, [
+            'required' => false,
+            'label' => false,
+            'attr' => [
+                'placeholder' => 'Prix minimum'
+            ]
+        ])
+        ->add('maxPrice', IntegerType::class, [
+            'required' => false,
+            'label' => false,
+            'attr' => [
+                'placeholder' => 'Prix maximum'
+            ]
         ])
         ->add('submit', SubmitType::class, [
             'label' => 'Filtrer'

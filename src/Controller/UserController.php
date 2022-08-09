@@ -160,11 +160,28 @@ class UserController extends AbstractController
         $subscribers = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id]);
         $subscribersCount = count($subscribers);
 
+        $users = $doctrine->getRepository(User::class)->findAll();
+
+        $artists = array();
+        foreach ($users as $userArtist) {
+            //Récupération id de l'artiste
+            $userArtistId = $userArtist->getId(); 
+            $userArtistRoles = $userArtist->getRoles(); 
+
+            if(in_array('ROLE_ARTIST', $userArtistRoles))
+            {
+                $artists[$userArtistId] = $userArtist;
+            }
+        }
+        shuffle($artists);
+        $others = array_slice($artists, 0, 3);
+
 
         return $this->render('users/artist/artistPage.html.twig', [
             'user' => $user,
             'subscription' => $subscriptionsFound,
-            'nbSubscribers' => $subscribersCount
+            'nbSubscribers' => $subscribersCount,
+            'others' => $others
         ]);
     }
 
