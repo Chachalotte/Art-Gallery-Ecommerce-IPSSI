@@ -20,12 +20,6 @@ class HomeController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $user = $doctrine->getRepository(User::class)->findAll();
-        // $role = $user->getRoles();
-        // $user = $doctrine->getRepository(User::class)->findArtist();
-        // if ($user->getRoles() == ['ROLE_ARTIST']) {
-        //     $artists = $user;
-        // };
-        // $artists = $doctrine->getRepository(User::class)->findBy(["roles" => ["ROLE_ARTIST"]], [], null, null);
         $productsToSell = $doctrine->getRepository(Product::class)->findBy(['isSold' => false]); 
         $productsSold = $doctrine->getRepository(Product::class)->findBy(['isSold' => true]);
 

@@ -17,6 +17,19 @@ div.products,
   display: flex;
 }
 
+section#otherArtists{
+  margin: 5vh 0;
+}
+
+div.anotherArtist{
+  width: 30vw;
+  justify-content: space-between;
+}
+
+div.otherPresentation{
+  width:19vw;
+}
+
 .follow p {
   margin-left: 10px;
 }
@@ -36,6 +49,17 @@ div.products div.product {
   width: 20vw;
 }
 
+div#oeuvreState{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+}
+
+img.sold{
+  width: 5Vw;
+  margin-top: -5vh;
+}
+
 div.product img {
   object-fit: cover;
   width: 20vw;
@@ -46,7 +70,8 @@ div.product img {
 }
 
 .anotherArtist img {
-  width: 8vw;
+  width: 10vw;
+  height: 15vh;
   object-fit: cover;
 }
 
