@@ -23,6 +23,7 @@ class ProductController extends AbstractController
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
         $search = new SearchProduct();
+        $search->page = $request->get('page', 1);
         $form = $this->createForm(SearchProductType::class, $search);
 
         $form->handleRequest($request);
@@ -39,6 +40,7 @@ class ProductController extends AbstractController
     public function productSoldList(ManagerRegistry $doctrine, Request $request): Response
     {
         $search = new SearchProduct();
+        $search->page = $request->get('page', 1);
         $form = $this->createForm(SearchProductType::class, $search);
 
         $form->handleRequest($request);

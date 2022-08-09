@@ -65,4 +65,7 @@
     <p>Aucun produit trouvé.</p>
     {% endfor %}
 	</section>
+    <div class="pagination">
+        {{ knp_pagination_render(products) }}
+    </div>
 {% endblock %}

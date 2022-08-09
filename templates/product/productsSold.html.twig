@@ -33,4 +33,7 @@
     <p>Il n'y a pas de produit vendu</p>
     {% endfor %}
 	</section>
+    <div class="pagination">
+        {{ knp_pagination_render(products) }}
+    </div>
 {% endblock %}
