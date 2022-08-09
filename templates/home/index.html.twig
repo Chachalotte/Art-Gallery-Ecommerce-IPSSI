@@ -41,7 +41,15 @@
         {% for artist in artists | reverse | slice(0, 1) %} 
             <div class="article__image--big">
                 <h3>{{ artist.name | capitalize}} {{artist.firstname| capitalize}}</h3>
-                <img src="{{ asset('img/user/' ~ artist.avatar) }}">
+                {% if artist.avatar %}
+                    <img src="{{ asset('img/user/' ~ artist.avatar) }}"/>
+                {% else %}
+                    {% if artist.gender == "homme" %}
+                        <img src="{{ asset('img/user/man.png') }}"/>
+                    {% else %}
+                        <img src="{{ asset('img/user/woman.png') }}"/>
+                    {% endif %}
+                {% endif %}
                 <a href="{{path('artistPage', {'id':artist.id})}}"><img src="{{ artist.avatar }}"/></a>
             </div>
             <div class="article__image--multi">

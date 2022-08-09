@@ -70,7 +70,11 @@
                 </tbody>
             </table>
         </div>
-        <a class="validBtn" href="{{path('order')}}">Valider mon panier</a> {#ancienne classe :class="validBtn"#}
+        {% for product in dataCart %}
+            <a class="validBtn" href="{{path('order')}}">Valider mon panier</a> 
+        {% else %}
+            <a href="{{path('app_product')}}">Choisir des produits pour mon panier</a>
+        {% endfor %}
     </section>
     
 {% endblock %}

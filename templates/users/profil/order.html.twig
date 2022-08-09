@@ -13,8 +13,10 @@
             Statut de la commande 
             {% if order.state == 1 %}
                 Paiement accepté
+            {% endif %}
             {% if order.state == 2 %}
                 Préparation en cours
+            {% endif %}
             {% if order.state == 3 %}
                 Livraison en cours
             {% endif %}

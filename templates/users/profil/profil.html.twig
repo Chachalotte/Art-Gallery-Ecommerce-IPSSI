@@ -66,13 +66,36 @@
                         {% endif %}
                     {% endif %}
                     <div class="followCard">
-                        {{follow.UserFollowed.firstname}} {{follow.UserFollowed.name}}
+                        {{follow.UserFollowed.firstname}} {{follow.UserFollowed.name}} 
+                        <a class="unfollowRightButton" href="{{path('unfollow', {'id': follow.UserFollowed.id}) }}">Annuler</a>
                     </div>
                 </div>
             </a>
             {% endfor %}
 
             <center> <a href="{{ path('FollowedArtistsList') }}">+ Tout voir</a></center>
+        </div>
+
+        <div class="profileBoxSmall"><h2 class="secondaryTitle">Mes commentaires</h2>
+            {% for comment in comments | reverse | slice(0, 5) %}
+            <a href="{{ path('product', {'id':comment.product.id}) }}">
+                <div class="followsFlexbox"> 
+                
+ 
+                    <div class="profileCommentCard">
+                       <b><i>{{comment.Product.name}}</i></b> de <b>{{comment.Product.Artist.firstname}} {{comment.Product.Artist.name}}</b>
+                       <p class="profileCommentMessage">
+                            {{comment.Message | capitalize | slice(0, 90)}}
+                            {% if comment.Message|length > 90 %}
+                                ...
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+
+            <center> <a href="{{ path('myComments') }}">+ Tout voir</a></center>
         </div>
 </section>
 

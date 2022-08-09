@@ -22,9 +22,9 @@
                     <center><img class="imgMedium" src="{{ asset('img/user/' ~ user.avatar) }}"/></center>
                 {% else %}
                     {% if user.gender == "homme" %}
-                        <img src="{{ asset('img/user/man.png') }}"/>
+                        <img class="imgMedium" src="{{ asset('img/user/man.png') }}"/>
                     {% else %}
-                        <img src="{{ asset('img/user/woman.png') }}"/>
+                        <img class="imgMedium" src="{{ asset('img/user/woman.png') }}"/>
                     {% endif %}
                 {% endif %}
                     <div>
@@ -40,7 +40,7 @@
                         {% endif %}
                     </p>
                 {% else %}
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p>(Aucune description)</p>
                 {% endif %}
             </div>
         </div>
@@ -61,7 +61,7 @@
                         {% endif %}
                         <p>{{ product.description | capitalize | slice(0, 150)}}</p>
 
-                        <div>
+                        <div id="oeuvreState">
                             <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>  
                             {% if product.isSold %}
                                 <img class="sold" alt="Vendu icônes créées par Alfredo Hernandez - Flaticon" title="Oeuvre vendue" src="{{ asset('img/vendu.png')}}">
@@ -76,19 +76,38 @@
         {% endfor %}
     </div>
 </section>
-<section >
+<section id='otherArtists'>
     <h2>Vous aimerez aussi ...</h2>
-    {#% for  | reverse | slice(0, 3) %#}
         <div class="otherArtists">
-            <div class="anotherArtist">
-                <img src="{{ asset('img/user/man.png') }}"/>
-                <div>  
-                    <h3>Autre Artiste</h3>
-                    <p> Début de description du profil ....</p>
+        {% for other in others %}
+            <a href="{{path('artistPage', {'id':other.id})}}">
+                <div class="anotherArtist">
+                    {% if other.avatar %}
+                        <img src="{{ asset('img/user/' ~ other.avatar) }}"/>
+                    {% else %}
+                        {% if other.gender == "homme" %}
+                            <img src="{{ asset('img/user/man.png') }}"/>
+                        {% else %}
+                            <img src="{{ asset('img/user/woman.png') }}"/>
+                        {% endif %}
+                    {% endif %}
+                    <div class="otherPresentation">  
+                        <h3>{{other.firstName}} {{other.name}}</h3>
+                        {% if other.description %}
+                            <p>
+                                {{other.description | capitalize | slice(0, 150)}}
+                                {% if other.description | length > 150 %}
+                                    ...
+                                {% endif %}
+                            </p>
+                        {% else %}
+                            <p>(Aucune description)</p>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
+            </a>    
 
-            <div class="anotherArtist">
+            {# <div class="anotherArtist">
                 <img src="{{ asset('img/user/man.png') }}"/>
                 <div>  
                     <h3>Autre Artiste</h3>
@@ -101,9 +120,9 @@
                     <h3>Autre Artiste</h3>
                     <p> Début de description du profil ....</p>
                 </div>
-            </div>
+            </div> #}
+        {% endfor %}
         </div>
-    {#% endfor %#}
 </section>
 
 {% endblock %}

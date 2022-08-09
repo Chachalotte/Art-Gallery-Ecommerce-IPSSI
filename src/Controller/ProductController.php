@@ -87,7 +87,7 @@ class ProductController extends AbstractController
             );
             $product->setImg($imageName);
             $product->setArtist($user);
-
+            $product->setIsSold(false);
             // On le persist et l'enregistre en BDD
             $em->persist($product);
             $em->flush();
@@ -111,28 +111,134 @@ class ProductController extends AbstractController
         $em = $doctrine->getManager();
         $connectedUser = $this->getUser();
         $product = $doctrine->getRepository(Product::class)->find($id);
-        // $newComment = new Comments();
+        $postedComments = $doctrine->getRepository(Comments::class)->findBy(['Product' => $id]);
 
-        // $form = $this->createForm(CommentType::class, $newComment);
-        // $form->handleRequest($request);
+        //Section ajout de commentaire
+        $newComment = new Comments();
+        $form = $this->createForm(CommentType::class, $newComment);
+        $form->handleRequest($request);
 
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $newComment->setProduct($product);
-        //     $newComment->setUser($connectedUser);
-        //     // On le persist et l'enregistre en BDD
-        //     $em->persist($newComment);
-        //     $em->flush();
-        // }
-        //  else {
-        // $this->addFlash('error', 'Problème dans le formulaire');
-        // }
+        if ($form->isSubmitted() && $form->isValid() && $connectedUser !== null) {
+
+            $newComment->setProduct($product);
+            $newComment->setUser($connectedUser);
+            $newComment->setMessage($form['Message']->getData());
+
+            // On le persist et l'enregistre en BDD
+            $em->persist($newComment);
+            $em->flush();
+        }
+         else {
+        $this->addFlash('error', 'Problème dans le formulaire');
+        }
 
 
         return $this->render('product/product.html.twig', [
             'product' => $product,
-            // 'formComment' => $form->createView()
+            'comments' => $postedComments,
+            'formComment' => $form->createView()
+            
         ]);
+    }
+
+    #[Route('/product/comments/{id}', name: 'productComments')]
+    public function showProductComments(Request $request, ManagerRegistry $doctrine, $id): Response
+    {
+        $em = $doctrine->getManager();
+        $connectedUser = $this->getUser();
+        $product = $doctrine->getRepository(Product::class)->find($id);
+        $postedComments = $doctrine->getRepository(Comments::class)->findBy(['Product' => $id]);
+
+        //Section ajout de commentaire
+        $newComment = new Comments();
+        $form = $this->createForm(CommentType::class, $newComment);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid() && $connectedUser !== null) {
+
+            $newComment->setProduct($product);
+            $newComment->setUser($connectedUser);
+            $newComment->setMessage($form['Message']->getData());
+            // $newComment->setMessage($form->getParameter('Message'));
+            
+            // On le persist et l'enregistre en BDD
+            $em->persist($newComment);
+            $em->flush();
+            return $this->redirectToRoute('product', ['id'=> $id]);
+        }
+         else {
+        $this->addFlash('error', 'Problème dans le formulaire');
+        }
+        
+
+        return $this->render('product/product.html.twig', [
+            'product' => $product,
+            'comments' => $postedComments,
+            'formComment' => $form->createView()
+        ]);
+    }
+
+    #[Route('/product/comments/edit/{id}/{idCom}', name: 'editComments')]
+    public function editProductComment(Request $request, ManagerRegistry $doctrine, $id, $idCom): Response
+    {
+        $em = $doctrine->getManager();
+        $connectedUser = $this->getUser();
+        $product = $doctrine->getRepository(Product::class)->find($id);
+        $editedComment = $doctrine->getRepository(Comments::class)->find($idCom);
+        $postedComments = $doctrine->getRepository(Comments::class)->findBy(['Product' => $id]);
+
+        //Section ajout de commentaire
+        $form = $this->createForm(CommentType::class, $editedComment);
+        $form->handleRequest($request);
+
+        
+        if ($editedComment->getUser() != $this->getUser()) {
+            return $this->redirectToRoute('product', ['id'=> $id]);
+        }
+
+        if ($form->isSubmitted() && $form->isValid() && $connectedUser !== null) {
+
+            // $editedComment->setProduct($product);
+            // $editedComment->setUser($connectedUser);
+             $editedComment->setMessage($form['Message']->getData());
+            
+            // $editedComment->setMessage("Franchement, non.");
+            // On le persist et l'enregistre en BDD
+            $em->persist($editedComment);
+            $em->flush();
+            return $this->redirectToRoute('product', ['id'=> $id]);
+        }
+         else {
+        $this->addFlash('error', 'Problème dans le formulaire');
+        }
+        
+
+        return $this->render('product/product.html.twig', [
+            'product' => $product,
+            'comments' => $postedComments,
+            'formComment' => $form->createView()
+        ]);
+    }
+
+    #[Route('/product/comments/delete/{idCom}', name: 'deleteComments')]
+    public function deleteProductComment(Request $request, ManagerRegistry $doctrine, $idCom): Response
+    {
+        $em = $doctrine->getManager();
+
+        $comment = $doctrine->getRepository(Comments::class)->find($idCom);
+
+        if($comment && $comment->getUser() == $this->getUser()){
+            $em->remove($comment);
+            $em->flush();
+        } else {
+            $this->addFlash('error', "Vous n'avez pas les droits pour cette action");
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->redirectToRoute('product', ['id'=> $comment->getProduct()->getId()]);
+
     }
 
 

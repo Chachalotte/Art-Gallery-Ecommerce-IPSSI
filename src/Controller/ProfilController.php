@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Order;
+use App\Entity\Comments;
 use App\Entity\Subscriptions;
 use App\Form\ProfilType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -28,23 +29,10 @@ class ProfilController extends AbstractController
             return $this->createAccessDeniedException();
         }
 
-        $comment = $user->getComments();
+        // $comment = $user->getComments();
         $follows = $doctrine->getRepository(Subscriptions::class)->findBy(['User' => $id]);
         $orders = $doctrine->getRepository(Order::class)->findSuccessOrders($this->getUser()); 
-        // On récupère l'ancienne donnée
-        // $oldUser = new User;
-        // $oldUser->setEmail($user->getEmail());
-        // $oldUser->setFirstname($user->getFirstname());
-        // $oldUser->setName($user->getName());
-        // $oldUser->getGender() ? $oldUser->setGender($user->getGender()) : null;
-        // $oldUser->getAge() ? $oldUser->setAge($user->getAge()) : null;
-        // $oldUser->setPassword($user->getPassword());
-        // $oldUser->getAvatar() ? $oldUser->setAvatar($user->getAvatar()) : null;
-
-        // $oldUser->setDescription($user->getDescription());
-
-        // $email = new Email($user->getEmail());
-        // $user->setEmail($email);
+        $comments = $doctrine->getRepository(Comments::class)->findBy(['User' => $id]); 
 
         $form = $this->createForm(ProfilType::class, $user);
 
@@ -118,7 +106,7 @@ class ProfilController extends AbstractController
         return $this->render('users/profil/profil.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'comments' => $comment,
+            'comments' => $comments,
             'follows' => $follows,
             'orders' => $orders,
         ]);
@@ -142,4 +130,75 @@ class ProfilController extends AbstractController
             'order' => $order,
         ]);
     }
+
+
+    //=============================================
+    //          Page Liste des abonnements
+    //=============================================
+    #[Route('/artistsfollowed', name: 'FollowedArtistsList')]
+    public function indexFollowed(ManagerRegistry $doctrine): Response
+    {
+
+        //Récupération utilisateur connecté
+        $connectedUser = $this->getUser();
+        $idConnected = $connectedUser->getId();
+
+        $follows = $doctrine->getRepository(Subscriptions::class)->findBy(['User' => $idConnected]);
+
+        foreach ($follows as $artistsInst) {
+            //Récupération id de l'artiste
+            $artistId = $artistsInst->getId(); 
+
+            //Récupération nombre d'abonnés de l'artiste
+            $subscribers = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $artistId]); //
+            $subscribersCount = count($subscribers);
+            $followerCountArray[$artistId] = $subscribersCount;
+
+            //Récupération de si l'utilisateur connecté est abonné à cet artiste ou non
+            $subscriptionsFound = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $artistId, 'User' => $idConnected]);
+
+            $subscribedCount = count($subscriptionsFound);
+            if ($subscribedCount > 0){
+                $IsFollowedArray[$artistId] = true;
+            }
+            else{
+                $IsFollowedArray[$artistId] = false;
+            }
+            
+
+        }
+
+
+
+        return $this->render('users/profil/subscriptions.twig', [
+            'artists' => $follows,
+            'followers' => $followerCountArray,
+            'isFollowed' => $IsFollowedArray
+        ]);
+    }
+
+
+    //=============================================
+    //          Page Liste des commentaires
+    //=============================================
+    #[Route('/mycomments', name: 'myComments')]
+    public function indexComments(ManagerRegistry $doctrine): Response
+    {
+
+        //Récupération utilisateur connecté
+        $connectedUser = $this->getUser();
+        $idConnected = $connectedUser->getId();
+
+        $comments = $doctrine->getRepository(Comments::class)->findBy(['User' => $idConnected]); 
+
+
+
+        return $this->render('users/profil/comments.twig', [
+            'comments' => $comments
+        ]);
+    }
+
+
+
+
 }
