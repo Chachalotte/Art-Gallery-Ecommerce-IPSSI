@@ -67,9 +67,9 @@ h1,
 	margin-right: auto;
     margin-top: 20;
   
-	border-radius: 1px;
-	width:30% ;
-	max-height:500px ;
+	border-radius: 10px;
+	width:320px ;
+	max-height:600px;
 	box-shadow :-3px 7px 16px #ced6de;
 	opacity: 1;
 	margin-bottom: 10px;
@@ -104,8 +104,8 @@ h1,
 	padding-right: 4vw;
 	border-radius: 1px;
 	width:36vw;
-	height:40vw;
-	max-height:600px;
+	height:30vw;
+	max-height:30vw;
 	opacity: 1;
 	margin-bottom: 10px;
 
@@ -202,9 +202,6 @@ h1,
 
 .commentVoidCard
 {
-	
-  	
-	
 	margin-left: 2% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
 	margin-top: 2px;
@@ -240,7 +237,8 @@ h1,
 	/*margin-left: 2% ; centrer les elements avec margin : auto */
 	margin-right: 5%; 
     margin-top: 1%;
-	min-height:100px;
+	min-height:30vw;
+	height:30vw;
 	font: 16px "Georgia", serif;
 }
 

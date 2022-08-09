@@ -7,6 +7,8 @@
 {% if app.user.id == user.id %}
     <h1 class="rubriqueTitle">Mes informations</h1>
 
+        {% include 'home/flashMessages.twig' %}
+
     <section class="profilFlex">
         <div class="profileBoxSmall">
             <center>
@@ -28,7 +30,7 @@
                 {% if app.user.age is empty %}
                 <p class="card-text">Date de naissance non renseignée</p>
                 {% else %}
-                <p class="card-text"><b>Date de naissance:</b> {{app.user.age|date("m/d/Y")}}</p>
+                <p class="card-text"><b>Date de naissance:</b> {{app.user.age|date("d/m/Y")}}</p>
                 {% endif %}
             </div>
             <div class="personnalInformation">
@@ -50,100 +52,111 @@
             </div>
         </div>
 
-        <div class="profileBoxSmall"><h2 class="secondaryTitle">Mes abonnements</h2>
-            {% for follow in follows | reverse | slice(0, 7) %}
-            <a href="{{ path('artistPage', {'id':follow.UserFollowed.id}) }}">
-                <div class="followsFlexbox"> 
-                
-                    {% if follow.UserFollowed.avatar %}
-                        <img class="imgMini" src="{{ asset('img/user/' ~ follow.UserFollowed.avatar) }}"/>
-                    <center>
-                    {% else %}
-                        {% if follow.UserFollowed.gender == "homme" %}
-                            <img class="imgMini" src="{{ asset('img/user/man.png') }}"/>
+
+        {% if follows %}
+            <div class="profileBoxSmall"><h2 class="secondaryTitle">Mes abonnements</h2>
+                {% for follow in follows | reverse | slice(0, 7) %}
+                <a href="{{ path('artistPage', {'id':follow.UserFollowed.id}) }}">
+                    <div class="followsFlexbox"> 
+                    
+                        {% if follow.UserFollowed.avatar %}
+                            <img class="imgMini" src="{{ asset('img/user/' ~ follow.UserFollowed.avatar) }}"/>
+                        <center>
                         {% else %}
-                            <img class="imgMini" src="{{ asset('img/user/woman.png') }}"/>
-                        {% endif %}
-                    {% endif %}
-                    <div class="followCard">
-                        {{follow.UserFollowed.firstname}} {{follow.UserFollowed.name}} 
-                        <a class="unfollowRightButton" href="{{path('unfollow', {'id': follow.UserFollowed.id}) }}">Annuler</a>
-                    </div>
-                </div>
-            </a>
-            {% endfor %}
-
-            <center> <a href="{{ path('FollowedArtistsList') }}">+ Tout voir</a></center>
-        </div>
-
-        <div class="profileBoxSmall"><h2 class="secondaryTitle">Mes commentaires</h2>
-            {% for comment in comments | reverse | slice(0, 5) %}
-            <a href="{{ path('product', {'id':comment.product.id}) }}">
-                <div class="followsFlexbox"> 
-                
- 
-                    <div class="profileCommentCard">
-                       <b><i>{{comment.Product.name}}</i></b> de <b>{{comment.Product.Artist.firstname}} {{comment.Product.Artist.name}}</b>
-                       <p class="profileCommentMessage">
-                            {{comment.Message | capitalize | slice(0, 90)}}
-                            {% if comment.Message|length > 90 %}
-                                ...
+                            {% if follow.UserFollowed.gender == "homme" %}
+                                <img class="imgMini" src="{{ asset('img/user/man.png') }}"/>
+                            {% else %}
+                                <img class="imgMini" src="{{ asset('img/user/woman.png') }}"/>
                             {% endif %}
-                        </p>
+                        {% endif %}
+                        <div class="followCard">
+                            {{follow.UserFollowed.firstname}} {{follow.UserFollowed.name}} 
+                            <a class="unfollowRightButton" href="{{path('unfollow', {'id': follow.UserFollowed.id}) }}">Annuler</a>
+                        </div>
                     </div>
+                </a>
+                {% endfor %}
+
+                <center> <a href="{{ path('FollowedArtistsList') }}">+ Tout voir</a></center>
+            </div>
+        {% endif %}
+
+        {% if comments %}
+            <div class="profileBoxSmall"><h2 class="secondaryTitle">Mes commentaires</h2>
+                {% for comment in comments | reverse | slice(0, 5) %}
+                <a href="{{ path('product', {'id':comment.product.id}) }}">
+                    <div class="followsFlexbox"> 
+                    
+    
+                        <div class="profileCommentCard">
+                        <b><i>{{comment.Product.name}}</i></b> de <b>{{comment.Product.Artist.firstname}} {{comment.Product.Artist.name}}</b>
+                        <p class="profileCommentMessage">
+                                {{comment.Message | capitalize | slice(0, 90)}}
+                                {% if comment.Message|length > 90 %}
+                                    ...
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+
+                <center> <a href="{{ path('myComments') }}">+ Tout voir</a></center>
+            </div>
+        {% endif %}
+
+        {% if orders %}
+            <div class="profileBoxOrders">
+                <h2 class="secondaryTitle">Mes commandes</h2>
+                <div class="commandes">
+                    <center>
+                    {% if orders|length == 0 %}
+                    <p>Vous n'avez pas encore passé de commande.</p>
+                    {% else %}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Référence</td>
+                                    <td>Statut</td>
+                                    <td>Passée le</td>
+                                    <td>Produits</td>
+                                    <td>Total</td>
+                                    {# <td>Total</td> #}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('profil_order_show', {'id': app.user.id, 'reference': order.reference} ) }}">
+                                            {{ order.reference }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {% if order.state == 1 %}
+                                            Paiement accepté
+                                        {% endif %}
+                                        {% if order.state == 2 %}
+                                            Préparation en cours
+                                        {% endif %}
+                                        {% if order.state == 3 %}
+                                            Livraison en cours
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                                    <td>{{ order.orderDetails|length }}</td>
+                                    <td>{{ ((order.carrierPrice + order.total) / 100)|number_format(2, ',','.') }} €</td>
+                                    {# <td><a href="{{ path('profil_order_show', {'id': app.user.id, 'reference': order.reference} ) }}">Voir ma commande</a></td> #}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                    <center>
                 </div>
-            </a>
-            {% endfor %}
-
-            <center> <a href="{{ path('myComments') }}">+ Tout voir</a></center>
-        </div>
+            </div>
+        {% endif %}
 </section>
-
-    <div class="profileBoxOrders">
-        <h2 class="secondaryTitle">Mes commandes</h2>
-        <div class="commandes">
-            <center>
-            {% if orders|length == 0 %}
-            <p>Vous n'avez pas encore passé de commande.</p>
-            {% else %}
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Référence</td>
-                            <td>Statut</td>
-                            <td>Passée le</td>
-                            <td>Produits</td>
-                            <td>Total</td>
-                            <td>Total</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for order in orders %}
-                        <tr>
-                            <td>{{ order.reference }}</td>
-                            <td>
-                                {% if order.state == 1 %}
-                                    Paiement accepté
-                                {% endif %}
-                                {% if order.state == 2 %}
-                                    Préparation en cours
-                                {% endif %}
-                                {% if order.state == 3 %}
-                                    Livraison en cours
-                                {% endif %}
-                            </td>
-                            <td>{{ order.createdAt|date('d/m/Y') }}</td>
-                            <td>{{ order.orderDetails|length }}</td>
-                            <td>{{ ((order.carrierPrice + order.total) / 100)|number_format(2, ',','.') }} €</td>
-                            <td><a href="{{ path('profil_order_show', {'id': app.user.id, 'reference': order.reference} ) }}">Voir ma commande</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
-            <center>
-        </div>
-    </div>
 
  
 {% else %}

@@ -86,7 +86,7 @@ class ProductController extends AbstractController
             $this->addFlash('success', 'Produit ajouté avec succes');
 
             return $this->redirectToRoute('home');
-        } else {
+        } elseif ($form->isSubmitted() && $form->isValid() == false) {
             $this->addFlash('error', 'Problème dans le formulaire');
         }
 
@@ -129,8 +129,11 @@ class ProductController extends AbstractController
             $em->persist($newComment);
             $em->flush();
         }
-         else {
-        $this->addFlash('error', 'Problème dans le formulaire');
+        elseif ($form->isSubmitted() && $form->isValid() == false) {
+            $this->addFlash('error', 'Problème dans le formulaire');
+        }
+        elseif ($form->isSubmitted() && $connectedUser == null) {
+            $this->addFlash('error', 'Connectez-vous pour effectuer cette action');
         }
 
 
@@ -168,8 +171,11 @@ class ProductController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('product', ['id'=> $id]);
         }
-         else {
-        $this->addFlash('error', 'Problème dans le formulaire');
+        elseif ($form->isSubmitted() && $form->isValid() == false) {
+            $this->addFlash('error', 'Problème dans le formulaire');
+        }
+        elseif ($form->isSubmitted() && $connectedUser == null) {
+            $this->addFlash('error', 'Connectez-vous pour effectuer cette action');
         }
         
 
@@ -193,8 +199,9 @@ class ProductController extends AbstractController
         $form = $this->createForm(CommentType::class, $editedComment);
         $form->handleRequest($request);
 
+        $userRoles = $this->getUser()->getRoles(); 
         
-        if ($editedComment->getUser() != $this->getUser()) {
+        if ($editedComment->getUser() != $this->getUser() and in_array('ROLE_ADMIN', $userRoles) == false) {
             return $this->redirectToRoute('product', ['id'=> $id]);
         }
 
@@ -210,8 +217,11 @@ class ProductController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('product', ['id'=> $id]);
         }
-         else {
-        $this->addFlash('error', 'Problème dans le formulaire');
+        elseif ($form->isSubmitted() && $form->isValid() == false) {
+            $this->addFlash('error', 'Problème dans le formulaire');
+        }
+        elseif ($form->isSubmitted() && $connectedUser == null) {
+            $this->addFlash('error', 'Connectez-vous pour effectuer cette action');
         }
         
 
@@ -228,8 +238,10 @@ class ProductController extends AbstractController
         $em = $doctrine->getManager();
 
         $comment = $doctrine->getRepository(Comments::class)->find($idCom);
+        $userRoles = $this->getUser()->getRoles();
 
-        if($comment && $comment->getUser() == $this->getUser()){
+
+        if($comment && $comment->getUser() == $this->getUser() or in_array('ROLE_ADMIN', $userRoles)){
             $em->remove($comment);
             $em->flush();
         } else {
@@ -281,11 +293,15 @@ class ProductController extends AbstractController
            
             $em->flush();
 
-            $this->addFlash('success', 'Produit ajouté avec succes');
+            $this->addFlash('success', 'Produit modifié avec succes');
 
             return $this->redirectToRoute('home');
-        } else {
+        }         
+        elseif ($form->isSubmitted() && $form->isValid() == false) {
             $this->addFlash('error', 'Problème dans le formulaire');
+        }
+        elseif ($form->isSubmitted() && $connectedUser == null) {
+            $this->addFlash('error', 'Connectez-vous pour effectuer cette action');
         }
 
         return $this->render('product/newProduct.html.twig', [

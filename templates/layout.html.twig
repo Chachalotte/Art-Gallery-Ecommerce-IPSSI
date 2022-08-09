@@ -41,7 +41,10 @@
 
 {% block body %}
 
-<main>{% block content %}{% endblock %}</main>
+<main>
+{% include 'home/flashMessages.twig' %}
+{% block content %}{% endblock %}
+</main>
 
 {% endblock %}
 
