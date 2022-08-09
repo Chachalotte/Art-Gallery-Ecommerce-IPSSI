@@ -10,7 +10,8 @@
 
     <section class="productsList"><div class="products">
     {% for product in category.products %}
-    <div class="productBox">
+        {% include 'product/productCard.twig' %}
+    {# <div class="productBox">
         <div class="product">
             
             <a href="{{path('product', {'id': product.id} )}}">
@@ -20,7 +21,7 @@
             <h2><a class="authorName" href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a></h2>             
             <p>{{ product.description | capitalize | slice(0, 150)}}</p>
         </div>
-    </div>
+    </div> #}
     {% else %}
         <p>Il n'y a pas encore d'oeuvres à présenter.</p>
     {% endfor %}

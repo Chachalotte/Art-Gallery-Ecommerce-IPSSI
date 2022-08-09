@@ -1,0 +1,17 @@
+
+{% block content %}
+
+    {# Messages flash #}
+    {% for flashError in app.session.flashBag.get('error') %}
+        <div class="flashAlert" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <div>
+    {% for message in app.session.flashBag.get('success') %}
+        <div class="flashMessage" role="alert">{{ message }}</div>
+    {% endfor %}
+    </div>
+    
+    {% if app.session.flashBag.get('error') or app.session.flashBag.get('success') %}
+        <div class="spacingSmall"></div>
+    {% endif %} 
+{% endblock %}

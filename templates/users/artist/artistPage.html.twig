@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% include 'home/flashMessages.twig' %}
+
 <section class="presentation">
     <aside>   
         <div class="profileBox">   
@@ -49,8 +51,10 @@
     
     <div class="products">
         {% for product in user.product %}
-            <div class="productBox">
-                
+
+            {% include 'product/productCard.twig' %}
+
+            {# <div class="productBox">
                     <h2>
                         <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
                         <span><a href="{{path('category', {'id': product.category.id} ) }}">({{ product.category.name }})</a></span>
@@ -71,7 +75,7 @@
                         </div>
                         
                     </center>
-            </div>
+            </div> #}
             <div class="spacingRow"></div>
         {% endfor %}
     </div>

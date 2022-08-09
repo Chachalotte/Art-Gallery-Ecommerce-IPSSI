@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% include 'home/flashMessages.twig' %}
 
 <div class="spacingSmall"></div>
 <section  class="presentation">
@@ -22,9 +23,9 @@
          
                 
                 <p>{{ product.description | capitalize }}</p>
-                
-                <img class="imgProduct" src="{{ asset('img/product/' ~ product.img) }}"/>
-
+                <div>
+                 <center>   <img class="imgProduct" src="{{ asset('img/product/' ~ product.img) }}"/> </center>
+                </div>
             
         </div>
     </div>
@@ -52,15 +53,14 @@
                         <p class="indication">Il s'agit de l'un de vos produits.</p>
                     {% endif %}           
                     </div>
-                    <div class="action">
+                    
                         <h2 class="secondaryTitle">Détails techniques du produit</h2> 
                         <p>Catégorie : <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a></p>  
                         <p>Dimensions: 120x170 cm</p>             
-                    </div>
+                    
                 </div>
               
-                
-              
+ 
 </section>    
 
    <div class="spacingBig"></div>
@@ -97,7 +97,7 @@
                             <div class="commentCard">
                                     <p>
                                         De <b><a href="{{path('artistPage', {'id': comment.user.id} ) }}">{{ comment.user.firstname }} {{ comment.user.name }}</a></b>
-                                        {% if comment.user ==  app.user and (app.request.get('_route') == 'product') %} 
+                                        {% if comment.user ==  app.user and (app.request.get('_route') == 'product') or app.user and is_granted('ROLE_ADMIN') == true %} 
                                             <a class="editButton" href="{{path('editComments', {'id': product.id, 'idCom': comment.id} ) }}">Editer</a>
                                             <a class="deleteButton" href="{{path('deleteComments', {'idCom': comment.id} ) }}">Supprimer</a> 
                                         {% endif %}

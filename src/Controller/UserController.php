@@ -105,7 +105,7 @@ class UserController extends AbstractController
             }
         }
 
-
+        $followerCountArray = array();
         foreach ($artistArray as $artistsInst) {
             //Récupération id de l'artiste
             $artistId = $artistsInst->getId(); 
