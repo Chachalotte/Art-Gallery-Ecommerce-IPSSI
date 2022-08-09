@@ -9,6 +9,8 @@ use App\Entity\Product;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -19,8 +21,8 @@ class DashboardController extends AbstractDashboardController
     public function index():Response
     {
         // $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
-        return $this->render('@EasyAdmin/page/content.html.twig');
-        // return $this->render('admin/dashboard.html.twig', []);
+        // return $this->render('@EasyAdmin/page/content.html.twig');
+        return $this->render('admin/dashboard.html.twig', []);
     }
 
     public function configureDashboard(): Dashboard
