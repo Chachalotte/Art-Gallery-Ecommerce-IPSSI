@@ -1,30 +1,98 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
+{% block db_stylesheets %}
+<style>
+section#dashboard{
+    display:flex; 
+    flex-wrap:wrap; 
+    justify-content: space-between;
+    margin:0.5vw;
+    border-radius: 10px;
+    background-color: rgb(240, 235, 223);
+    border: 1px solid rgb(240, 235, 223);
+    width:100%;
+}
+
+div.kpi{
+    display:flex;
+    flex-direction: column;
+    vertical-align: middle;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5%;
+    padding: 0.5vw;
+    width: 30%;
+    height:32vh;
+    margin:1vw;
+    background-color: rgb(255, 255, 255);
+}
+
+div.chart{
+    padding: 0.5vw;
+    margin:1vw;
+    height:32vh;
+    width: 65%;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+p{
+    text-align: center;
+}
+
+div.kpiItems{
+    padding: 0.5vw;
+    color: rgb(118, 75, 54);
+    font: 16px "Georgia", serif;
+}
+
+div.kpiNumbers{
+    font-size: 3vw !important;
+    color: red;
+}
+
+span.subNumber{
+    font-size:1vw;
+}   
+
+.red{
+    width: 10px;
+    height: 10px;
+    background: red;
+}
+</style>
+{% endblock %}
+
 {% block content_title %}<h1>Tableau de bord</h1>{% endblock %}
 {# {% block page_actions %}
     <a class="btn btn-primary" href="...">Some Action</a>
 {% endblock %} #}
 
 {% block main %}
-    
-    <table class="datagrid">
-        <thead>
-            <tr>
-                <td>Nombre de ventes</td>
-                <td>Chiffre d'affaire actuel</td>
-            </tr>
-        </thead>
-        <tbody>
-            {# {% for data in my_own_data %} #}
-                <tr>
-                <td>Some </td>
-                <td>Another </td>
-                    {# <td>{{ data.someColumn }}</td>
-                    <td>{{ data.anotherColumn }}</td> #}
-                </tr>
-            {# {% endfor %} #}
-        </tbody>
-    </table>
+    <section id="dashboard">
+        <div class="kpi">
+            <p class="kpiItems">Nombre total de ventes</p>
+            <p class="kpiNumbers">{{ orders|length }}</p>
+            <p class="subKpi"><span class="subNumber">{{ orders30|length }}</span> / 30 jours</p>
+        </div>
+        <div class="kpi">
+            <p class="kpiItems">Nombre total de ventes</p>
+            <p class="kpiNumbers">{{total}}€</p>
+            <p class="subKpi"><span class="subNumber">{{ total30 }}€</span> / 30 jours</p>
+        </div>
+        <div class="kpi">
+            <p class="kpiNumbers">{{artists|length}}</p>
+            <p class="subKpi">Artistes</p>
+        </div>
+        <div class="kpi">
+            <p class="kpiNumbers">{{products|length}}</p>
+            <p class="subKpi">Oeuvres</p>
+        </div>
+        <div class="chart">
+        </div>
+        <div class="red">
+        </div>
+    </section>
 {% endblock %}
 
 {# <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> #}
