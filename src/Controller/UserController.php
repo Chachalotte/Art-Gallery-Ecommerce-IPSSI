@@ -107,7 +107,7 @@ class UserController extends AbstractController
         $artistArray = $paginator->paginate(
             $allArtistArray,
             $request->query->getInt('page', 1),
-            2
+            20
         );
 
         $followerCountArray = array();

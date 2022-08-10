@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Data\Mail;
 use App\Entity\Order;
+use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +25,10 @@ class OrderSuccessController extends AbstractController
         if($order->getState() == 0){
             $session->set("cart", []);
             $order->setState(1);
+            foreach($order->getOrderDetails() as $product){
+                $idProduct = $doctrine->getRepository(Product::class)->findOneBy(['name' => $product->getProduct()]);
+                $idProduct->setIsSold(1);
+            };
             $doctrine->getManager()->flush();
 
             //envoi d'email mailjet
