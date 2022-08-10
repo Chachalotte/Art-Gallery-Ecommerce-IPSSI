@@ -22,13 +22,16 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $this->addFlash('success', 'Merci de nous avoir contacté. Notre équipe va vous répondre dans les plus brèves délais.');
 
             $contact->setDate(new \DateTime());
             $contact->setStatut('Posté');
 
             $em->persist($contact);
             $em->flush();
+
+            $this->addFlash('success', 'Merci de nous avoir contacté. Notre équipe va vous répondre dans les plus brèves délais.');
+
+            return $this->redirectToRoute('home');
         }
         elseif ($form->isSubmitted() && $form->isValid() == false){
             $this->addFlash('error', 'Un problème est survenu dans le traitement du formulaire.');
