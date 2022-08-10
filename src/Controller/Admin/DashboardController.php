@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\Validator\Constraints\Length;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -50,9 +51,13 @@ class DashboardController extends AbstractDashboardController
             }
         }
 
+        $dateChart = [];
+        $orderChart = [];
         $totalAll = 0;
         $ordersAll = $this->doctrine->getRepository(Order::class)->findPaidOrders();
         foreach($ordersAll as $o){  
+            $dateChart[] = date_format($o->getCreatedAt(), 'j-M-y');
+            $orderChart[] = 1; 
             $od = $o->getOrderDetails();  
             foreach($od as $detail){
                 $totalAll += $detail->getTotal();
@@ -76,7 +81,9 @@ class DashboardController extends AbstractDashboardController
             'orders30' => $ordersThirty,
             'total30' => $totalThirty,
             'products' => $products,
-            'artists' => $allArtistArray
+            'artists' => $allArtistArray,
+            'dateC' => $dateChart,
+            'orderC' => $orderChart
         ]);
     }
 
