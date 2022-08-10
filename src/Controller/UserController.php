@@ -12,6 +12,7 @@ use App\Form\ProfilType;
 use App\Form\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
@@ -76,7 +77,7 @@ class UserController extends AbstractController
     //          Page Liste des artistes
     //=============================================
     #[Route('/artists', name: 'artistList')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
 
         $artists = $doctrine->getRepository(User::class)->findAll();
@@ -91,8 +92,7 @@ class UserController extends AbstractController
             $idConnected = 0;
         }
 
-
-        $artistArray = array();
+        $allArtistArray = array();
 
         foreach ($artists as $userInst) {
             //Récupération id de l'artiste
@@ -101,11 +101,16 @@ class UserController extends AbstractController
 
             if(in_array('ROLE_ARTIST', $userRoles))
             {
-                $artistArray[$userId] = $userInst;
+                $allArtistArray[$userId] = $userInst;
             }
         }
+        $artistArray = $paginator->paginate(
+            $allArtistArray,
+            $request->query->getInt('page', 1),
+            20
+        );
 
-
+        $followerCountArray = array();
         foreach ($artistArray as $artistsInst) {
             //Récupération id de l'artiste
             $artistId = $artistsInst->getId(); 
@@ -125,8 +130,6 @@ class UserController extends AbstractController
             else{
                 $IsFollowedArray[$artistId] = false;
             }
-            
-
         }
 
 
@@ -134,7 +137,7 @@ class UserController extends AbstractController
         return $this->render('users/artist/artistList.html.twig', [
             'artists' => $artistArray,
             'followers' => $followerCountArray,
-            'isFollowed' => $IsFollowedArray
+            'isFollowed' => $IsFollowedArray,
         ]);
     }
 
@@ -160,11 +163,28 @@ class UserController extends AbstractController
         $subscribers = $doctrine->getRepository(Subscriptions::class)->findBy(['UserFollowed' => $id]);
         $subscribersCount = count($subscribers);
 
+        $users = $doctrine->getRepository(User::class)->findAll();
+
+        $artists = array();
+        foreach ($users as $userArtist) {
+            //Récupération id de l'artiste
+            $userArtistId = $userArtist->getId(); 
+            $userArtistRoles = $userArtist->getRoles(); 
+
+            if(in_array('ROLE_ARTIST', $userArtistRoles))
+            {
+                $artists[$userArtistId] = $userArtist;
+            }
+        }
+        shuffle($artists);
+        $others = array_slice($artists, 0, 3);
+
 
         return $this->render('users/artist/artistPage.html.twig', [
             'user' => $user,
             'subscription' => $subscriptionsFound,
-            'nbSubscribers' => $subscribersCount
+            'nbSubscribers' => $subscribersCount,
+            'others' => $others
         ]);
     }
 

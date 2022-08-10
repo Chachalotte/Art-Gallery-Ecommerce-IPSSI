@@ -11,6 +11,10 @@
 {% if app.user and is_granted('ROLE_ARTIST') == false %}
 <a class="createButton" href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
 {% endif %}
+
+{% include 'home/flashMessages.twig' %}
+
+
 <section class="artistList">
     {% for artist in artists %}
         <div class="artistBox">
@@ -52,5 +56,7 @@
     <p>Il n'y a pas encore d' artistes</p>
     {% endfor %}
 </section>
-
+<div class="pagination">
+    {{ knp_pagination_render(artists) }}
+</div>
 {% endblock %}

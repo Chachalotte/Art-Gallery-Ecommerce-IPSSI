@@ -118,6 +118,12 @@
     "guzzlehttp/psr7": {
         "version": "2.4.0"
     },
+    "knplabs/knp-components": {
+        "version": "v3.5.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.8.0"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
@@ -597,6 +603,9 @@
     },
     "symfony/uid": {
         "version": "v6.0.2"
+    },
+    "symfony/ux-chartjs": {
+        "version": "v2.3.0"
     },
     "symfony/validator": {
         "version": "6.0",

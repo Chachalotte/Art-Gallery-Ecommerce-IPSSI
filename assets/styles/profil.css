@@ -1,13 +1,40 @@
+.flashMessage
+{
+  /* border:linear-gradient(.25turn, rgb(0, 0, 0), 20%, rgba(255, 119, 0, 0)); */
+  margin: auto;
+  padding: 0.5vw;
+  margin:2px;
+  margin-left: 25px;
+  border-radius: 5px;
+  background:linear-gradient(.25turn, #ffe5cfa1, 10%, rgba(255, 119, 0, 0));
+  font-size:  16px;
+  color: rgb(153 99 0);
+}
+
+.flashAlert
+{
+  /* border:linear-gradient(.25turn, rgb(0, 0, 0), 20%, rgba(255, 119, 0, 0)); */
+  margin: auto;
+  padding: 0.5vw;
+  margin:2px;
+  margin-left: 25px;
+  border-radius: 5px;
+  background:linear-gradient(.25turn, #ffb0b0a8, 10%, rgba(255, 119, 0, 0));
+  font-size:  16px;
+  color: rgb(166, 11, 0);
+}
+
+
 .profileBoxSmall
 {
-    background-color: rgb(240, 235, 223);
+  background-color: rgb(240, 235, 223);
 	border:solid 1px rgb(240, 235, 223);
 	margin-left: 2% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
-    margin-top: 1px;
+  margin-top: 1px;
     
 	border-radius: 1px;
-	width:25% ;
+	width:20% ;
 	box-shadow :-3px 7px 16px #ced6de;
 	opacity: 1;
 	margin: 10px;
@@ -24,7 +51,7 @@
     margin-bottom: 1px;
     padding-bottom: 6px;
 	border-radius: 1px;
-	width:52% ;
+	width:30% ;
 	box-shadow :-3px 7px 16px #ced6de;
 	opacity: 1;
 	margin: 10px;
