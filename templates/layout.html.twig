@@ -5,11 +5,6 @@
         {% if (app.user) %}
             <li><a class="nav__link" href="{{ path('app_logout') }}">Déconnexion</a></li>
             <li><a class="nav__link" href="{{ path('app_profil', {'id':app.user.id}) }}">Mon Profil</a></li>
-            {% if is_granted('ROLE_ADMIN') %}
-                <li><a class="nav__link" href="{{ path('app_product') }}">Liste des produits</a></li>
-                <li><a class="nav__link" href="{{ path('admin') }}">Administration</a></li>
-                {# <li><a class="nav__link" href="{{ path('dossier') }}">Dossier</a></li> #}
-            {% endif %}
         {% else %}
             <li><a class="nav__link" href="{{ path('login') }}">Connexion</a></li>
             <li><a class="nav__link" href="{{ path('app_register') }}">Inscription</a></li>
@@ -23,9 +18,10 @@
                 <li><a class="nav__link" href="{{path('artistList')}}">Artistes</a></li>
                 <li><a class="nav__link" href="{{path('categories')}}">Catégories</a></li>
                 <li><a class="nav__link" href="{{path('events')}}">Evenements</a></li>
-                {% if is_granted('ROLE_ARTIST') %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a class="nav__link" href="{{ path('admin') }}">Administration</a></li>
+                {% elseif is_granted('ROLE_ARTIST') %}
                     <li><a class="nav__link" href="{{path('product_new', {'id':app.user.id})}}">Ajout oeuvre</a></li>
-                    <li><a class="nav__link" href="#">Ajout vitrine</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -80,7 +76,6 @@
             <h4>Guides et contact</h4>
             <ul class="nav" >
                 <li><a class="nav__link" href="{{ path('contact')}}">Contact</a></li>
-                <li><a class="nav__link" href="#">Relation presse</a></li>
                 <li><a class="nav__link" href="{{ path('privacy')}}">Mentions légales</a></li>
                 <li><a class="nav__link" href="{{ path('privacypolicy')}}">Politique de confidentialité</a></li>
                 <li><a class="nav__link" href="{{ path('terms')}}">CGU</a></li>
