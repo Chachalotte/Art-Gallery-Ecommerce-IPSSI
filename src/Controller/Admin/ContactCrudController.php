@@ -14,10 +14,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 
 class ContactCrudController extends AbstractCrudController
 {
@@ -32,16 +34,16 @@ class ContactCrudController extends AbstractCrudController
         return Contact::class;
     }
 
-    public function configureActions(Actions $actions): Actions
-    {
-        $updateInProgress = Action::new('updateInProgress', 'En cours de traitement', 'fas fa-box-open')->linkToCrudAction('updateInProgress');
-        $updateDone = Action::new('updateDone', 'Traité', 'fas fa-truck')->linkToCrudAction('updateDone');
+    // public function configureActions(Actions $actions): Actions
+    // {
+    //     $updateInProgress = Action::new('updateInProgress', 'En cours de traitement', 'fas fa-box-open')->linkToCrudAction('updateInProgress');
+    //     $updateDone = Action::new('updateDone', 'Traité', 'fas fa-truck')->linkToCrudAction('updateDone');
 
-        return $actions
-            ->add('detail', $updateInProgress)
-            ->add('detail', $updateDone)
-            ->add('index', 'detail');
-    }
+    //     return $actions
+    //         ->add('detail', $updateInProgress)
+    //         ->add('detail', $updateDone)
+    //         ->add('index', 'detail');
+    // }
 
     public function updateInProgress(AdminContext $context)
     {
@@ -86,14 +88,15 @@ class ContactCrudController extends AbstractCrudController
         return [
             IdField::new('id'),
             TextField::new('nom','Nom'),
-            TextField::new('prenom','Prénom'),
-            TextEditorField::new('message','Message'),
+            TextField::new('prenom','Prénom'),            
+            EmailField::new('email','Email'),
+            TextareaField::new('message','Message'),
             DateTimeField::new('date','Date de la demande'),
-            ChoiceField::new('statut','Statut')->setChoices([
-                'Demande envoyée' => 1,
-                'Demande en cours' => 2,
-                'Demande traitée' => 3
-            ]),
+            // ChoiceField::new('statut','Statut')->setChoices([
+            //     'Demande envoyée' => 1,
+            //     'Demande en cours' => 2,
+            //     'Demande traitée' => 3
+            // ]),
         ];
     }
 
