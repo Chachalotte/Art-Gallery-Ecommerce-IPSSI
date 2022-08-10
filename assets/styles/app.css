@@ -14,6 +14,7 @@
 @import url('form.scss');
 @import url('adress.css');
 
+*{ margin: 0}
 main {
   margin: 0 2vw;
   font:  14px "Georgia", serif;

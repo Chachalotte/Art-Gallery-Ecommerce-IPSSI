@@ -13,9 +13,10 @@
     {% endfor %}
 </div>
 
-<h1 class="rubriqueTitle">Se connecter</h1>
 
 <form class="connection" action="{{ path('login') }}" method="post">
+<h1 class="rubriqueTitle">Se connecter</h1>
+
     <div class="formField">
         <label for="username">Adresse Email :</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}"/>

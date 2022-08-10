@@ -27,14 +27,14 @@
                     <li><a class="nav__link" href="{{path('product_new', {'id':app.user.id})}}">Ajout oeuvre</a></li>
                     <li><a class="nav__link" href="#">Ajout vitrine</a></li>
                 {% endif %}
+                {% if (app.user) %}
+                <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
+            {% endif %}
             </ul>
         </div>
         <div class="search_product">
-            {% if (app.user) %}
-                <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
-            {% endif %}
-            <i class="fas fa-search"></i>
-            <input placeholder="Rechercher">
+    
+        
         </div>
     </nav>
 {% endblock %}
@@ -53,7 +53,10 @@
                 <li><a class="nav__link" href="{{ path('app_product')}}">Les oeuvres à vendre</a></li>
                 <li><a class="nav__link" href="{{path('artistList')}}">Les artistes</a></li>
                 <li><a class="nav__link" href="{{ path('products_sold')}}">Les oeuvres vendues</a></li>
-                <li><a class="nav__link" href="{{ path('app_register')}}">Inscription</a> / <a class="nav__link" href="{{ path('login')}}">Connexion</a></li>
+                {% if (app.user) %}
+                {% else %}
+                    <li><a class="nav__link" href="{{ path('app_register')}}">Inscription</a> / <a class="nav__link" href="{{ path('login')}}">Connexion</a></li>
+                {% endif %}
                 <li><a class="nav__link" href="#">Conditions de ventes</a></li>
                 <li><a class="nav__link" href="#">Retours et remboursements</a></li>
             </ul>
