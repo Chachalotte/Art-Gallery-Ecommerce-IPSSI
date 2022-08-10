@@ -41,7 +41,7 @@
                     {% if product.isSold != true %}
                         <a class="addCartButton" href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>  
                     {% else %}
-                        <p class="indication">Ce produit n'est actuellement pas en vente.</p>
+                        <p class="indication">Ce produit n'est plus en vente.</p>
                     {% endif %}  
                 {% else %}
                     <p class="indication">Il s'agit de l'un de vos produits.</p>
@@ -88,7 +88,11 @@
                         {% for comment in comments %}
                             <div class="commentCard">
                                     <p>
-                                        De <b><a href="{{path('artistPage', {'id': comment.user.id} ) }}">{{ comment.user.firstname }} {{ comment.user.name }}</a></b>
+                                        De <b><a href="{{path('artistPage', {'id': comment.user.id} ) }}">{{ comment.user.firstname }} {{ comment.user.name }}</a></b> 
+                                        {% if comment.date %} 
+                                            le {{ comment.date }}
+                                        {% endif %}
+
                                         {% if comment.user ==  app.user and (app.request.get('_route') == 'product') or app.user and is_granted('ROLE_ADMIN') == true %} 
                                             <a class="editButton" href="{{path('editComments', {'id': product.id, 'idCom': comment.id} ) }}">Editer</a>
                                             <a class="deleteButton" href="{{path('deleteComments', {'idCom': comment.id} ) }}">Supprimer</a> 
@@ -115,6 +119,7 @@
                 <img src="{{ asset('img/product/' ~ other.img) }}"/>
             </div>
         </a>    
+        {% else %}
         {% endfor %}
         </div>
 </section>

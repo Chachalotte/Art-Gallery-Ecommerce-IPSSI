@@ -7,6 +7,7 @@ use App\Entity\Order;
 use App\Entity\Carrier;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Contact;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
@@ -41,6 +42,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::section('Liste liées aux utilisateurs'),
             MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class),
             MenuItem::linkToCrud('Orders', 'fa fa-shopping-cart', Order::class),
+            MenuItem::linkToCrud('Contact', 'fa fa-solid fa-comments', Contact::class),
 
             MenuItem::section('Liste liées aux produits'),
             MenuItem::linkToCrud('Produits', 'fa fa-tags', Product::class),

@@ -33,8 +33,8 @@ class ProductType extends AbstractType
             ->add('price', NumberType::class,[
                 'label' => 'Prix'
             ])
-            ->add('color', TextType::class,[
-                'label' => 'Couleur'
+            ->add('descriptionTech', TextType::class,[
+                'label' => 'Description technique (Dimensions, matériaux...)'
             ])
             // ->add('orderItem')
             // ->add('artist')

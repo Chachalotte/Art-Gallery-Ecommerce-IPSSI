@@ -160,11 +160,21 @@ class ProductController extends AbstractController
         $form = $this->createForm(CommentType::class, $newComment);
         $form->handleRequest($request);
 
+        $products = $doctrine->getRepository(Product::class)->findAll();
+        $productsother = [];
+        foreach($products as $p){
+            if(!$p->isSold() && ($p->getArtist()->getId() != $product->getArtist()->getId())){
+                $productsother[] = $p;
+            }
+        }
+        shuffle($productsother);
+        $others = array_slice($productsother, 0, 4);
 
         if ($form->isSubmitted() && $form->isValid() && $connectedUser !== null) {
 
             $newComment->setProduct($product);
             $newComment->setUser($connectedUser);
+            // $newComment->setDate(new \DateTime());
             $newComment->setMessage($form['Message']->getData());
             // $newComment->setMessage($form->getParameter('Message'));
             
@@ -184,7 +194,8 @@ class ProductController extends AbstractController
         return $this->render('product/product.html.twig', [
             'product' => $product,
             'comments' => $postedComments,
-            'formComment' => $form->createView()
+            'formComment' => $form->createView(),
+            'others' => $others  
         ]);
     }
 
@@ -197,6 +208,16 @@ class ProductController extends AbstractController
         $editedComment = $doctrine->getRepository(Comments::class)->find($idCom);
         $postedComments = $doctrine->getRepository(Comments::class)->findBy(['Product' => $id]);
 
+        $products = $doctrine->getRepository(Product::class)->findAll();
+        $productsother = [];
+        foreach($products as $p){
+            if(!$p->isSold() && ($p->getArtist()->getId() != $product->getArtist()->getId())){
+                $productsother[] = $p;
+            }
+        }
+        shuffle($productsother);
+        $others = array_slice($productsother, 0, 4);
+        
         //Section ajout de commentaire
         $form = $this->createForm(CommentType::class, $editedComment);
         $form->handleRequest($request);
@@ -230,7 +251,8 @@ class ProductController extends AbstractController
         return $this->render('product/product.html.twig', [
             'product' => $product,
             'comments' => $postedComments,
-            'formComment' => $form->createView()
+            'formComment' => $form->createView(),
+            'others' => $others  
         ]);
     }
 

@@ -87,7 +87,7 @@ class ProfilType extends AbstractType
                 ]
             ])
             ->add('age', BirthdayType::class,[
-                'years' => $this->generateChoices(1910,(date("Y")-1))
+                'years' => $this->generateChoices(1910,(date("Y")-18))
 
             ])
             ->add('plainPassword', RepeatedType::class, [
