@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Order;
 use App\Entity\Comments;
-use App\Entity\Subscriptions;
 use App\Form\ProfilType;
+use App\Entity\Subscriptions;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -29,16 +30,33 @@ class ProfilController extends AbstractController
             return $this->createAccessDeniedException();
         }
 
+
+        // On récupère l'ancienne donnée
+        $oldUser = new User;
+        $oldUser->setEmail($user->getEmail());
+        $oldUser->setFirstname($user->getFirstname());
+        $oldUser->setName($user->getName());
+        $user->getGender() ? $oldUser->setGender($user->getGender()) : null;
+        $user->getAge() ? $oldUser->setAge($user->getAge()) : null;
+        $oldUser->setPassword($user->getPassword());
+        $user->getAvatar() ? $oldUser->setAvatar($user->getAvatar()) : null;
+
+        // $avatar = new File($this->getParameter('upload_file_user').$user->getAvatar());
+        // $user->setAvatar($avatar);
+
         // $comment = $user->getComments();
         $follows = $doctrine->getRepository(Subscriptions::class)->findBy(['User' => $id]);
         $orders = $doctrine->getRepository(Order::class)->findSuccessOrders($this->getUser()); 
         $comments = $doctrine->getRepository(Comments::class)->findBy(['User' => $id]); 
 
+        
         $form = $this->createForm(ProfilType::class, $user);
 
         $form->handleRequest($request);
-
+        // dump($form->isSubmitted());
+        // dump($form->isValid());
         if ($form->isSubmitted() && $form->isValid()) {
+            
             if ($form->get('plainEmail')->getData() !== null) {
                 $user->setEmail($form['plainEmail']->getData());
             } else {
@@ -81,7 +99,12 @@ class ProfilController extends AbstractController
                 $user->setPassword($oldUser->getPassword());
             }
 
-            if ($form->get('avatar')->getData() !== null) {
+            if ($form->get('avatar')->getData() == null) {
+                
+                $this->addFlash("error", "Aucun avatar d'enregistré");
+                //$user->setAvatar($oldUser->getAvatar());
+            } else {
+                
                 $avatar = $form->get('avatar')->getData();
                 $avatarName = md5(uniqid()) . '.' . $avatar->guessExtension();
 
@@ -90,9 +113,25 @@ class ProfilController extends AbstractController
                     $avatarName
                 );
                 $user->setAvatar($avatarName);
-            } else {
-                // $user->setAvatar($oldUser->getAvatar());
+                $this->addFlash("sucess", "Avatar changé");
             }
+
+            // if ($form->get('avatar')->getData()) {
+            //     dump("if");
+            //     $avatar = $form->get('avatar')->getData();
+            //     $avatarName = md5(uniqid()) . '.' . $avatar->guessExtension();
+
+            //     $avatar->move(
+            //         $this->getParameter('upload_file_user'),
+            //         $avatarName
+            //     );
+            //     $user->setAvatar($avatarName);
+            //     $this->addFlash("sucess", "Avatar changé");
+            // } else {
+            //     dump($oldUser->getAvatar());
+            //     $this->addFlash("error", $oldUser->getAvatar());
+            //      $user->setAvatar($oldUser->getAvatar());
+            // }
 
             
             $em->persist($user);
@@ -102,6 +141,7 @@ class ProfilController extends AbstractController
 
             return $this->redirectToRoute("app_profil", ['id' => $user->getId()]);
         }
+
 
         return $this->render('users/profil/profil.html.twig', [
             'user' => $user,

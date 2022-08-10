@@ -39,65 +39,49 @@ class ProfilType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if ($options['current_password_is_required']) {
-            $builder
-                ->add('currentPassword', PasswordType::class, [
-                    'label' => 'Entrer votre mot de passe',
-                    'attr' => [
-                        'autocomplete' => 'off'
-                    ],
-                    'constraints' => [
-                        new NotBlank([
-                            'message' => 'Veuillez entrer un mot de passe',
-                        ]),
-                        new UserPassword([
-                            'message' => 'Mot de passe invalide',
-                        ]),
-                    ]
-                ]);
-        }
         $builder
             ->add('plainEmail', RepeatedType::class, [
+                'required' => false,
                 'type' => EmailType::class,
                 'first_options' => [
                     'label' => 'Entrer votre nouvel email',
-                    'constraints' => [
-                        new NotBlank([
-                            'message' => 'Veuillez entrer un email',
-                        ]),
-                    ],
                 ],
                 'second_options' => [
                     'label' => 'Confirmer votre nouvel email',
                 ],
                 'invalid_message' => 'Les champs nouvels email doivent être identiques.',
                 'mapped' => false,
+                'attr' => [
+                    'autocomplete' => 'off'
+                ]
             ])
             ->add('firstname', TextType::class, [
+                'required' => false,
                 'label' => 'Entrer votre prénom',
             ])
             ->add('name', TextType::class, [
+                'required' => false,
                 'label' => 'Entrer votre nom',
             ])
             ->add('gender', ChoiceType::class, [
-                'label' => 'Sexe',
+                'required' => true,
+                'label' => 'Sexe*',
                 'choices' => [
                     'Homme' => 'Homme',
                     'Femme' => 'Femme'
                 ]
             ])
             ->add('age', BirthdayType::class,[
+                'required' => false,
                 'years' => $this->generateChoices(1910,(date("Y")-18))
 
             ])
             ->add('plainPassword', RepeatedType::class, [
+                'required' => false,
                 'type' => PasswordType::class,
                 'first_options' => [
                     'label' => 'Entrer votre nouveau mot de passe',
                     'constraints' => [
-                        new NotBlank([
-                            'message' => 'Veuillez entrer un mot de passe',
-                        ]),
                         new Length([
                             'min' => 6,
                             'minMessage' => 'Votre mot de passe doit être au moins {{ limit }} caractères',
@@ -113,7 +97,7 @@ class ProfilType extends AbstractType
                 'mapped' => false,
             ])
             ->add('avatar', FileType::class, [
-                'label' => 'Image (JPEG/PNG)',
+                'label' => 'Image (JPEG/PNG)*',
                 'data_class' => null,
                 'required' => false
             ])
