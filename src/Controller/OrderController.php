@@ -22,6 +22,7 @@ class OrderController extends AbstractController
             return $this->redirectToRoute('new_address');
         }
 
+        $productArray = array(); //Récupération de la liste des produits pour l'affichage des cartes
         $cart = $session->get("cart", []);
         $dataCart = [];
         $total = 0;
@@ -32,7 +33,10 @@ class OrderController extends AbstractController
                 "quantity" => $quantity
             ];
             $total += $product->getPrice() * $quantity;
+            $productArray[$id] = $product;
         }
+
+
 
         $form = $this->createForm(OrderType::class, null, [
             'user' => $this->getUser()
@@ -40,7 +44,8 @@ class OrderController extends AbstractController
 
         return $this->render('order/index.html.twig', [
             'form' => $form->createView(),
-            'cart' => $dataCart
+            'cart' => $dataCart,
+            'products' => $productArray
         ]);
     }
 
@@ -53,6 +58,7 @@ class OrderController extends AbstractController
 
         $em = $doctrine->getManager();
         $cart = $session->get("cart", []);
+        $productArray = array(); //Récupération de la liste des produits pour l'affichage des cartes
         $dataCart = [];
         $total = 0;
         foreach ($cart as $id => $quantity) {
@@ -62,6 +68,7 @@ class OrderController extends AbstractController
                 "quantity" => $quantity
             ];
             $total += $product->getPrice() * $quantity;
+            $productArray[$id] = $product;
         }
 
         $form = $this->createForm(OrderType::class, null, [
@@ -113,6 +120,7 @@ class OrderController extends AbstractController
                 'carrier' => $carrier,
                 'delivery' => $delivery_content,
                 'reference' => $order->getReference(),
+                'products' => $productArray
             ]);
         }     
         

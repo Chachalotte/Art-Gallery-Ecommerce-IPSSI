@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% include 'home/flashMessages.twig' %}
 
 <div class="spacingSmall"></div>
 <section  class="presentation">
@@ -22,48 +23,39 @@
          
                 
                 <p>{{ product.description | capitalize }}</p>
-                
-                <img class="imgProduct" src="{{ asset('img/product/' ~ product.img) }}"/>
-
+                <div>
+                 <center>   <img class="imgProduct" src="{{ asset('img/product/' ~ product.img) }}"/> </center>
+                </div>
             
         </div>
     </div>
   </aside>
-    {# <div class="spacingSmall"></div> #}
-    
-    
 
-            
-            
-                <div class="SaleInfoBox">
-                    <h2 class="secondaryTitle">Mise en vente</h2> 
-                    {% if product.isSold != true %}               
-                        <p class="priceTag">Prix: {{ product.price | capitalize }} €</p>
-                    {% endif %} 
-
-                    <div class="action">
-                    {% if product.artist != app.user %}
-                        {% if product.isSold != true %}
-                            <a class="addCartButton" href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>  
-                        {% else %}
-                            <p class="indication">Ce produit n'est actuellement pas en vente.</p>
-                        {% endif %}  
+    <div class="SaleInfoBox">
+        <h2 class="secondaryTitle">Mise en vente</h2> 
+        {% if product.isSold != true %}
+            <p class="priceTag">Prix: {{ product.price | capitalize }} €</p>
+        {% endif %} 
+            <div class="action">
+                {% if product.artist != app.user %}
+                    {% if product.isSold != true %}
+                        <a class="addCartButton" href="{{path('cart_add', {'id': product.id}) }}"/>Ajouter au panier</a>  
                     {% else %}
-                        <p class="indication">Il s'agit de l'un de vos produits.</p>
-                    {% endif %}           
-                    </div>
-                    <div class="action">
-                        <h2 class="secondaryTitle">Détails techniques du produit</h2> 
-                        <p>Catégorie : <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a></p>  
-                        <p>Dimensions: 120x170 cm</p>             
-                    </div>
-                </div>
-              
+                        <p class="indication">Ce produit n'est actuellement pas en vente.</p>
+                    {% endif %}  
+                {% else %}
+                    <p class="indication">Il s'agit de l'un de vos produits.</p>
+                {% endif %}           
+            </div>
                 
-              
-</section>    
+            <h2 class="secondaryTitle">Détails techniques du produit</h2> 
+            <p>Catégorie : <a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a></p>  
+            <p>Dimensions: 120x170 cm</p>             
 
-   <div class="spacingBig"></div>
+    </div>        
+</section>        
+        
+<div class="spacingBig"></div>
             
 <section >                 
          
@@ -97,7 +89,7 @@
                             <div class="commentCard">
                                     <p>
                                         De <b><a href="{{path('artistPage', {'id': comment.user.id} ) }}">{{ comment.user.firstname }} {{ comment.user.name }}</a></b>
-                                        {% if comment.user ==  app.user and (app.request.get('_route') == 'product') %} 
+                                        {% if comment.user ==  app.user and (app.request.get('_route') == 'product') or app.user and is_granted('ROLE_ADMIN') == true %} 
                                             <a class="editButton" href="{{path('editComments', {'id': product.id, 'idCom': comment.id} ) }}">Editer</a>
                                             <a class="deleteButton" href="{{path('deleteComments', {'idCom': comment.id} ) }}">Supprimer</a> 
                                         {% endif %}
@@ -110,46 +102,21 @@
                 
        
 
-    <section >
+<section id="other">
     <h2 class="rubriqueTitle">Vous aimerez aussi ...</h2>
-    {#% for  | reverse | slice(0, 3) %#}
         <div class="otherOeuvres">
+        {% for other in others %}
+        <a href="{{path('product', {'id':other.id})}}" >
             <div class="anotherOeuvre">
                 <div>  
-                    <h3>Autre Oeuvre</h3>
-                    <p> Début de description de l'oeuvre ....</p>
+                    <h3>{{other.name | capitalize}}</h3>
+                    <p>De {{ other.artist.firstname | capitalize }} {{ other.artist.name | capitalize }} </p>
                 </div>
-                <img src="{{ asset('img/product/d813d4903ac4445a84746e8133643e95.jpg') }}"/>
+                <img src="{{ asset('img/product/' ~ other.img) }}"/>
             </div>
-
-            <div class="anotherOeuvre">
-                <div>  
-                    <h3>Autre Oeuvre</h3>
-                    <p> Début de description de l'oeuvre ....</p>
-                </div>
-                <img src="{{ asset('img/product/') }}"/>
-            </div>
-            <div class="anotherOeuvre">
-                <div>  
-                    <h3>Autre Oeuvre</h3>
-                    <p> Début de description de l'oeuvre ....</p>
-                </div>
-                <img src="{{ asset('img/product/') }}"/>
-            </div>
-            <div class="anotherOeuvre">
-                <div>  
-                    <h3>Autre Oeuvre</h3>
-                    <p> Début de description de l'oeuvre ....</p>
-                </div>
-                <img src="{{ asset('img/product/') }}"/>
-            </div>
+        </a>    
+        {% endfor %}
         </div>
-    {#% endfor %#}
-
-
-
-
-    
 </section>
 
 

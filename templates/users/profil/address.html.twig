@@ -5,8 +5,9 @@
 {% block content %}
     <div>
         <h1 class="rubriqueTitle">Mes adresses</h1>
-        <a class="createButton" href="{{path('new_address') }}">Ajouter une adresse</a>
+        <center><a class="createButton" href="{{path('new_address') }}">Ajouter une adresse</a></center>
     </div>
+    {% include 'home/flashMessages.twig' %}
     <div class="addresses">
         {% if app.user.adresses|length == 0 %}
         <p>Vous n'avez pas encore ajouté d'adresse dans votre compte client.</p>

@@ -13,6 +13,33 @@
     <h1 class="rubriqueTitle">Nous contacter</h1>
 
         {{ form_start(form) }}
+        <div class="col-md-12">
+            <div class="formField">
+                {{ form_label(form.firstname) }}
+                {{ form_errors(form.firstname) }}
+                {{ form_help(form.firstname) }}
+                {{ form_widget(form.firstname) }}
+            </div>
+            <div class="formField">
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{ form_help(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="formField">
+                {{ form_label(form.email) }}
+                {{ form_errors(form.email) }}
+                {{ form_help(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="formField">
+                {{ form_label(form.content) }}
+                {{ form_errors(form.content) }}
+                {{ form_help(form.content) }}
+                {{ form_widget(form.content) }}
+            </div>
+
+        </div>
         {{ form_end(form) }}
     </div>
 

@@ -1,0 +1,34 @@
+
+{% block content %}
+
+
+            <div class="productBox">
+                    <h2>
+                        <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
+                        
+                    </h2>
+                    <center>
+                    <p><a href="{{path('category', {'id': product.category.id} ) }}">{{ product.category.name }}</a> 
+                        {% if (app.request.get('_route') != 'artistPage') %}
+                            de <a href="{{path('artistPage', {'id': product.artist.id} ) }}">{{ product.artist.firstname }} {{ product.artist.name }}</a></p>
+                        {% endif %}
+
+                        {% if app.user and product.Artist.id == app.user.id %}
+                            <div>{% include 'product/editProductButtons.html.twig' %}</div>
+                        {% endif %}
+                        <p>{{ product.description | capitalize | slice(0, 150)}}</p>
+
+                        <div>
+                            <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>  
+                            {% if product.isSold %}
+                                <img class="sold" alt="Vendu icônes créées par Alfredo Hernandez - Flaticon" title="Oeuvre vendue" src="{{ asset('img/vendu.png')}}">
+                            {% else %}
+                                <p class="price">{{ product.price}}€</p>
+                            {% endif %}
+                        </div>
+                        
+                    </center>
+            </div>
+
+
+{% endblock %}

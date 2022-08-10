@@ -8,9 +8,8 @@
 {% block content %}
 
 <h2 class="rubriqueTitle">Mes commentaires</h2>
-{% if app.user and is_granted('ROLE_ARTIST') == false %}
-<a class="createButton" href="{{path('product_new', {'id':app.user.id})}}">Devenir exposant sur le site</a>
-{% endif %}
+
+
 <section class="artistList">
     {% for comment in comments %}
         <div class="commentFlexBox">

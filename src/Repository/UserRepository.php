@@ -65,31 +65,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
-    public function findArtist($id)
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb->select('u')
-            ->where('u.roles LIKE ["ROLE_ARTIST"]')
-            ->orderBy('u.id', 'DESC');
-        // ->setParameter('["ROLE_ARTIST"]', );
-
-        // return $qb->getQuery()->getResult();
-        // $qb = $this->createQueryBuilder('u');
-        // $qb->select('u')
-        //     ->where('u.roles LIKE :roles')
-        //     ->orderBy('u.id', 'DESC')
-        //     ->setParameter('roles', '%"' . $role . '"%');
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function findAllArtists()
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb->select('u')
-            ->where("u.roles = [\"ROLE_ARTIST\"]")
-            ->orderBy('u.id', 'DESC');
-        // ->setParameter(':["ROLE_ARTIST"]');
-        return $qb->getQuery()->getResult();
-    }
 }

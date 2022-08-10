@@ -37,11 +37,13 @@
             {{ form_errors(form.string) }}
             {{ form_help(form.string) }}
             {{ form_widget(form.string) }}
+
+            {{ form_label(form.categories) }}
+            {{ form_widget(form.categories) }}
+
+            {{ form_widget(form.minPrice) }}
+            {{ form_widget(form.maxPrice) }}
         {{form_end(form)}} 
-
-
-
-
     </div>
 
     <section class="productsList">
@@ -49,28 +51,9 @@
         {% if loop.first %}
 
         {% endif %}
-           <div class="productBox">
-                
-                    <h2>
-                        <a href="{{path('product', {'id': product.id} )}}">{{ product.name | capitalize }}</a>
-                        <span><a href="{{path('category', {'id': product.category.id} ) }}">({{ product.category.name }})</a></span>
-                    </h2>
-                    <center>
-        
-                        <p>{{ product.description | capitalize | slice(0, 150)}}</p>
 
-                        <div>
-                            <img class="imgBig" src="{{ asset('img/product/' ~ product.img) }}"/>  
-                            {% if product.isSold %}
-                                <img class="sold" alt="Vendu icônes créées par Alfredo Hernandez - Flaticon" title="Oeuvre vendue" src="{{ asset('img/vendu.png')}}">
-                            {% else %}
-                                <p class="price">{{ product.price}}€</p>
-                            {% endif %}
-                        </div>
-                        
-                    </center>
-            </div>
-            <div class="spacingRow"></div>
+        {% include 'product/productCard.twig' %}
+
 
         {% if loop.index % 6 == 0 %}
 		{# Après 3 boucles on reforme une section et on sépare les blocs #}
@@ -79,7 +62,10 @@
 		{# close last row #}
 		{% endif %}
     {% else %}
-    <p>pas de produit</p>
+    <p>Aucun produit trouvé.</p>
     {% endfor %}
 	</section>
+    <div class="pagination">
+        {{ knp_pagination_render(products) }}
+    </div>
 {% endblock %}
