@@ -12,10 +12,11 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Constraints\Length;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Symfony\Component\Validator\Constraints\Length;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -58,6 +59,7 @@ class DashboardController extends AbstractDashboardController
         foreach($ordersAll as $o){  
             $dateChart[] = date_format($o->getCreatedAt(), 'j-M-y');
             $orderChart[] = 1; 
+            // getChartData($dateChart, $orderChart);
             $od = $o->getOrderDetails();  
             foreach($od as $detail){
                 $totalAll += $detail->getTotal();
@@ -86,6 +88,15 @@ class DashboardController extends AbstractDashboardController
             'orderC' => $orderChart
         ]);
     }
+
+    // #[Route('/admin/chart', name: 'chart')]
+    // public function getChartData($dateChart, $orderChart)
+    // {
+    //     $response = new JsonResponse(['date' => $dateChart, 'order' => $orderChart]);
+    //     $response->headers->set('Content-Type', 'application/json');
+
+    //     return $response;
+    // }
 
     public function configureDashboard(): Dashboard
     {
