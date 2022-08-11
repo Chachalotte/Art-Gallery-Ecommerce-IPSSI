@@ -20,7 +20,7 @@ class StripeController extends AbstractController
     public function index(SessionInterface $session, ProductRepository $productRepository, ManagerRegistry $doctrine, $reference)
     {
         $products_for_stripe = [];
-        $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
+        $YOUR_DOMAIN = 'http://artfactory-ipssi.herokuapp.com/';
         $order = $doctrine->getRepository(Order::class)->findOneBy(['reference' => $reference]);
         if(!$order){
             new JsonResponse(['error' => 'order']);
