@@ -78,6 +78,19 @@ section .partner__items {
   justify-content: space-around;
 }
 
+div.order__items div{
+  width: 17vw;
+  text-align: center;
+}
+
+div.order__items div img{
+  width: 10vw;
+  height: 15vh;
+  object-fit: contain;
+  margin: 0.5vw 3.5vw;
+}
+
 section .partner__items div img {
   width: 15vw;
+
 }

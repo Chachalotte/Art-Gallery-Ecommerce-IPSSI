@@ -160,11 +160,21 @@ class ProductController extends AbstractController
         $form = $this->createForm(CommentType::class, $newComment);
         $form->handleRequest($request);
 
+        $products = $doctrine->getRepository(Product::class)->findAll();
+        $productsother = [];
+        foreach($products as $p){
+            if(!$p->isSold() && ($p->getArtist()->getId() != $product->getArtist()->getId())){
+                $productsother[] = $p;
+            }
+        }
+        shuffle($productsother);
+        $others = array_slice($productsother, 0, 4);
 
         if ($form->isSubmitted() && $form->isValid() && $connectedUser !== null) {
 
             $newComment->setProduct($product);
             $newComment->setUser($connectedUser);
+            // $newComment->setDate(new \DateTime());
             $newComment->setMessage($form['Message']->getData());
             // $newComment->setMessage($form->getParameter('Message'));
             
@@ -184,7 +194,8 @@ class ProductController extends AbstractController
         return $this->render('product/product.html.twig', [
             'product' => $product,
             'comments' => $postedComments,
-            'formComment' => $form->createView()
+            'formComment' => $form->createView(),
+            'others' => $others  
         ]);
     }
 
@@ -197,6 +208,16 @@ class ProductController extends AbstractController
         $editedComment = $doctrine->getRepository(Comments::class)->find($idCom);
         $postedComments = $doctrine->getRepository(Comments::class)->findBy(['Product' => $id]);
 
+        $products = $doctrine->getRepository(Product::class)->findAll();
+        $productsother = [];
+        foreach($products as $p){
+            if(!$p->isSold() && ($p->getArtist()->getId() != $product->getArtist()->getId())){
+                $productsother[] = $p;
+            }
+        }
+        shuffle($productsother);
+        $others = array_slice($productsother, 0, 4);
+        
         //Section ajout de commentaire
         $form = $this->createForm(CommentType::class, $editedComment);
         $form->handleRequest($request);
@@ -217,6 +238,7 @@ class ProductController extends AbstractController
             // On le persist et l'enregistre en BDD
             $em->persist($editedComment);
             $em->flush();
+            $this->addFlash('success', 'Ce commentaire a été modifié.');
             return $this->redirectToRoute('product', ['id'=> $id]);
         }
         elseif ($form->isSubmitted() && $form->isValid() == false) {
@@ -230,7 +252,8 @@ class ProductController extends AbstractController
         return $this->render('product/product.html.twig', [
             'product' => $product,
             'comments' => $postedComments,
-            'formComment' => $form->createView()
+            'formComment' => $form->createView(),
+            'others' => $others  
         ]);
     }
 
@@ -246,6 +269,8 @@ class ProductController extends AbstractController
         if($comment && $comment->getUser() == $this->getUser() or in_array('ROLE_ADMIN', $userRoles)){
             $em->remove($comment);
             $em->flush();
+
+            $this->addFlash('success', 'Ce commentaire a été supprimé.');
         } else {
             $this->addFlash('error', "Vous n'avez pas les droits pour cette action");
             return $this->redirectToRoute('home');
@@ -295,7 +320,7 @@ class ProductController extends AbstractController
            
             $em->flush();
 
-            $this->addFlash('success', 'Produit modifié avec succes');
+            $this->addFlash('success', 'Produit modifié avec succès');
 
             return $this->redirectToRoute('home');
         }         

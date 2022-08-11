@@ -47,13 +47,10 @@ class CartController extends AbstractController
         }
 
         $cart = $session->get("cart", []);
+        dump($cart);
         $id = $product->getId();
 
-        if (!empty($cart[$id])) {
-            $cart[$id]++;
-        } else {
-            $cart[$id] = 1;
-        }
+        $cart[$id] = 1;
 
         $session->set("cart", $cart);
 

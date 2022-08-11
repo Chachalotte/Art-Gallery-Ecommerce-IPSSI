@@ -2,6 +2,8 @@
 
 {% block title %}{{parent()}} - login{% endblock %}
 
+
+{% block wallpaper %}<img class="imgConnect" src="{{ asset('img/product/' ~ paperwall) }}"/>{% endblock %}
 {% block connection %}
 
 {% if error %}

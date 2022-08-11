@@ -1,0 +1,37 @@
+section#dashboard{
+    display:flex; 
+    flex-wrap:wrap; 
+    justify-content: space-between;
+    margin:0.5vw;
+    padding:1.5vw;
+    border-radius: 10px;
+    background-color: rgb(240, 235, 223);
+    border: 1px solid rgb(240, 235, 223);
+}
+
+div.kpi{
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 2%;
+    padding: 0.5vw;
+    width: 24%;
+    background-color: rgb(255, 255, 255);
+}
+
+div.kpiItems{
+    padding: 0.5vw;
+    color: rgb(118, 75, 54);
+    font: 16px "Georgia", serif;
+    margin-top: 1vw;
+}
+
+div.kpiNumbers{
+    font-size: 5vw;
+    font-weight: bolder;
+    color: rgb(255, 196, 168);
+}
+
+span.subNumber{
+    font-size:3vw;
+    font-weight: bolder;
+    color: rgb(255, 232, 183);
+}   

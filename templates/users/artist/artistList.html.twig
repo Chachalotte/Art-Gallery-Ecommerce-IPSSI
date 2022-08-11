@@ -14,7 +14,6 @@
 
 {% include 'home/flashMessages.twig' %}
 
-
 <section class="artistList">
     {% for artist in artists %}
         <div class="artistBox">
@@ -59,4 +58,5 @@
 <div class="pagination">
     {{ knp_pagination_render(artists) }}
 </div>
+
 {% endblock %}

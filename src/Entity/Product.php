@@ -27,8 +27,11 @@ class Product
     #[ORM\Column(type: 'float')]
     private $price;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private $color;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $descriptionTech;
+
+    // #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    // private $color;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'Product')]
     private $artist;
@@ -102,17 +105,29 @@ class Product
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getDescriptionTech(): ?string
     {
-        return $this->color;
+        return $this->descriptionTech;
     }
 
-    public function setColor(string $color): self
+    public function setDescriptionTech(string $descriptionTech): self
     {
-        $this->color = $color;
+        $this->descriptionTech = $descriptionTech;
 
         return $this;
     }
+
+    // public function getColor(): ?string
+    // {
+    //     return $this->color;
+    // }
+
+    // public function setColor(string $color): self
+    // {
+    //     $this->color = $color;
+
+    //     return $this;
+    // }
 
     public function getArtist(): ?User
     {

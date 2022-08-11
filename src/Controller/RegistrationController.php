@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Data\Mail;
 use App\Entity\User;
+use App\Entity\Product;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,8 +28,17 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
     {
+        $allProducts = $doctrine->getRepository(Product::class)->findAll();
+
+        $images = [];
+        foreach($allProducts as $product){
+            $images[] = $product->getImg();
+        }
+        shuffle($images);
+        $paperWall = end($images);
+
         $notification = null;
 
         $user = new User();
@@ -78,7 +89,8 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'notification' => $notification
+            'notification' => $notification,
+            'paperwall' => $paperWall,
         ]);
     }
 
@@ -91,7 +103,7 @@ class RegistrationController extends AbstractController
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
+            $this->addFlash('error', $exception->getReason());
 
             return $this->redirectToRoute('app_register');
         }

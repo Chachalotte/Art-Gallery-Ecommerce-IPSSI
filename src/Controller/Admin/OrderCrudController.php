@@ -87,7 +87,7 @@ class OrderCrudController extends AbstractCrudController
 
         return $this->redirect($url);
     }
-
+    
     public function configureCrud(Crud $crud): Crud
     {
         return $crud->setDefaultSort(['id' => 'DESC']);
