@@ -64,6 +64,55 @@ class DashboardController extends AbstractDashboardController
             }                    
         }
 
+        $dateChart = [];
+        $orderChart = [];
+        $totalAll = 0;
+        $ordersAll = $this->doctrine->getRepository(Order::class)->findPaidOrders();
+        foreach($ordersAll as $o){ 
+            if(in_array(date_format($o->getCreatedAt(), 'j-M-y'), $dateChart)) {
+                dump("Dans le if");
+                $end=end($orderChart);
+                array_splice($orderChart, end($orderChart), 1,$end+1);
+                
+            }
+            else{
+                $dateChart[] = date_format($o->getCreatedAt(), 'j-M-y');
+                $orderChart[] = 1; 
+ 
+            }
+            $od = $o->getOrderDetails();  
+            foreach($od as $detail){
+                $totalAll += $detail->getTotal();
+            }  
+                  
+        }
+
+        // $dateLoop = $dateStart;
+
+        // while($dateStart < $dateNow){
+            
+        //     $dateLoop+1;
+        //     $dateChart[]=$dateLoop;
+        //     // $users = $this->doctrine->getRepository(Order::class)->findBy(['createdAt' => $dateLoop, 'state' =>]);
+
+        //     $nbOrders=0;
+        //     $ordersAll = $this->doctrine->getRepository(Order::class)->findPaidOrders();
+        //     foreach($ordersAll as $orderInst){
+        //         if($orderInst->getCreatedAt() == $dateLoop){
+        //             $nbOrders = $nbOrders+1;
+        //         }
+
+        //     $orderChart[$nbOrders];    
+        //     }
+
+        // }
+
+        dump($orderChart);
+        dump($dateChart);
+        // $combineChart[] = array_combine($orderChart,$dateChart);
+        // dump($combineChart);
+
+
         $totalThirty = 0;
         $ordersThirty = $this->doctrine->getRepository(Order::class)->findByThirtyDays($dateStart, $dateNow);
         foreach($ordersThirty as $o){  
@@ -82,8 +131,8 @@ class DashboardController extends AbstractDashboardController
             'total30' => $totalThirty,
             'products' => $products,
             'artists' => $allArtistArray,
-            'dateC' => $dateChart,
-            'orderC' => $orderChart
+            'dateC' => json_encode($dateChart),
+            'orderC' => json_encode($orderChart)
         ]);
     }
 

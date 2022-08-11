@@ -238,6 +238,7 @@ class ProductController extends AbstractController
             // On le persist et l'enregistre en BDD
             $em->persist($editedComment);
             $em->flush();
+            $this->addFlash('success', 'Ce commentaire a été modifié.');
             return $this->redirectToRoute('product', ['id'=> $id]);
         }
         elseif ($form->isSubmitted() && $form->isValid() == false) {
@@ -268,6 +269,8 @@ class ProductController extends AbstractController
         if($comment && $comment->getUser() == $this->getUser() or in_array('ROLE_ADMIN', $userRoles)){
             $em->remove($comment);
             $em->flush();
+
+            $this->addFlash('success', 'Ce commentaire a été supprimé.');
         } else {
             $this->addFlash('error', "Vous n'avez pas les droits pour cette action");
             return $this->redirectToRoute('home');
@@ -317,7 +320,7 @@ class ProductController extends AbstractController
            
             $em->flush();
 
-            $this->addFlash('success', 'Produit modifié avec succes');
+            $this->addFlash('success', 'Produit modifié avec succès');
 
             return $this->redirectToRoute('home');
         }         

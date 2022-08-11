@@ -1,5 +1,6 @@
 section.presentation {
   margin-top: 3vw;
+ 
 }
 
 aside {
@@ -15,6 +16,7 @@ div.products,
 .otherArtists,
 .anotherArtist {
   display: flex;
+  height: auto;
 }
 
 section#otherArtists{
