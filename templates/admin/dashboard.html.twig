@@ -30,7 +30,7 @@ div.chart{
     padding: 0.5vw;
     margin:1vw;
     height:32vh;
-    width: 65%;
+    width: 63%;
     border: 1px solid rgb(255, 255, 255);
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
@@ -47,7 +47,7 @@ div.kpiItems{
 }
 
 div.kpiNumbers{
-    font-size: 3vw !important;
+    font-size: 3vw;
     color: red;
 }
 
@@ -71,22 +71,50 @@ span.subNumber{
 {% block main %}
     <section id="dashboard">
         <div class="kpi">
-            <p class="kpiItems">Nombre total de ventes</p>
-            <p class="kpiNumbers">{{ orders|length }}</p>
-            <p class="subKpi"><span class="subNumber">{{ orders30|length }}</span> / 30 jours</p>
+            <p class="kpiItems" style="
+            padding-top: 0.5vw;
+    color: rgb(118, 75, 54);
+    font: 1vw "Georgia", serif;
+    margin-top: 1vw;
+    ">Nombre total de ventes</p>
+            <p class="kpiNumbers" style="
+            font-size: 5vw;
+    font-weight: bolder;
+    color: rgb(255, 196, 168);
+    ">{{ orders|length }}</p>
+            <p class="subKpi"><span class="subNumber" style="font-size:2vw; font-weight: bolder; color: rgb(255, 232, 183);">{{ orders30|length }}</span> / 30 jours</p>
         </div>
         <div class="kpi">
-            <p class="kpiItems">Nombre total de ventes</p>
-            <p class="kpiNumbers">{{total}}€</p>
-            <p class="subKpi"><span class="subNumber">{{ total30 }}€</span> / 30 jours</p>
+            <p class="kpiItems" style="
+            padding-top: 0.5vw;
+    color: rgb(118, 75, 54);
+    font: 1vw "Georgia", serif;
+    margin-top: 1vw;
+    ">Nombre total de ventes</p>
+            <p class="kpiNumbers" style="
+            font-size: 5vw;
+    font-weight: bolder;
+    color: rgb(255, 196, 168);
+    ">{{total}}€</p>
+            <p class="subKpi"><span class="subNumber" style="font-size:2vw; font-weight: bold; color: rgb(255, 232, 183);">{{ total30 }}€</span> / 30 jours</p>
         </div>
         <div class="kpi">
-            <p class="kpiNumbers">{{artists|length}}</p>
-            <p class="subKpi">Artistes</p>
+            <p class="kpiNumbers" style="
+            font-size: 5vw;
+    font-weight: bolder;
+    color: rgb(255, 196, 168);
+    margin-top: 2.5vw;
+    ">{{artists|length}}</p>
+            <p class="subKpi"><span class="subNumber" style="font-size:2vw; font-weight: bold; color: rgb(240, 235, 223);">Artistes</span></p>
         </div>
         <div class="kpi">
-            <p class="kpiNumbers">{{products|length}}</p>
-            <p class="subKpi">Oeuvres</p>
+            <p class="kpiNumbers" style="
+            font-size: 5vw;
+    font-weight: bolder;
+    color: rgb(255, 196, 168);
+    margin-top: 2.5vw;
+    ">{{products|length}}</p>
+            <p class="subKpi"><span class="subNumber" style="font-size:2vw; font-weight: bold; color: rgb(240, 235, 223);">Oeuvres</span></p>
         </div>
         <div class="chart">
             <div>
@@ -163,4 +191,9 @@ var myChart = new Chart(ctx, {
 
 {% endblock %}
 
-{# <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> #}
+{# <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  #}
+{# <script>
+document('.dashboard').addEventListener('click', function(){
+    console.log(response.json());
+})
+</script>  #}
