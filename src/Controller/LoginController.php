@@ -2,16 +2,27 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Product;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function index(AuthenticationUtils $authenticationUtils, ManagerRegistry $doctrine): Response
     {
+        $allProducts = $doctrine->getRepository(Product::class)->findAll();
+
+        $images = [];
+        foreach($allProducts as $product){
+            $images[] = $product->getImg();
+        }
+        shuffle($images);
+        $paperWall = end($images);
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -22,6 +33,7 @@ class LoginController extends AbstractController
         'controller_name' => 'LoginController',
         'last_username' => $lastUsername,
         'error'         => $error,
+        'paperwall' => $paperWall,
         ]);
     }
 }
