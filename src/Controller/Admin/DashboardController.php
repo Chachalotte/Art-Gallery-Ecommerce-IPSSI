@@ -59,7 +59,6 @@ class DashboardController extends AbstractDashboardController
         foreach($ordersAll as $o){  
             $dateChart[] = date_format($o->getCreatedAt(), 'j-M-y');
             $orderChart[] = 1; 
-            // getChartData($dateChart, $orderChart);
             $od = $o->getOrderDetails();  
             foreach($od as $detail){
                 $totalAll += $detail->getTotal();
@@ -72,15 +71,14 @@ class DashboardController extends AbstractDashboardController
         $ordersAll = $this->doctrine->getRepository(Order::class)->findPaidOrders();
         foreach($ordersAll as $o){ 
             if(in_array(date_format($o->getCreatedAt(), 'j-M-y'), $dateChart)) {
-                dump("Dans le if");
-                $end=end($orderChart);
-                array_splice($orderChart, end($orderChart), 1,$end+1);
-                
+                $end = end($orderChart);
+                $last = array_key_last($orderChart);
+                unset($orderChart[$last]);
+                $orderChart[$last] = $end + 1;    
             }
             else{
                 $dateChart[] = date_format($o->getCreatedAt(), 'j-M-y');
                 $orderChart[] = 1; 
- 
             }
             $od = $o->getOrderDetails();  
             foreach($od as $detail){
@@ -109,11 +107,6 @@ class DashboardController extends AbstractDashboardController
 
         // }
 
-        dump($orderChart);
-        dump($dateChart);
-        // $combineChart[] = array_combine($orderChart,$dateChart);
-        // dump($combineChart);
-
 
         $totalThirty = 0;
         $ordersThirty = $this->doctrine->getRepository(Order::class)->findByThirtyDays($dateStart, $dateNow);
@@ -124,8 +117,6 @@ class DashboardController extends AbstractDashboardController
             }                    
         }
 
-        // $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
-        // return $this->render('@EasyAdmin/page/content.html.twig');
         return $this->render('admin/dashboard.html.twig', [
             'orders' => $ordersAll,
             'total' => $totalAll,
@@ -137,15 +128,6 @@ class DashboardController extends AbstractDashboardController
             'orderC' => json_encode($orderChart)
         ]);
     }
-
-    // #[Route('/admin/chart', name: 'chart')]
-    // public function getChartData($dateChart, $orderChart)
-    // {
-    //     $response = new JsonResponse(['date' => $dateChart, 'order' => $orderChart]);
-    //     $response->headers->set('Content-Type', 'application/json');
-
-    //     return $response;
-    // }
 
     public function configureDashboard(): Dashboard
     {

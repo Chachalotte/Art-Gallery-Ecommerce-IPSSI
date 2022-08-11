@@ -54,12 +54,6 @@ div.kpiNumbers{
 span.subNumber{
     font-size:1vw;
 }   
-
-.red{
-    width: 10px;
-    height: 10px;
-    background: red;
-}
 </style>
 {% endblock %}
 
@@ -117,18 +111,7 @@ span.subNumber{
             <p class="subKpi"><span class="subNumber" style="font-size:2vw; font-weight: bold; color: rgb(240, 235, 223);">Oeuvres</span></p>
         </div>
         <div class="chart">
-            <div>
-        {# {{ dateC[1]}}  #}
-        {# <input type="hidden" id="dateC" value="{{ dateC|json_encode }}">
-        <input type="hidden" id="orderC" value="{{ orderC|json_encode }}"> #}
-        {# <p id="date">{{dateC}} </p>
-        <p id="order">{{orderC}}</p> #}
-        
-        
-            <canvas id="chartVentes" width="40vw" height="14vh"></canvas>
-            </div>
-        </div>
-        <div class="red">
+            <canvas id="chartVentes" width="40vw" height="11.7vh"></canvas>
         </div>
     </section>
 
@@ -149,7 +132,7 @@ var orderData = [3, 5, 3, 7, 8]; #}
 
 let chartVentes = document.querySelector("#chartVentes")
 let chartVentesGraph = new Chart(chartVentes, {
-    type : "line", //'pie' pour camembert
+    type : "bar", //'pie' pour camembert
     data : {
         labels: {{ dateC|raw }},
         datasets: [{
@@ -158,10 +141,17 @@ let chartVentesGraph = new Chart(chartVentes, {
             
         }]
     },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    callback: function(value) {if (value % 1 === 0) {return value;}}
+                }
+            }]
+        }
+    }
 })
-console.log("Date :");
-console.log({{ dateC|raw }});
-console.log({{ orderC|raw }});
 {# backgroundColor : "Blue" #}
 {# var ctx = document.getElementById('chartVentes');
 
