@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    {# <div  class="nav header_head">
+    <div  class="nav header_head">
         {% if (app.user) %}
-            <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
             <li><a class="nav__link" href="{{ path('app_profil', {'id':app.user.id}) }}">Mon Profil</a></li>
             <li><a class="nav__link" href="{{ path('app_logout') }}">Déconnexion</a></li>
         {% else %}
             <li><a class="nav__link" href="{{ path('login') }}">Connexion</a></li>
             <li><a class="nav__link" href="{{ path('app_register') }}">Inscription</a></li>
         {% endif %}
-    </div> #}
+    </div>
             
     <nav>
         <a href="{{path('home')}}"><img src="{{asset('img/logo.png')}}" id="logo" alt="logo de la galerie"/></a>
@@ -24,24 +23,12 @@
                 {% elseif is_granted('ROLE_ARTIST') %}
                     <li><a class="nav__link" href="{{path('product_new', {'id':app.user.id})}}">Ajout oeuvre</a></li>
                 {% endif %}
+                {% if (app.user) %}
+                <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
+            {% endif %}
             </ul>
         </div>
         <div class="search_product">
-            {# {% if (app.user) %}
-                <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
-            {% endif %}
-            <i class="fas fa-search"></i>
-            <input placeholder="Rechercher"> #}
-            <div  class="nav header_head">
-                {% if (app.user) %}
-                    <a href="{{path('cart_index')}}"><i class="fas fa-shopping-cart"></i></a>
-                    <li><a class="nav__link" href="{{ path('app_profil', {'id':app.user.id}) }}">Mon Profil</a></li>
-                    <li><a class="nav__link" href="{{ path('app_logout') }}">Déconnexion</a></li>
-                {% else %}
-                    <li><a class="nav__link" href="{{ path('login') }}">Connexion</a></li>
-                    <li><a class="nav__link" href="{{ path('app_register') }}">Inscription</a></li>
-                {% endif %}
-            </div>
         </div>
     </nav>
 {% endblock %}
@@ -88,5 +75,5 @@
             </ul>
         </div>
     </div>  
-    &copy2022 ArtGalery
+    &copy2022 ArtGallery
 {% endblock %}

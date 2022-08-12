@@ -1,6 +1,11 @@
 .header_head {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255,196,168,0.5);
+    height: 40px;
+    padding: 0;
+
 }
 
 nav,

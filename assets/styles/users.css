@@ -32,6 +32,7 @@ a {
   a:hover {
 	color: #ed824c; /* blue colors for links too */
 	text-decoration: inherit; /* no underline */
+	transition: all 0.2s;
   }
 
 

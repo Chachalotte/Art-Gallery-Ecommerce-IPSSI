@@ -15,10 +15,18 @@
 @import url('adress.css');
 @import url('dashboard.css');
 @import url('order.css');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
+p, a { 
+  margin: 0;
+}
 main {
   margin: 0 2vw;
   font:  14px "Georgia", serif;
+}
+
+.mainBody {
+
 }
 
 .nav {
