@@ -1,0 +1,12 @@
+div#recap{
+    display: flex;
+    justify-content: space-between;
+}
+
+div.adressCarrier{
+    width:45vw;
+}
+
+div.productincart{
+    flex-wrap: nowrap;
+}

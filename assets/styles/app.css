@@ -14,6 +14,7 @@
 @import url('form.scss');
 @import url('adress.css');
 @import url('dashboard.css');
+@import url('order.css');
 
 main {
   margin: 0 2vw;

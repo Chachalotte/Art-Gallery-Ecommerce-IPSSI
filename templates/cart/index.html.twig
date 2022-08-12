@@ -70,11 +70,11 @@
                 </tbody>
             </table>
         </div>
-        {% for product in dataCart %}
+        {% if dataCart is not empty %}
             <a class="validBtn" href="{{path('order')}}">Valider mon panier</a> 
         {% else %}
             <a href="{{path('app_product')}}">Choisir des produits pour mon panier</a>
-        {% endfor %}
+        {% endif %}
     </section>
     
 {% endblock %}

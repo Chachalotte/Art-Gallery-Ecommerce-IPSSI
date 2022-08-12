@@ -7,8 +7,8 @@
     <h1 class="rubriqueTitle">Valider ma commande</h1>
     <p>Choisissez vos préférences avant de passer votre commande.</p>
     <hr/>
-    <div>        
-        <div>
+    <div id="recap">        
+        <div class="adressCarrier">
             {% set formHtml %}
                 {{form_start(form, {action:path('order_recap')} ) }}
                     <div class="spacingSmall">
