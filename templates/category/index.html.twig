@@ -5,7 +5,7 @@
 {% block content %}
 <link href="{{ asset('styles/users.css') }}" type="text/css" rel="stylesheet" />
     <h2 class="rubriqueTitle">Catégories</h2>
-    <section class="showCategories">
+    <section class="showCategories mainBody">
         {% for category in categories %}
         <div class="category">
             <a href="{{path('category', {'id': category.id})}}">

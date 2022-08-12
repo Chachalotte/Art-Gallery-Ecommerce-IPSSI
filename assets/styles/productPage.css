@@ -265,10 +265,8 @@ h1,
 	margin-left: 2% ; /*centrer les elements avec margin : auto */
 	margin-right: auto;
     margin-top: 20;
-    
 	border-radius: 1px;
 	width:60% ;
-
 	opacity: 1;
 
 
@@ -300,7 +298,6 @@ h1,
 /* =========== Boutons ============*/
 
 button {
-	
 	border: 1px solid #764B36;
 	padding-top: 0.1vw;
 	padding-bottom: 0.1vw;
@@ -311,16 +308,16 @@ button {
 	-webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
-
     text-decoration: none;
     color: white;
 	font:  14px "Georgia", serif;
 	background-color: rgb(139, 139, 139);
-  }
+}
 
 button:hover {
 	
 	border: 1px solid #764B36;
+	transition: all 0.2s;
 	padding-top: 0.1vw;
 	padding-bottom: 0.1vw;
 	padding-left: 0.2vw;

@@ -81,6 +81,7 @@ td.product {
 	
 	border: 1px solid #764B36;
 	padding: 0.2vw;
+  transition: all 0.5s;
   margin-left: 80vw;
 	-webkit-appearance: button;
     -moz-appearance: button;
@@ -111,6 +112,7 @@ td.product {
     
     border: 1px solid #764B36;
     padding: 0.2vw;
+    transition: all 0.5s;
     margin-left: 43vw;
     -webkit-appearance: button;
       -moz-appearance: button;

@@ -13,11 +13,18 @@
 @import url('users.css');
 @import url('form.scss');
 @import url('adress.css');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+p, a { 
+  margin: 0;
 
-*{ margin: 0}
+}
 main {
   margin: 0 2vw;
   font:  14px "Georgia", serif;
+}
+
+.mainBody {
+
 }
 
 .nav {

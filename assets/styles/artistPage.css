@@ -95,6 +95,7 @@ div.product img {
   .followButton:hover {
 	
 	border: 1px solid #764B36;
+  transition: all 0.5s;
 	padding: 0.1vw;
 	padding-right: 5px;
 	-webkit-appearance: button;
@@ -125,6 +126,7 @@ div.product img {
     .unfollowButton:hover {
     
     border: 1px solid #764B36;
+    transition: all 0.5s;
     padding: 0.1vw;
     padding-right: 5px;
     -webkit-appearance: button;
