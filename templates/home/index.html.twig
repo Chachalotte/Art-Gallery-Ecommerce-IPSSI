@@ -4,9 +4,6 @@
 
 {% block content %}
 
-<section class="promotion sectionHome">
-    <h2>Promotions du moment</h2>
-</section>
 <article class="articleHome">
     <div class="article__header">
         <h2>Les oeuvres vendues</h2>
@@ -106,16 +103,20 @@
     <h2>Commandes facilitées</h2>
     <div class="order__items">
         <div>
-            <img src="https://via.placeholder.com/180x100" />
-            <p>Petite explication</p>
+            <img src="{{ asset('img/shop.png')}}" />
+            <p>Parcourez le site</p>
         </div>
         <div>
-            <img src="https://via.placeholder.com/180x100" />
-            <p>Petite explication</p>
+            <img src="{{ asset('img/choose.png')}}" />
+            <p>Choisissez vos produits</p>
         </div>
         <div>
-            <img src="https://via.placeholder.com/180x100" />
-            <p>Petite explication</p>
+            <img src="{{ asset('img/paid.png')}}" />
+            <p>Procédez au paiement</p>
+        </div>
+        <div>
+            <img src="{{ asset('img/delivery.png')}}" />
+            <p>Vous êtes livrez par les meilleurs services</p>
         </div>
     </div>
 </section>

@@ -2,6 +2,7 @@
 
 {% block title %}{{parent()}} - Register{% endblock %}
 
+{% block wallpaper %}<img class="imgConnect" src="{{ asset('img/product/' ~ paperwall) }}"/>{% endblock %}
 {% block connection %}
 <div class="formContent">
     {% for flashError in app.session.flashBag.get('verify_email_error') %}

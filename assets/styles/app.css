@@ -13,6 +13,7 @@
 @import url('users.css');
 @import url('form.scss');
 @import url('adress.css');
+@import url('dashboard.css');
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 p, a { 
   margin: 0;

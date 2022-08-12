@@ -177,7 +177,7 @@
                     {{ form_label(form.plainEmail.first) }}
                     {{ form_errors(form.plainEmail.first) }}
                     {{ form_help(form.plainEmail.first) }}
-                    {{ form_widget(form.plainEmail.first) }}
+                    {{ form_widget(form.plainEmail.first, { 'attr': {'autocomplete': 'off'} }) }}
                 </div>
                 <div class="formField">
                     {{ form_label(form.plainEmail.second) }}

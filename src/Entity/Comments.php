@@ -16,6 +16,9 @@ class Comments
     #[ORM\Column(type: 'string', nullable: true)]
     private $Message;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $Date;
+
     #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'commented')]
     private $Product;
 
@@ -45,6 +48,17 @@ class Comments
         return $this;
     }
 
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->Date;
+    }
+
+    public function setDate(\DateTimeInterface $Date): self
+    {
+        $this->Date = $Date;
+
+        return $this;
+    }
 
     public function getProduct(): ?Product
     {

@@ -22,7 +22,7 @@ class ProductCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             TextEditorField::new('description'),
-   //=========================================================================================
+            //=========================================================================================
             //C'est grâce à ce champ que l'on peut insérer des images dans le dossier "uploads" et retourner le champ de texte en BDD
             //=========================================================================================
             ImageField::new('img')
@@ -32,7 +32,7 @@ class ProductCrudController extends AbstractCrudController
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false),                        
             NumberField::new('price'),
-            TextField::new('color'),
+            // TextField::new('color'),
 
         ];
     }
